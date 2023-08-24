@@ -43,8 +43,18 @@ function getCityWeather(cityName) {
    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
      .then((response) => response.json())
      .then((data) => displayWeather(data))
+     
 
 }
+
+
+function getIdCity(idCidade, lon, lat) {
+  fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lon=${idCidade}&lat=${idCidade}&units=metric&lang=pt_br&appid=${api_key}`)
+    .then((response) => response.json())
+    .then((alert) => displayAlert(alert))
+
+}
+
 
 function displayWeather(data) {
   console.log(data)
@@ -54,14 +64,17 @@ function displayWeather(data) {
         main: { temp, feels_like, humidity },
         wind: { speed },
         sys: { sunrise, sunset },
+
+        coord = [{lon, lat}],
+        
       } = data
-  
-     
-     
-     
+      idCidade = coord;
+
+        console.log(idCidade);
+
+      getIdCity(idCidade);
      cityName.textContent = name;
      weatherIcon.src = `/assets/${icon}.svg`
-
      weatherDescription.textContent = description;
      currentTemperature.textContent = `${Math.round(temp)}°C`;
      windSpeed.textContent = `${Math.round(speed * 3.6)}km`;
@@ -72,16 +85,25 @@ function displayWeather(data) {
    
 }
 
-function getIdCity(idCity) {
+function displayAlert(alert){
+console.log(alert);
+let{
+  list,
+} = alert;
+
+alertsPrevisao.textContent = list;
+}
+
+/*function getIdCity(idCity) {
   const options = {method: 'GET', headers: {accept: 'application/json', 'Accept-Encoding': 'gzip'}};
 
   fetch(`https://api.tomorrow.io/v4/weather/realtime?location=${idCity}&apikey=${api_key1}`,options)
     .then(response => response.json())
     .then((dado) => displayAlerts(dado))
   
-    /*fetch(`https://api.tomorrow.io/v4/alerts?apikey=${api_key1}`, options)
+    fetch(`https://api.tomorrow.io/v4/alerts?apikey=${api_key1}`, options)
   .then(response => response.json())
-  .then(alerta => displayAlerts(alerta))*/
+  .then(alerta => displayAlerts(alerta))
 }
 
 function displayAlerts(dado) {
@@ -89,20 +111,20 @@ function displayAlerts(dado) {
   let{
     
     data: {time},
-
   } = dado;
 
   
-  currentDate.textContent = `${time}`;
+  currentDate.textContent = time;
 }
 
 function displayAlerts(alerta) {
   console.log(alerta);
   let{
    alerts: [{length}],
+   links,
   } = alerta;
 
-  alertsPrevisao.textContent = `${length}`;
+  alertsPrevisao.textContent = `${links}`;
  
 }
 
