@@ -1,3 +1,6 @@
+
+
+
 // Interação''
 
 const citySearchInput = document.getElementById('city-search-input')
@@ -21,12 +24,15 @@ const api_key = "9dd573acf23af2fb1e2b79726072d201";
 const api_key1 = "t616H4VQSxC4C0dHNzBqf1e5OlVfWDJZ";
 
 
+
 citySearchButton.addEventListener("click", () => {
 
-   let cityName = citySearchInput.value
-   let idCity = idSearchInput.value
+   const cityName = citySearchInput.value
+   const requestCityName = cityName
+
    getCityWeather(cityName)
-   getIdCity(idCity)
+   requestAccuWeather(requestCityName)
+  
 
 })
 
@@ -34,25 +40,15 @@ citySearchButton.addEventListener("click", () => {
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
-navigator.geolocation.getCurrentPosition((position) => {
-  console.log(position);
-})
+
 
 
 function getCityWeather(cityName) {
    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
      .then((response) => response.json())
      .then((data) => displayWeather(data))
-     
-
-}
-
-
-function getIdCity(idCidade, lon, lat) {
-  fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lon=${idCidade}&lat=${idCidade}&units=metric&lang=pt_br&appid=${api_key}`)
-    .then((response) => response.json())
-    .then((alert) => displayAlert(alert))
-
+    
+    
 }
 
 
@@ -61,106 +57,26 @@ function displayWeather(data) {
     let {
         name,
         weather: [{ icon, description }],
-        main: { temp, feels_like, humidity },
+        main: { temp, feels_like, humidity, temp_min },
         wind: { speed },
         sys: { sunrise, sunset },
-
-        coord = [{lon, lat}],
         
       } = data
-      idCidade = coord;
 
-        console.log(idCidade);
-
-      getIdCity(idCidade);
      cityName.textContent = name;
      weatherIcon.src = `/assets/${icon}.svg`
      weatherDescription.textContent = description;
-     currentTemperature.textContent = `${Math.round(temp)}°C`;
-     windSpeed.textContent = `${Math.round(speed * 3.6)}km`;
-     feelsLikeTemperature.textContent = feels_like;
+     currentTemperature.textContent = `${Math.round(temp)} °C`;
+     windSpeed.textContent = `${Math.round(speed * 3.6)}km/h`;
+     feelsLikeTemperature.textContent = `${feels_like}°C`;
      currentHumidity.textContent =`${humidity}%`;
      sunriseTime.textContent = formatTime(sunrise);
      sunsetTime.textContent = formatTime(sunset);
    
 }
 
-function displayAlert(alert){
-console.log(alert);
-let{
-  list,
-} = alert;
 
-alertsPrevisao.textContent = list;
-}
 
-/*function getIdCity(idCity) {
-  const options = {method: 'GET', headers: {accept: 'application/json', 'Accept-Encoding': 'gzip'}};
-
-  fetch(`https://api.tomorrow.io/v4/weather/realtime?location=${idCity}&apikey=${api_key1}`,options)
-    .then(response => response.json())
-    .then((dado) => displayAlerts(dado))
-  
-    fetch(`https://api.tomorrow.io/v4/alerts?apikey=${api_key1}`, options)
-  .then(response => response.json())
-  .then(alerta => displayAlerts(alerta))
-}
-
-function displayAlerts(dado) {
-  console.log(dado);
-  let{
-    
-    data: {time},
-  } = dado;
-
-  
-  currentDate.textContent = time;
-}
-
-function displayAlerts(alerta) {
-  console.log(alerta);
-  let{
-   alerts: [{length}],
-   links,
-  } = alerta;
-
-  alertsPrevisao.textContent = `${links}`;
- 
-}
-
-/*
-function getIdCity(idCity) {
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${idCity}&appid=${api_key}`)
-  .then(response => response.json())
-  .then((idDado) => IdCity(idDado))
-}
-
- function  IdCity(idDado) {
-  let {coord = [{lat, lon}]} = idDado;
-  idCidade = coord;
-
-  console.log(idCidade);
-
-  getCityAlerts(idCidade);
-
- }
-
-function getCityAlerts(idCidade) {
-  
-  fetch(`https://api.openweathermap.org/data/2.5/triggers/5852816a9aaacb00153134a3`)
-    .then((response) => response.json())
-    .then((alerts) => displayAlerts(alerts))
-
-}
-function displayAlerts(alerts) {
-  console.log(alerts);
-  let{
-    conditions:[{name,expression}]
-
-  } = alerts;
-  alertsPrevisao.textContent = `${name,expression} ${conditions}`;
-
-}*/
 
 function formatTime(epochTime) {
   let date = new Date(epochTime * 1000)
@@ -174,3 +90,61 @@ function formatDate(epochTime) {
   let formattedDate = date.toLocaleDateString('pt-BR', {month: "long", day: 'numeric' })
   return `Hoje, ${formattedDate}`
 }
+
+
+function requestAccuWeather(requestCityName) {
+  let url = '';
+
+  if (requestCityName === 'caraguatatuba') {
+    url = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/weather-warnings/45839';
+  } else if (requestCityName === 'sao sebastiao') {
+    url = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/weather-warnings/41642';
+  } else if (requestCityName === 'ilhabela') {
+    url = 'https://www.accuweather.com/pt/br/ilhabela/41748/weather-warnings/41748';
+  } else {
+    console.log('Cidade não suportada para alertas de previsão');
+    return;
+  }
+
+  console.log(url);
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Falha ao recuperar a página');
+      }
+    })
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      
+      const alertsTextElements = doc.querySelectorAll('.alert-group__alerts');
+  if (alertsTextElements.length > 0) {
+    let alertsText = '';
+    alertsTextElements.forEach(alertElement => {
+      alertsText += alertElement.textContent + '\n\n'; // Adicionando duas quebras de linha entre cada alerta
+    });
+    alertsPrevisao.textContent = alertsText;
+  } else {
+    alertsPrevisao.textContent = 'Nenhum alerta encontrado';
+  }
+      console.log(alertsTextElement);
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+}
+  /*request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      const $ = cheerio.load(body);
+      const alertsText = $('.daily-forecast-card.has-alert').text();
+
+      // Agora você pode usar o alertsText conforme necessário
+      alertsPrevisao.textContent = alertsText;
+    } else {
+      console.log('Falha ao recuperar a página');
+    }
+  });
+}*/

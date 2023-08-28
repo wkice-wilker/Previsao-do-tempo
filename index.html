@@ -11,18 +11,25 @@
 
 
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/style.css">
     <title>Previsão do Tempo</title>
 </head>
 <body>
      
-    
+    <div class='ripple-background'>
+    <img class="bkg" src="/imagem/1.png">
+    </div>
 
     <header class="header">
         
         
         <div class="header__city-search-bar">
-            <input class="header__input" id="city-search-input" type="text" placeholder="Temperatura de qual cidade?">
+            <select name="cidade" required="required" class="header__input" id="city-search-input">
+                <option value="">Escolha uma Cidade</option>
+                <option value="caraguatatuba">Caraguatatuba</option>
+                <option value="sao sebastiao">São Sebastião</option>
+                <option value="ilhabela">Ilhabela</option>
+            </select>
             <button class="header__button" id="city-search-button">
                 <img class="header__button-icon" src="/assets/search-icon.svg" alt="Icone de uma lupa.">
             </button>
@@ -33,9 +40,9 @@
     </header>
 
     <section class="current-temperature">
+        <div class="current-temperature__info-label">Tempo agora</div>
         <img class="current-temperature__weather-icon" id="weather-icon" src="/assets/loading-icon.svg" alt="Icone que ilustra a temperatura atual.">
         <div class="current-temperature__description" id="weather-description">...</div>
-        <div class="current-temperature__info-label">Tempo agora</div>
         <div class="current-temperature__current-temperature" id="current-temperature">...</div>
         <div class="info-alerts">Alertas</div>
         <div class="alert-message_alert" id="alertsPrevisao">...</div>
@@ -56,33 +63,23 @@
             <div class="temperature-details__label">Umidade</div>
             <div class="temperature-details__value" id="current-humidity">...</div>
           </div>
+          <div class="sunset-sunrise__item">
+            <img class="sunset-sunrise__icon" src="/assets/sunrise.svg" alt="Nascer do sol">
+            <div class="sunset-sunrise__value" id="sunrise-time">...</div>
+
+        </div>
+
+        <div class="sunset-sunrise__item">
+            <img class="sunset-sunrise__icon" src="/assets/sunset.svg" alt="Pôr do sol">
+            <div class="sunset-sunrise__value" id="sunset-time">...</div>
+
+        </div>
 
         </section>
 
 
-        <section class="sunset-sunrise">
-            <div class="sunset-sunrise__item">
-                <img class="sunset-sunrise__icon" src="/assets/sunrise.svg" alt="Nascer do sol">
-                <div class="sunset-sunrise__value" id="sunrise-time">...</div>
-
-            </div>
-
-            <div class="sunset-sunrise__item">
-                <img class="sunset-sunrise__icon" src="/assets/sunset.svg" alt="Pôr do sol">
-                <div class="sunset-sunrise__value" id="sunset-time">...</div>
-
-            </div>
-            
-        </section>
-        <div class='ripple-background'>
-            <div class='circle xxlarge shade1'></div>
-            <div class='circle xlarge shade2'></div>
-            <div class='circle large shade3'></div>
-            <div class='circle mediun shade4'></div>
-            <div class='circle small shade5'></div>
-          </div>
+        
     </div>
-    
-   <script src="app.js"></script>
+   <script src="/app.js"></script>
 </body>
 </html>
