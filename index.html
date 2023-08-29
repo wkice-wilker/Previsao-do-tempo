@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Ubuntu:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
-
+    <link href="grid/simple-grid.min.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="public/style.css">
@@ -17,7 +17,7 @@
 <body>
      
     <div class='ripple-background'>
-    <img class="bkg" src="/imagem/1.png">
+    <img class="bkg" src="/bg/1.png">
     </div>
 
     <header class="header">
@@ -38,16 +38,20 @@
         <div class="header__current-date" id="current-date">...</div>
         <div class="header__city-name" id="city-name">...</div>
     </header>
-
-    <section class="current-temperature">
-        <div class="current-temperature__info-label">Tempo agora</div>
-        <img class="current-temperature__weather-icon" id="weather-icon" src="/assets/loading-icon.svg" alt="Icone que ilustra a temperatura atual.">
-        <div class="current-temperature__description" id="weather-description">...</div>
-        <div class="current-temperature__current-temperature" id="current-temperature">...</div>
-        <div class="info-alerts">Alertas</div>
-        <div class="alert-message_alert" id="alertsPrevisao">...</div>
-    </section>
-
+    <div class="grid-coluna">
+        <section class="current-temperature">
+            <div class="current-temperature__info-label">Tempo agora</div>
+            <img class="current-temperature__weather-icon" id="weather-icon" src="/assets/loading-icon.svg" alt="Icone que ilustra a temperatura atual.">
+            <div class="current-temperature__description" id="weather-description">...</div>
+            <div class="current-temperature__current-temperature" id="current-temperature">...</div>
+            <div class="info-alerts">Alertas</div>
+            <div class="alert-message_alert" id="alertsPrevisao">...</div>
+        </section>
+        <section class="recomendacao">
+            <div class="conteudo-recomendacao">Recomendação</div>
+            <div class="imagem-recomendacao">...</div>
+        </section>
+    </div>
     <div class="button-container">
         <section class="temperature-details">
 
