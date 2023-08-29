@@ -128,7 +128,7 @@ function requestAccuWeather(requestCityName) {
     });
     alertsPrevisao.textContent = alertsText;
   } else {
-    alertsPrevisao.textContent = 'Nenhum alerta encontrado';
+    alertsPrevisao.textContent = 'Nenhum alerta';
   }
       console.log(alertsTextElement);
     })
