@@ -28,8 +28,18 @@ body {
     align-items:baseline;
 }
 
-.header, .temperature-details, .sunset-sunrise  {
+.header,  .sunset-sunrise  {
     max-width: 600px;
+    margin: 0 auto;
+}
+
+.temperature-details{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#gust{
+    width: 900px;
     margin: 0 auto;
 }
 /* Header */
@@ -192,6 +202,7 @@ body {
     flex-direction: column;
     align-items: center;
     border-right: 1px solid #a2a2be;
+    
 
 }
 

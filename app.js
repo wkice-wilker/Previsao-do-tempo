@@ -14,6 +14,7 @@ const weatherIcon = document.getElementById("weather-icon");
 const weatherDescription = document.getElementById("weather-description");
 const currentTemperature = document.getElementById("current-temperature");
 const windSpeed = document.getElementById("wind-speed");
+const windGust = document.getElementById("wind-gust");
 const feelsLikeTemperature = document.getElementById("feels-like-temperature");
 const currentHumidity = document.getElementById("current-humidity");
 const sunriseTime = document.getElementById("sunrise-time");
@@ -57,8 +58,8 @@ function displayWeather(data) {
     let {
         name,
         weather: [{ icon, description }],
-        main: { temp, feels_like, humidity, temp_min },
-        wind: { speed },
+        main: { temp, feels_like, humidity },
+        wind: { speed, gust },
         sys: { sunrise, sunset },
         
       } = data
@@ -68,7 +69,8 @@ function displayWeather(data) {
      weatherDescription.textContent = description;
      currentTemperature.textContent = `${Math.round(temp)} °C`;
      windSpeed.textContent = `${Math.round(speed * 3.6)}km/h`;
-     feelsLikeTemperature.textContent = `${feels_like}°C`;
+     windGust.textContent = `${Math.round(gust * 3.6)}km/h`;
+     feelsLikeTemperature.textContent = `${Math.round(feels_like)}°C`;
      currentHumidity.textContent =`${humidity}%`;
      sunriseTime.textContent = formatTime(sunrise);
      sunsetTime.textContent = formatTime(sunset);
@@ -101,6 +103,8 @@ function requestAccuWeather(requestCityName) {
     url = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/weather-warnings/41642';
   } else if (requestCityName === 'ilhabela') {
     url = 'https://www.accuweather.com/pt/br/ilhabela/41748/weather-warnings/41748';
+  } else if (requestCityName === 'ubatuba') {
+    url = 'https://www.accuweather.com/pt/br/ubatuba/41645/weather-warnings/41645';
   } else {
     console.log('Cidade não suportada para alertas de previsão');
     return;
