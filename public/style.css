@@ -34,12 +34,12 @@ body {
 }
 
 .temperature-details{
-    max-width: 600px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
 #gust{
-    width: 900px;
+    width: 1000px;
     margin: 0 auto;
 }
 /* Header */
@@ -116,8 +116,9 @@ body {
     font-weight: bold;
 }
 .alert-message_alert{
-  font-size: 18px;
-  color: #ff0000;
+    width: 750px;
+  font-size: 16px;
+  color: #c30000;
 }
 
 .recomendacao{

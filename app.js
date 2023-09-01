@@ -3,6 +3,10 @@
 
 // Interação''
 
+
+
+
+
 const citySearchInput = document.getElementById('city-search-input')
 const idSearchInput = document.getElementById('city-search-input')
 const citySearchButton = document.getElementById('city-search-button')
@@ -20,6 +24,7 @@ const currentHumidity = document.getElementById("current-humidity");
 const sunriseTime = document.getElementById("sunrise-time");
 const sunsetTime = document.getElementById("sunset-time"); 
 const alertsPrevisao = document.getElementById("alertsPrevisao");
+const qualidadeAr = document.getElementById("qualidadeAr");
 
 const api_key = "9dd573acf23af2fb1e2b79726072d201";
 const api_key1 = "t616H4VQSxC4C0dHNzBqf1e5OlVfWDJZ";
@@ -29,10 +34,11 @@ const api_key1 = "t616H4VQSxC4C0dHNzBqf1e5OlVfWDJZ";
 citySearchButton.addEventListener("click", () => {
 
    const cityName = citySearchInput.value
+   const tempCityName = citySearchInput.value
    const requestCityName = cityName
-
    getCityWeather(cityName)
    requestAccuWeather(requestCityName)
+   getCityTemp(tempCityName)
   
 
 })
@@ -68,17 +74,14 @@ function displayWeather(data) {
      weatherIcon.src = `./assets/${icon}.svg`
      weatherDescription.textContent = description;
      currentTemperature.textContent = `${Math.round(temp)} °C`;
-     windSpeed.textContent = `${Math.round(speed * 3.6)}km/h`;
-     windGust.textContent = `${Math.round(gust * 3.6)}km/h`;
+     //windSpeed.textContent = `${Math.round(speed * 3.6)}km/h`;
+     //windGust.textContent = `${Math.round(gust * 3.6)}km/h`;
      feelsLikeTemperature.textContent = `${Math.round(feels_like)}°C`;
      currentHumidity.textContent =`${humidity}%`;
      sunriseTime.textContent = formatTime(sunrise);
      sunsetTime.textContent = formatTime(sunset);
    
 }
-
-
-
 
 function formatTime(epochTime) {
   let date = new Date(epochTime * 1000)
@@ -93,7 +96,117 @@ function formatDate(epochTime) {
   return `Hoje, ${formattedDate}`
 }
 
+/*
+  //para exibir outras informações de tempo
 
+  const apiKey = '46c64c23cc7884215caf4ab0fa1ee538'; // Substitua pela sua chave de API do Clima Tempo
+  // Construindo a URL correta da API do Clima Tempo
+  function getCityTemp(cityName){
+  fetch( `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${cityName}&country=BR&token=${apiKey}`)
+  .then((response) => response.json())
+  .then((apiUrl) => getWeatherData(apiUrl))
+  }
+  // Função para fazer a requisição e obter os dados
+      function getWeatherData(apiUrl) {
+        console.log(apiUrl);
+
+        let{
+          0:{name},
+
+        } = apiUrl
+
+
+        const idCity = name;
+        addId(idCity);
+        console.log(idCity);
+      
+      }
+*/
+      function getCityTemp(tempCityName) {
+
+        let urlDado = '';
+      
+      
+  if (tempCityName === 'caraguatatuba') {
+    urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/weather-forecast/45839';
+  } else if (tempCityName === 'sao sebastiao') {
+    urlDado = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/weather-forecast/41642';
+  } else if (tempCityName === 'ilhabela') {
+    urlDado = 'https://www.accuweather.com/pt/br/ilhabela/41748/weather-forecast/41748';
+  } else if (tempCityName === 'ubatuba') {
+    urlDado = 'https://www.accuweather.com/pt/br/ubatuba/41645/weather-forecast/41645';
+  } else {
+    console.log('Cidade não suportada para alertas de previsão');
+    return;
+  }
+
+
+  fetch(urlDado)
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Falha ao recuperar a página');
+      }
+    })
+    
+    .then(html => {
+      const parserDado = new DOMParser();
+      const doc = parserDado.parseFromString(html, 'text/html');
+      
+      const windTextElements = doc.querySelectorAll('.value');
+      console.log(windTextElements);
+      rajadaVento(windTextElements);
+      rajadaVento1(windTextElements);
+      rajadaVento2(windTextElements);
+      
+      function rajadaVento(windTextElements) {
+        let{
+          3: {outerText},
+        } = windTextElements
+        dado = outerText;
+        console.log(dado);
+        
+        windGust.textContent = dado;
+        
+      }
+      function rajadaVento1(windtextElements) {
+        let{
+          2: {outerText},
+        } = windtextElements 
+        dado1 = outerText;
+        windSpeed.textContent = dado1;
+      }
+      function rajadaVento2(windtextElements) {
+        let{
+          1: {outerText},
+        } = windtextElements 
+        dado = outerText;
+        qualidadeAr.textContent = dado;
+      }
+    })
+    .catch(error => {
+      console.log(error.message);
+    });console.log(urlDado);
+  }
+
+     /* function addId(idCity){
+        fetch(`http://apiadvisor.climatempo.com.br/api/v1/weather/locale/${idCity}/current?token=${apiKey}`)
+        .then((response) => response.json())
+        .then((dados) => getDados(dados))
+        }
+  // Chamando a função e lidando com os dados obtidos
+  function getDados(dados){
+    if (dados) {
+      console.log('Dados do clima:', dados);
+      // Aqui você pode fazer o que quiser com os dados do clima
+    }
+  };
+  */
+
+
+
+// para exibir alertas do tempo da cidade
 function requestAccuWeather(requestCityName) {
   let url = '';
 
@@ -110,7 +223,6 @@ function requestAccuWeather(requestCityName) {
     return;
   }
 
-  console.log(url);
 
   fetch(url)
     .then(response => {
@@ -125,30 +237,23 @@ function requestAccuWeather(requestCityName) {
       const doc = parser.parseFromString(html, 'text/html');
       
       const alertsTextElements = doc.querySelectorAll('.alert-group__alerts');
+      console.log(alertsTextElements);
   if (alertsTextElements.length > 0) {
     let alertsText = '';
+    
     alertsTextElements.forEach(alertElement => {
-      alertsText += alertElement.textContent + '\n\n'; // Adicionando duas quebras de linha entre cada alerta
+      const text = alertElement.textContent;
+      const textWithLineBreaks = text.replace(/\.Fonte/g, '\n\n .');
+      alertsText += textWithLineBreaks + '\n\n'; // Adicionando duas quebras de linha entre cada alerta
     });
     alertsPrevisao.textContent = alertsText;
   } else {
     alertsPrevisao.textContent = 'Nenhum alerta';
   }
-      console.log(alertsTextElement);
+      console.log(alertsPrevisao);
     })
     .catch(error => {
       console.log(error.message);
     });
-}
-  /*request(url, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const $ = cheerio.load(body);
-      const alertsText = $('.daily-forecast-card.has-alert').text();
+  }
 
-      // Agora você pode usar o alertsText conforme necessário
-      alertsPrevisao.textContent = alertsText;
-    } else {
-      console.log('Falha ao recuperar a página');
-    }
-  });
-}*/
