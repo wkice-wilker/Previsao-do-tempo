@@ -24,7 +24,7 @@ body {
 
 .grid-coluna{
     display:grid;
-    grid-template-columns: [vazio]3fr [temperatura]2fr [recomendacao]3fr;
+    grid-template-columns: [vazio]3fr [temperatura]3fr [recomendacao]3fr;
     align-items:baseline;
 }
 
@@ -116,7 +116,6 @@ body {
     font-weight: bold;
 }
 .alert-message_alert{
-    width: 750px;
   font-size: 16px;
   color: #c30000;
 }
