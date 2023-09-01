@@ -4,9 +4,24 @@
   position: absolute;
   z-index: -2;
  }
- .ripple-background .bkg{
+ .ripple-background .bkg {
   width: 550px;
   height: 700px;
+ }
+ .bgefeito{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 550px;
+    height: 700px;
+    z-index: -3;
+ }
+ .iconebg{
+    position: absolute;
+    left: -10%;
+    top: -2%;
+    width: 50%;
+    z-index: -1;
  }
  
 

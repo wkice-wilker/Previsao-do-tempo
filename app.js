@@ -1,15 +1,12 @@
-
-
-
-// Interação''
-
-
-
-
-
+  // Interação''
 const citySearchInput = document.getElementById('city-search-input')
 const idSearchInput = document.getElementById('city-search-input')
 const citySearchButton = document.getElementById('city-search-button')
+
+// chamando campo background
+const weatherIcon1 = document.getElementById("weather-icon1");
+const weatherIconbg = document.getElementById("weather-iconbg");
+const weatherIconefeito = document.getElementById("weather-iconefeito");
 
 //exibição
 const currentDate = document.getElementById("current-date");
@@ -81,6 +78,20 @@ function displayWeather(data) {
      sunriseTime.textContent = formatTime(sunrise);
      sunsetTime.textContent = formatTime(sunset);
    
+// adição do background de acordo com o clima
+    weatherIcon1.src = `./assets/${icon}.svg`
+    
+    weatherIconefeito.src = `./efeito/${icon}.png`
+
+    if({icon} = ['01d, 02d, 03d, 04d, 05d']){
+      
+      weatherIconbg.src = './bg/01d.png';
+      
+    }else{
+      weatherIconbg.src = './bg/00d.png';
+    }
+    
+
 }
 
 function formatTime(epochTime) {
