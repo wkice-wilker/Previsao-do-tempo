@@ -83,6 +83,8 @@ function displayWeather(data) {
     
     weatherIconefeito.src = `./efeito/${icon}.png`
 
+
+    // background de verão
     if({icon} = ['01d, 02d, 03d, 04d, 05d']){
       
       weatherIconbg.src = './bg/01d.png';
@@ -247,17 +249,25 @@ function requestAccuWeather(requestCityName) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
       
-      const alertsTextElements = doc.querySelectorAll('.alert-group__alerts');
+      const alertsTextElements = doc.querySelectorAll('.alert-item__header__summary');
       console.log(alertsTextElements);
   if (alertsTextElements.length > 0) {
-    let alertsText = '';
-    
+    const alertsText = document.getElementById('alertsPrevisao');
+    alertsText.innerHTML = '';
+
     alertsTextElements.forEach(alertElement => {
       const text = alertElement.textContent;
-      const textWithLineBreaks = text.replace(/\.Fonte/g, '\n\n .');
-      alertsText += textWithLineBreaks + '\n\n'; // Adicionando duas quebras de linha entre cada alerta
+
+      // Crie um novo elemento <p> para cada alerta
+      const alertP = document.createElement('p');
+      alertP.textContent = text;
+
+      // Adicione o elemento <p> ao contêiner
+      alertsText.appendChild(alertP);
+
+            
     });
-    alertsPrevisao.textContent = alertsText;
+    
   } else {
     alertsPrevisao.textContent = 'Nenhum alerta';
   }
