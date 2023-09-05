@@ -84,13 +84,20 @@ function displayWeather(data) {
     weatherIconefeito.src = `./efeito/${icon}.png`
 
 
-    // background de verão
+    // background de verão dia
     if({icon} = ['01d, 02d, 03d, 04d, 05d']){
       
       weatherIconbg.src = './bg/01d.png';
       
     }else{
       weatherIconbg.src = './bg/00d.png';
+    }
+
+    // efeito verão noite
+    if({icon} = ['04n']){
+      weatherIconefeito.src = './efeito/04d.png';
+    }else{
+      weatherIconefeito.src = './efeito/00d.png';
     }
     
 
@@ -109,32 +116,9 @@ function formatDate(epochTime) {
   return `Hoje, ${formattedDate}`
 }
 
-/*
-  //para exibir outras informações de tempo
 
-  const apiKey = '46c64c23cc7884215caf4ab0fa1ee538'; // Substitua pela sua chave de API do Clima Tempo
-  // Construindo a URL correta da API do Clima Tempo
-  function getCityTemp(cityName){
-  fetch( `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${cityName}&country=BR&token=${apiKey}`)
-  .then((response) => response.json())
-  .then((apiUrl) => getWeatherData(apiUrl))
-  }
-  // Função para fazer a requisição e obter os dados
-      function getWeatherData(apiUrl) {
-        console.log(apiUrl);
+// Buscar vento, rajadas de vento e qualidade do ar
 
-        let{
-          0:{name},
-
-        } = apiUrl
-
-
-        const idCity = name;
-        addId(idCity);
-        console.log(idCity);
-      
-      }
-*/
       function getCityTemp(tempCityName) {
 
         let urlDado = '';
@@ -170,53 +154,43 @@ function formatDate(epochTime) {
       const windTextElements = doc.querySelectorAll('.value');
       console.log(windTextElements);
       rajadaVento(windTextElements);
-      rajadaVento1(windTextElements);
-      rajadaVento2(windTextElements);
+      velocidadeVento(windTextElements);
+      qualidadeDoAr(windTextElements);
       
       function rajadaVento(windTextElements) {
         let{
-          3: {outerText},
-        } = windTextElements
-        dado = outerText;
-        console.log(dado);
-        
-        windGust.textContent = dado;
-        
-      }
-      function rajadaVento1(windtextElements) {
-        let{
           2: {outerText},
-        } = windtextElements 
-        dado1 = outerText;
-        windSpeed.textContent = dado1;
+        } = windTextElements
+        dadoRajada = outerText;
+             
+        windGust.textContent = dadoRajada;
+      
       }
-      function rajadaVento2(windtextElements) {
+      function velocidadeVento(windtextElements) {
+
         let{
           1: {outerText},
         } = windtextElements 
-        dado = outerText;
-        qualidadeAr.textContent = dado;
+        dadoVento = outerText;
+        windSpeed.textContent = dadoVento;
+      }
+      function qualidadeDoAr(windtextElements) {
+        if(outerText = ['innerText:"\n\t\t\t\tQualidade do ar\n\t\t\t\tRuim\n\t\t\t"']){
+          
+        let{
+          0: {outerText},
+        } = windtextElements 
+        dadoAr = outerText;
+        qualidadeAr.textContent = dadoAr;
+      }else{
+        console.log(error.message);
+      }
       }
     })
     .catch(error => {
       console.log(error.message);
     });console.log(urlDado);
   }
-
-     /* function addId(idCity){
-        fetch(`http://apiadvisor.climatempo.com.br/api/v1/weather/locale/${idCity}/current?token=${apiKey}`)
-        .then((response) => response.json())
-        .then((dados) => getDados(dados))
-        }
-  // Chamando a função e lidando com os dados obtidos
-  function getDados(dados){
-    if (dados) {
-      console.log('Dados do clima:', dados);
-      // Aqui você pode fazer o que quiser com os dados do clima
-    }
-  };
-  */
-
 
 
 // para exibir alertas do tempo da cidade
