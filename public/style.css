@@ -28,7 +28,6 @@
 * {
     margin: 0;
     padding: 0;
-    display: f;
 }
 
 
@@ -44,7 +43,7 @@ body {
 
 
 .grid-coluna{
-    padding-top: 50px;
+    padding-top: 20px;
     display:grid;
     grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
     align-items: stretch;
@@ -62,7 +61,7 @@ body {
     margin: 0 auto;
 }
 
-#gust{
+#gustA, #gustR{
     width: 1000px;
     margin: 0 auto;
 }
@@ -166,14 +165,18 @@ body {
 }
 .alert-message_alert p{
     margin-bottom: 10px;
+    background-color: #ffffff89;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .recomendacao{
-    display:flex;
+    /* display:flex; */
     flex-direction: column;
     grid-column: recomendacao;
     align-content: space-around;
-  
 }
 .recomendacao h1 {
   font-size: 30px;
@@ -190,12 +193,19 @@ body {
 }
 
 .conteudo-recomendacao{
+    display: flex;
     overflow: hidden;
-	overflow-wrap: break-word;
+    overflow-wrap: break-word;
     word-break: break-all;
-    padding: 15px;
+    align-items: center;
+    padding: 1px;
+    flex-direction: column;
+}
 
-    
+.icone-recomendacao{
+    width: 200px;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -209,8 +219,7 @@ body {
     align-items:center;
     margin-top: 5px;
     grid-column: temperatura;
-
-
+    flex-wrap: wrap;
 }
 
 .current-temperature__weather-icon {
@@ -246,6 +255,7 @@ body {
     background: #fff;
     position: fixed;
     bottom: 0;
+    height: auto;
     width: 100%;
     border-radius: 25px 25px 0 0;
     box-shadow: 
@@ -253,9 +263,11 @@ body {
      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+
 .temperature-details {
     display: flex;
-    margin-top: 30px;
+     margin-top: 10px; 
+    justify-content: space-around; 
 }
 
 .temperature-details__item {
@@ -263,6 +275,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     border-right: 1px solid #a2a2be;
 }
 
@@ -338,13 +351,14 @@ body {
 
     
     .temperature-details{
-        width: calc(65px * 7);
+        display:flex;
         justify-content: center;
-        align-items:center ;
-        overflow:hidden;
         font-size: 10px;
         text-align: center;
-        
+    }
+
+    #gustA, #gustR{
+        padding: 0;
     }
    
     .temperature-details__item{
@@ -353,5 +367,6 @@ body {
     .header__city-search-bar{
         width: 350px;
     }
+  
 
   }

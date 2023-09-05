@@ -8,6 +8,10 @@ const weatherIcon1 = document.getElementById("weather-icon1");
 const weatherIconbg = document.getElementById("weather-iconbg");
 const weatherIconefeito = document.getElementById("weather-iconefeito");
 
+//chamando recomendação
+const recomendacaoIcon = document.getElementById("recomIcon");
+const recomendacaoIcon1 = document.getElementById("recomIcon1");
+
 //exibição
 const currentDate = document.getElementById("current-date");
 const cityName = document.getElementById("city-name");
@@ -93,12 +97,25 @@ function displayWeather(data) {
       weatherIconbg.src = './bg/00d.png';
     }
 
-    // efeito verão noite
+    // efeito
     if({icon} = ['04n']){
       weatherIconefeito.src = './efeito/04d.png';
     }else{
       weatherIconefeito.src = './efeito/00d.png';
     }
+
+    //recomendação
+    
+    if({icon} = ['04n,04d']){
+      recomendacaoIcon.src = './recomendacao/04d.gif';
+      recomendacaoIcon1.src = './recomendacao/00d.png';
+    }else if({icon} = ['09d,09n']){
+      recomendacaoIcon.src = './recomendacao/09d.gif';
+      recomendacaoIcon1.src = './recomendacao/09d1.gif';
+    }else if({icon} = ['01d']){
+        recomendacaoIcon.src = './recomendacao/01d.gif';
+        recomendacaoIcon1.src = './recomendacao/01ds.gif';
+     }console.log(recomendacaoIcon.src);
     
 
 }
@@ -159,7 +176,7 @@ function formatDate(epochTime) {
       
       function rajadaVento(windTextElements) {
         let{
-          2: {outerText},
+          3: {outerText},
         } = windTextElements
         dadoRajada = outerText;
              
@@ -169,22 +186,19 @@ function formatDate(epochTime) {
       function velocidadeVento(windtextElements) {
 
         let{
-          1: {outerText},
+          2: {outerText},
         } = windtextElements 
         dadoVento = outerText;
         windSpeed.textContent = dadoVento;
       }
       function qualidadeDoAr(windtextElements) {
-        if(outerText = ['innerText:"\n\t\t\t\tQualidade do ar\n\t\t\t\tRuim\n\t\t\t"']){
-          
+        
         let{
-          0: {outerText},
+          1: {outerText},
         } = windtextElements 
         dadoAr = outerText;
         qualidadeAr.textContent = dadoAr;
-      }else{
-        console.log(error.message);
-      }
+      
       }
     })
     .catch(error => {
