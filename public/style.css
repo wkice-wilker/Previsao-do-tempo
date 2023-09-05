@@ -66,11 +66,41 @@ body {
     width: 1000px;
     margin: 0 auto;
 }
+.text-email{
+    font-family: "Ubuntu", sans-serif;
+    padding: 0 10px;
+}
+
+.add-email{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 700px;
+}
+.email-input{
+    flex: 1 auto;
+    border: none;
+    height: 30px;
+    width: 150px;
+    padding: 0 15px;
+    border-radius: 10px 0 0 10px;
+    appearance: none;
+    margin-right: -15px;
+}
+.email-button{
+    width: 50px;
+    height: 30px;
+    border-radius: 0px 10px 10px 0px;
+    appearance: none;
+    border: none;
+    background-color: #393939;
+    color: #fff;
+}
 /* Header */
 
 .header {
     display: flex;
-    padding: 0 10px;
+    padding: 20px 20px;
     align-content:center;
     align-items: center;
 }
@@ -78,26 +108,25 @@ body {
 .header__city-search-bar {
     display: flex;
     flex: 1;
-    margin: 30px 20px 0px 0px;
     align-items: center;
-    width: 350px;
-    max-width: 400px;
+    width: 400px;
 }
 
 .header__input {
     flex: 1 auto;
     border: none;
-    height: 40px;
+    height: 30px;
     padding: 0 15px;
     border-radius: 10px 0 0 10px;
     appearance: none;
     margin-right: -15px;
+    width: 300px;
 }
 
 .header__button {
     cursor: pointer;
-    min-width: 50px;
-    min-height: 50px;
+    min-width: 40px;
+    min-height: 40px;
     border: none;
     border-radius: 100%;
     background: #393939;
@@ -117,7 +146,7 @@ body {
 }
 
 .header__city-name {
-    padding-top: 30px;
+   padding: 0px 0px 0px 10px;
     flex: 2;
     font-size: 25px;
     align-items: center;
@@ -321,4 +350,8 @@ body {
     .temperature-details__item{
         padding: 0px 4px 0px 4px;
     }
+    .header__city-search-bar{
+        width: 350px;
+    }
+
   }
