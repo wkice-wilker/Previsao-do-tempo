@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,15 +8,18 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Ubuntu:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Ubuntu:ital,wght@0,500;1,400&display=swap"
+        rel="stylesheet">
+
 
 
     <link rel="stylesheet" href="./public/style.css">
     <title>Previsão do Tempo</title>
 </head>
+
 <body>
-     
+
     <div class='ripple-background'>
         <img class="bkg" id="weather-iconbg" src="./bg/00d.png">
         <img class="bgefeito" id="weather-iconefeito" src="./efeito/00d.png">
@@ -23,8 +27,8 @@
     </div>
 
     <header class="header">
-        
-        
+
+
         <div class="header__city-search-bar">
             <select name="cidade" required="required" class="header__input" id="city-search-input">
                 <option value="">Escolha uma Cidade</option>
@@ -37,17 +41,18 @@
                 <img class="header__button-icon" src="./assets/search-icon.svg" alt="Icone de uma lupa.">
             </button>
         </div>
-       <div class="header__city-name" id="city-name">...</div>
-       <div class="text-email">Receba os alertas em seu e-mail:</div> 
+        <div class="header__city-name" id="city-name">...</div>
+        <div class="text-email">Receba os alertas em seu e-mail:</div>
         <div class="addemail">
-       <input class="email-input" value="digite seu email">
-       <button class="email-button">enviar</button>
+            <input class="email-input" value="digite seu email">
+            <button class="email-button">enviar</button>
         </div>
     </header>
     <div class="grid-coluna">
         <section class="current-temperature">
             <div class="current-temperature__info-label">Tempo agora</div>
-            <img class="current-temperature__weather-icon" id="weather-icon" src="./assets/loading-icon.svg" alt="Icone que ilustra a temperatura atual.">
+            <img class="current-temperature__weather-icon" id="weather-icon" src="./assets/loading-icon.svg"
+                alt="Icone que ilustra a temperatura atual.">
             <div class="current-temperature__description" id="weather-description">...</div>
             <div class="current-temperature__current-temperature" id="current-temperature">...</div>
             <div class="info-alerts">Alertas</div>
@@ -56,11 +61,11 @@
         <section class="recomendacao">
             <div class="container-recomendacao">
                 <h1>Recomendação</h1>
-                    <div class="conteudo-recomendacao" id="conteudo-recomendacao">
-                        <img class="icone-recomendacao" id="recomIcon1" src="./recomendacao/00d.png" style="width: 50px;">
-                        <img class="icone-recomendacao" id="recomIcon" src="./recomendacao/00d.png">
-                        
-                    </div>
+                <div class="conteudo-recomendacao" id="conteudo-recomendacao">
+                    <img class="icone-recomendacao" id="recomIcon1" src="./recomendacao/00d.png" style="width: 50px;">
+                    <img class="icone-recomendacao" id="recomIcon" src="./recomendacao/00d.png">
+
+                </div>
         </section>
     </div>
     <div class="button-container">
@@ -96,9 +101,10 @@
                 <div class="sunset-sunrise__value" id="sunset-time">...</div>
             </div>
 
-        </section>        
-        
+        </section>
+
     </div>
-   <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>

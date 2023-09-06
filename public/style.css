@@ -1,400 +1,437 @@
- .ripple-background{
-  top: 0;
-  position: fixed;
-  z-index: -2;
-  opacity: 70%;
+ .ripple-background {
+     top: 0;
+     position: fixed;
+     z-index: -2;
+     opacity: 70%;
  }
+
  .ripple-background .bkg {
-  width: 550px;
-  height: 700px;
+     width: 550px;
+     height: 700px;
  }
- .bgefeito{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 550px;
-    height: 700px;
-    z-index: -3;
+
+ .bgefeito {
+     position: fixed;
+     left: 0;
+     top: 0;
+     width: 550px;
+     height: 700px;
+     z-index: -3;
  }
- .iconebg{
-    position: fixed;
-    left: -4%;
-    top: -2%;
-    z-index: -1;
-    width: 300px;
+
+ .iconebg {
+     position: fixed;
+     left: -4%;
+     top: -2%;
+     z-index: -1;
+     width: 300px;
  }
- 
-
-* {
-    margin: 0;
-    padding: 0;
-}
 
 
-body {
-    background: #6e9fd7;
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    flex-direction: column;
-    
-   
-}
+ * {
+     margin: 0;
+     padding: 0;
+ }
 
 
+ body {
+     background: #6e9fd7;
+     font-family: 'Inter', sans-serif;
+     display: flex;
+     flex-direction: column;
 
-.grid-coluna{
-    padding: 20px 0px 5% 0px;
-    display:grid;
-    grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
-    align-items: stretch;
-    gap: 10px;
-    
-    
-}
 
-.sunset-sunrise  {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.temperature-details{
-    max-width: 750px;
-    margin: 0 auto;
-}
-
-#gustA, #gustR{
-    width: 1000px;
-    margin: 0 auto;
-}
-#gustS{
-    width: 100px;
-}
-.text-email{
-    font-family: "Ubuntu", sans-serif;
-    padding: 0 10px;
-}
-
-.add-email{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 700px;
-}
-.email-input{
-    flex: 1 auto;
-    border: none;
-    height: 30px;
-    width: 150px;
-    padding: 0 15px;
-    border-radius: 10px 0 0 10px;
-    appearance: none;
-    margin-right: -15px;
-}
-.email-button{
-    width: 50px;
-    height: 30px;
-    border-radius: 0px 10px 10px 0px;
-    appearance: none;
-    border: none;
-    background-color: #393939;
-    color: #fff;
-}
-/* Header */
-
-.header {
-    display: flex;
-    padding: 20px 20px;
-    align-content:center;
-    align-items: center;
-}
-
-.header__city-search-bar {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    width: 400px;
-}
-
-.header__input {
-    flex: 1 auto;
-    border: none;
-    height: 30px;
-    padding: 0 15px;
-    border-radius: 10px 0 0 10px;
-    appearance: none;
-    margin-right: -15px;
-    width: 300px;
-}
-
-.header__button {
-    cursor: pointer;
-    min-width: 40px;
-    min-height: 40px;
-    border: none;
-    border-radius: 100%;
-    background: #393939;
-    color: #f3f4fb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-    box-shadow: 
-    rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-     rgba(0, 0, 0, 0.3);;
-       
-}
-
-.header__button:hover {
-    filter: brightness(1.25);
-}
-
-.header__city-name {
-   padding: 0px 0px 0px 10px;
-    flex: 2;
-    font-size: 25px;
-    align-items: center;
-    font-family: "Ubuntu", sans-serif;
-}
-.info-alerts{
-  font-weight: 500;
-    font-size: 20px;
-    margin-top: 20px;
-    padding-bottom: 10px;
-    font-weight: bold;
-}
-.alert-message_alert{
-  font-size: 16px;
-  color: #c30000;
-  padding: 15px;
-  overflow: scroll;
-}
-.alert-message_alert::-webkit-scrollbar{
-    width: 0;
-}
-.alert-message_alert p{
-    margin-bottom: 10px;
-    background-color: #ffffff89;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.recomendacao{
-    /* display:flex; */
-    flex-direction: column;
-    grid-column: recomendacao;
-    align-content: space-around;
-}
-.recomendacao h1 {
-  font-size: 30px;
-  margin-top: 20px;
-  padding-bottom: 10px;
-  font-weight: bold;
-  text-align: center;
-}
-.container-recomendacao{
-    align-items: center;
-    justify-content: center;
-    
-    
-}
-
-.conteudo-recomendacao{
-    display: flex;
-    overflow: hidden;
-    overflow-wrap: break-word;
-    word-break: break-all;
-    align-items: center;
-    padding: 1px;
-    flex-direction: column;
-}
-
-.icone-recomendacao{
-    width: 200px;
-    align-items: center;
-    justify-content: center;
-}
+ }
 
 
 
-
-/*current temperature */
-
-.current-temperature {
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    margin-top: 5px;
-    grid-column: temperatura;
-    flex-wrap: wrap;
-}
-
-.current-temperature__weather-icon {
-    width: 125px;
-    margin-top: 15px;
-}
-
-.current-temperature__description {
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 30px;
-    margin-top: 10px;
-}
-
-.current-temperature__info-label {
-  font-weight: 500;
-  font-size: 30px;
-  margin-top: 20px;
-  padding-bottom: 10px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.current-temperature__current-temperature {
-      font-size: 30px;
-    font-weight: 500;
-    margin-top: 10px;
-}
-/*Button container */
-
-.button-container {
-    padding-bottom: 10px;
-    background: #fff;
-    position: fixed;
-    align-items: center;
-    bottom: 0;
-    width: 100%;
-    border-radius: 25px 25px 0 0;
-    box-shadow: 
-    rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
+ .grid-coluna {
+     padding: 20px 0px 5% 0px;
+     display: grid;
+     grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
+     align-items: stretch;
+     gap: 10px;
 
 
-.temperature-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-   
-}
+ }
 
-.temperature-details__item {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    border-right: 1px solid #a2a2be;
-    
-}
+ .sunset-sunrise {
+     max-width: 600px;
+     margin: 0 auto;
+ }
 
-.temperature-details__item:last-child {
-    border: none;
-}
+ .temperature-details {
+     max-width: 750px;
+     margin: 0 auto;
+ }
 
-.temperature-details__label {
-    color: #a2a2be;
-}
+ #gustA,
+ #gustR {
+     width: 1000px;
+     margin: 0 auto;
+ }
 
-.temperature-details__value,
-.sunset-sunrise__value {
-    margin-top: 7px;
-    font-size: 14px;
-}
+ #gustS {
+     width: 100px;
+ }
 
-/* icone do sol */
+ .text-email {
+     font-family: "Ubuntu", sans-serif;
+     padding: 0 10px;
+ }
 
-.sunset-sunrise {
-    display: flex;
-    margin: 3px auto;
-}
+ .add-email {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     width: 700px;
+ }
 
-.sunset-sunrise__item {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #a2a2be;
-}
-.sunset-sunrise__item:last-child{
-  border: none;
-}
+ .email-input {
+     flex: 1 auto;
+     border: none;
+     height: 30px;
+     width: 150px;
+     padding: 0 15px;
+     border-radius: 10px 0 0 10px;
+     appearance: none;
+     margin-right: -15px;
+ }
+
+ .email-button {
+     width: 50px;
+     height: 30px;
+     border-radius: 0px 10px 10px 0px;
+     appearance: none;
+     border: none;
+     background-color: #393939;
+     color: #fff;
+ }
+
+ /* Header */
+
+ .header {
+     display: flex;
+     padding: 20px 20px;
+     align-content: center;
+     align-items: center;
+ }
+
+ .header__city-search-bar {
+     display: flex;
+     flex: 1;
+     align-items: center;
+     width: 400px;
+ }
+
+ .header__input {
+     flex: 1 auto;
+     border: none;
+     height: 30px;
+     padding: 0 15px;
+     border-radius: 10px 0 0 10px;
+     appearance: none;
+     margin-right: -15px;
+     width: 300px;
+ }
+
+ .header__button {
+     cursor: pointer;
+     min-width: 40px;
+     min-height: 40px;
+     border: none;
+     border-radius: 100%;
+     background: #393939;
+     color: #f3f4fb;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     transition: 0.2s;
+     box-shadow:
+         rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+         rgba(0, 0, 0, 0.3);
+     ;
+
+ }
+
+ .header__button:hover {
+     filter: brightness(1.25);
+ }
+
+ .header__city-name {
+     padding: 0px 0px 0px 10px;
+     flex: 2;
+     font-size: 25px;
+     align-items: center;
+     font-family: "Ubuntu", sans-serif;
+ }
+
+ .info-alerts {
+     font-weight: 500;
+     font-size: 20px;
+     margin-top: 20px;
+     padding-bottom: 10px;
+     font-weight: bold;
+ }
+
+ .alert-message_alert {
+     font-size: 16px;
+     color: #c30000;
+     padding: 15px;
+     overflow: scroll;
+ }
+
+ .alert-message_alert::-webkit-scrollbar {
+     width: 0;
+ }
+
+ .alert-message_alert p {
+     margin-bottom: 10px;
+     background-color: #ffffff89;
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+     padding: 10px;
+     border-radius: 10px;
+ }
+
+ .recomendacao {
+     /* display:flex; */
+     flex-direction: column;
+     grid-column: recomendacao;
+     align-content: space-around;
+ }
+
+ .recomendacao h1 {
+     font-size: 30px;
+     margin-top: 20px;
+     padding-bottom: 10px;
+     font-weight: bold;
+     text-align: center;
+ }
+
+ .container-recomendacao {
+     align-items: center;
+     justify-content: center;
+
+
+ }
+
+ .conteudo-recomendacao {
+     display: flex;
+     overflow: hidden;
+     overflow-wrap: break-word;
+     word-break: break-all;
+     align-items: center;
+     padding: 1px;
+     flex-direction: column;
+ }
+
+ .icone-recomendacao {
+     width: 200px;
+     align-items: center;
+     justify-content: center;
+ }
 
 
 
-  /* Quando a largura da tela atingir 1060px ou mais */
-@media (max-width: 1060px) {
-  
-    .grid-coluna {
-      display: flex;
-      flex-direction: column; /* Mudar para layout de coluna flexível */
-      /* gap: 10px; */ /* Espaçamento entre os itens */
-      justify-content: center;
-      backdrop-filter: blur( 13.5px );
-      -webkit-backdrop-filter: blur( 13.5px );
-      background-color: #ffffff33;
-    }
-    .header{
-        flex-direction: column;
-        backdrop-filter: blur( 13.5px );
-        -webkit-backdrop-filter: blur( 13.5px );
-        background-color: #ffffff33;
-        
-    }
-    .header__city-name{
-        justify-content: end;
-    }
-    
-    .ripple-background{
-        opacity: 60%;
 
-    }
-    .container-recomendacao{
-        height: 500px;
-    }
-  }
+ /*current temperature */
+
+ .current-temperature {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-top: 5px;
+     grid-column: temperatura;
+     flex-wrap: wrap;
+ }
+
+ .current-temperature__weather-icon {
+     width: 125px;
+     margin-top: 15px;
+ }
+
+ .current-temperature__description {
+     color: #ffffff;
+     font-weight: 500;
+     font-size: 30px;
+     margin-top: 10px;
+ }
+
+ .current-temperature__info-label {
+     font-weight: 500;
+     font-size: 30px;
+     margin-top: 20px;
+     padding-bottom: 10px;
+     font-weight: bold;
+     text-align: center;
+ }
+
+ .current-temperature__current-temperature {
+     font-size: 30px;
+     font-weight: 500;
+     margin-top: 10px;
+ }
+
+ /*Button container */
+
+ .button-container {
+     padding-bottom: 10px;
+     background: #fff;
+     position: fixed;
+     align-items: center;
+     bottom: 0;
+     width: 100%;
+     border-radius: 25px 25px 0 0;
+     box-shadow:
+         rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+ }
 
 
-   /* Quando a largura da tela atingir 80px ou mais */
-  @media (max-width: 800px) {
-    .button-container{
-        overflow-x: auto;
-    }
-    
-    .temperature-details{
-        display:flex;
-        justify-content: space-between;
-        font-size: 10px;
-        text-align: center;
-        min-width: 450px;
-    }
-    .temperature-details::-webkit-scrollbar{
-        width: 0;
-    }
+ .temperature-details {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-top: 10px;
 
-    #gustA, #gustR{
-        padding: 0px 1px 0px 1px;
-    }
-   
-    .temperature-details__item .sunset-sunrise__item {
-        padding: 0px 5px 0px 5px;
-        
-    }
-    .temperature-details__label{
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    .header__city-search-bar{
-        width: 350px;
-    }
-    .grid-coluna{
-        width:auto;
-        margin: 0;
-    }
-  
+ }
 
-  }
+ .temperature-details__item {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: center;
+     text-align: center;
+     border-right: 1px solid #a2a2be;
+
+ }
+
+ .temperature-details__item:last-child {
+     border: none;
+ }
+
+ .temperature-details__label {
+     color: #a2a2be;
+ }
+
+ .temperature-details__value,
+ .sunset-sunrise__value {
+     margin-top: 7px;
+     font-size: 14px;
+ }
+
+ /* icone do sol */
+
+ .sunset-sunrise {
+     display: flex;
+     margin: 3px auto;
+ }
+
+ .sunset-sunrise__item {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid #a2a2be;
+ }
+
+ .sunset-sunrise__item:last-child {
+     border: none;
+ }
+
+
+
+ /* Quando a largura da tela atingir 1060px ou mais */
+ @media (max-width: 1060px) {
+
+     .grid-coluna {
+         display: flex;
+         flex-direction: column;
+         /* Mudar para layout de coluna flexível */
+         /* gap: 10px; */
+         /* Espaçamento entre os itens */
+         justify-content: center;
+         backdrop-filter: blur(13.5px);
+         -webkit-backdrop-filter: blur(13.5px);
+         background-color: #ffffff33;
+     }
+
+     .header {
+         flex-direction: column;
+         backdrop-filter: blur(13.5px);
+         -webkit-backdrop-filter: blur(13.5px);
+         background-color: #ffffff33;
+
+     }
+
+     .header__city-name {
+         justify-content: end;
+     }
+
+     .ripple-background {
+         opacity: 60%;
+
+     }
+
+     .container-recomendacao {
+         height: 500px;
+     }
+ }
+
+
+ /* Quando a largura da tela atingir 80px ou mais */
+ @media (max-width: 800px) {
+     .button-container {
+         overflow-x: auto;
+     }
+
+     .temperature-details {
+         display: flex;
+         justify-content: space-between;
+         font-size: 10px;
+         text-align: center;
+         min-width: 500px;
+     }
+
+     .temperature-details::-webkit-scrollbar {
+         width: 0;
+     }
+
+     #gustA,
+     #gustR {
+         padding: 0px 1px 0px 1px;
+     }
+
+     .temperature-details__item .sunset-sunrise__item {
+         padding: 0px 5px 0px 5px;
+
+     }
+
+     .temperature-details__label {
+         padding-left: 5px;
+         padding-right: 5px;
+     }
+
+     .header__city-search-bar {
+         width: 350px;
+     }
+
+     .grid-coluna {
+         width: auto;
+         margin: 0;
+     }
+     .addemail{
+        margin-top: 5px;
+     }
+     .text-email{
+        margin-top: 20px;
+     }
+     .header__city-name{
+        margin-top: 10px;
+     }
+
+
+ }
