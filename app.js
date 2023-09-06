@@ -39,6 +39,7 @@ citySearchButton.addEventListener("click", () => {
    const requestCityName = cityName
    getCityWeather(cityName)
    requestAccuWeather(requestCityName)
+   requestAr(cityName)
    getCityTemp(tempCityName)
   
 
@@ -134,7 +135,7 @@ function formatDate(epochTime) {
 }
 
 
-// Buscar vento, rajadas de vento e qualidade do ar
+// Buscar dados vento e rajadas de vento
 
       function getCityTemp(tempCityName) {
 
@@ -142,15 +143,15 @@ function formatDate(epochTime) {
       
       
   if (tempCityName === 'caraguatatuba') {
-    urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/weather-forecast/45839';
+    urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/current-weather/45839';
   } else if (tempCityName === 'sao sebastiao') {
-    urlDado = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/weather-forecast/41642';
+    urlDado = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/current-weather/41642';
   } else if (tempCityName === 'ilhabela') {
-    urlDado = 'https://www.accuweather.com/pt/br/ilhabela/41748/weather-forecast/41748';
+    urlDado = 'https://www.accuweather.com/pt/br/ilhabela/41748/current-weather/41748';
   } else if (tempCityName === 'ubatuba') {
-    urlDado = 'https://www.accuweather.com/pt/br/ubatuba/41645/weather-forecast/41645';
+    urlDado = 'https://www.accuweather.com/pt/br/ubatuba/41645/current-weather/41645';
   } else {
-    console.log('Cidade não suportada para alertas de previsão');
+    console.log('Dados não encontrado');
     return;
   }
 
@@ -168,17 +169,17 @@ function formatDate(epochTime) {
       const parserDado = new DOMParser();
       const doc = parserDado.parseFromString(html, 'text/html');
       
-      const windTextElements = doc.querySelectorAll('.value');
+      const windTextElements = doc.querySelectorAll('[class="detail-item spaced-content"]');
       console.log(windTextElements);
       rajadaVento(windTextElements);
       velocidadeVento(windTextElements);
-      qualidadeDoAr(windTextElements);
       
       function rajadaVento(windTextElements) {
+       
         let{
-          3: {outerText},
+          2:{children:{1:{innerText}}},
         } = windTextElements
-        dadoRajada = outerText;
+        dadoRajada = innerText;
              
         windGust.textContent = dadoRajada;
       
@@ -186,24 +187,66 @@ function formatDate(epochTime) {
       function velocidadeVento(windtextElements) {
 
         let{
-          2: {outerText},
+          1:{children:{1:{innerText}}},
         } = windtextElements 
-        dadoVento = outerText;
+        dadoVento = innerText;
         windSpeed.textContent = dadoVento;
-      }
-      function qualidadeDoAr(windtextElements) {
-        
-        let{
-          1: {outerText},
-        } = windtextElements 
-        dadoAr = outerText;
-        qualidadeAr.textContent = dadoAr;
-      
       }
     })
     .catch(error => {
       console.log(error.message);
     });console.log(urlDado);
+  }
+
+
+
+  //buscar dados Qualidade do Ar
+  function requestAr(cityName) {
+
+    let urlDado = '';
+  
+  
+if (cityName === 'caraguatatuba') {
+urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/weather-forecast/45839';
+} else if (cityName === 'sao sebastiao') {
+urlDado = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/weather-forecast/41642';
+} else if (cityName === 'ilhabela') {
+urlDado = 'https://www.accuweather.com/pt/br/ilhabela/41748/weather-forecast/41748';
+} else if (cityName === 'ubatuba') {
+urlDado = 'https://www.accuweather.com/pt/br/ubatuba/41645/weather-forecast/41645';
+} else {
+console.log('Cidade não suportada para alertas de previsão');
+return;
+}
+
+
+fetch(urlDado)
+.then(response => {
+  if (response.ok) {
+    return response.text();
+  } else {
+    throw new Error('Falha ao recuperar a página');
+  }
+})
+
+.then(html => {
+  const parserDado = new DOMParser();
+  const doc = parserDado.parseFromString(html, 'text/html');
+  
+  const qualiArTextElements = doc.querySelectorAll('.category-text');
+  console.log(qualiArTextElements);
+  qualidadeDoAr(qualiArTextElements);
+  
+  function qualidadeDoAr(qualiArTextElements) {
+
+    let{
+      0: {outerText},
+    } = qualiArTextElements 
+    dadoAr = outerText;
+    qualidadeAr.textContent = dadoAr;
+  
+  }
+});
   }
 
 

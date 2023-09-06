@@ -36,18 +36,19 @@ body {
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
-    height: auto;
+    
    
 }
 
 
 
 .grid-coluna{
-    padding-top: 20px;
+    padding: 20px 0px 5% 0px;
     display:grid;
     grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
     align-items: stretch;
     gap: 10px;
+    
     
 }
 
@@ -162,6 +163,10 @@ body {
   font-size: 16px;
   color: #c30000;
   padding: 15px;
+  overflow: scroll;
+}
+.alert-message_alert::-webkit-scrollbar{
+    width: 0;
 }
 .alert-message_alert p{
     margin-bottom: 10px;
@@ -251,7 +256,8 @@ body {
 /*Button container */
 
 .button-container {
-    padding-bottom: 2%;
+    margin-top: 100px;
+    padding-bottom: 1%;
     background: #fff;
     position: fixed;
     bottom: 0;
@@ -277,6 +283,7 @@ body {
     align-items: center;
     text-align: center;
     border-right: 1px solid #a2a2be;
+    
 }
 
 .temperature-details__item:last-child {
@@ -290,6 +297,7 @@ body {
 .temperature-details__value,
 .sunset-sunrise__value {
     margin-top: 7px;
+    font-size: 14px;
 }
 
 /* icone do sol */
@@ -355,6 +363,12 @@ body {
         justify-content: center;
         font-size: 10px;
         text-align: center;
+        overflow-x: scroll;
+        min-width: 450px;
+        z-index: 1;
+    }
+    .temperature-details::-webkit-scrollbar{
+        width: 0;
     }
 
     #gustA, #gustR{
@@ -366,6 +380,10 @@ body {
     }
     .header__city-search-bar{
         width: 350px;
+    }
+    .grid-coluna{
+        width:auto;
+        margin: 0;
     }
   
 
