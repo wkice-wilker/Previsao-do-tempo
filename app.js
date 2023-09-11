@@ -126,22 +126,22 @@ function verificarEstacaoDoAno() {
     case 1:
     case 2:
     case 3:
-      estacao = 'Verao';
+      estacao = 'verao';
       break;
     case 4:
     case 5:
     case 6:
-      estacao = 'Outono';
+      estacao = 'outono';
       break;
     case 7:
     case 8:
     case 9:
-      estacao = 'Inverno';
+      estacao = 'inverno';
       break;
     case 10:
     case 11:
     case 12:
-      estacao = 'Primavera';
+      estacao = 'primavera';
       break;
     default:
       estacao = 'Mês desconhecido'; // apocalipse
@@ -204,6 +204,7 @@ weatherIconbg.src = `./bg/${estacaoAtual}.png`;
 
 }
 
+// data e horas (ainda não decidir se irei usar)
 function formatTime(epochTime) {
   let date = new Date(epochTime * 1000)
   let hours = date.getHours()
@@ -218,12 +219,13 @@ function formatDate(epochTime) {
 }
 
 
-// Buscando dados vento e rajadas de vento
+// Buscando dados de vento e rajadas de vento
 
 function getCityTemp(tempCityName) {
 
   let urlDado = '';
 
+  //verificando a cidade em que selecionou
   if (tempCityName === 'caraguatatuba') {
     urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/current-weather/45839';
   } else if (tempCityName === 'sao sebastiao') {
@@ -254,7 +256,7 @@ function getCityTemp(tempCityName) {
       console.log(windTextElements);
       encontrarDadosVento(windTextElements);
 
-
+      //extraindo dados da div do site da API
       function encontrarDadosVento(windTextElements) {
         let dadoRajada = "";
         let dadoVento = "";
@@ -281,6 +283,7 @@ function requestAr(cityName) {
 
   let urlDado = '';
 
+   //verificando a cidade em que selecionou
   if (cityName === 'caraguatatuba') {
     urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/weather-forecast/45839';
   } else if (cityName === 'sao sebastiao') {
@@ -357,6 +360,7 @@ function requestAccuWeather(requestCityName) {
       const alertsTextElements = doc.querySelectorAll('.alert-item__header__summary');
       console.log(alertsTextElements);
 
+      //extraindo dados da div do site da API
       if (alertsTextElements.length > 0) {
         const alertsText = document.getElementById('alertsPrevisao');
         alertsText.innerHTML = '';
