@@ -86,34 +86,119 @@ function displayWeather(data) {
 
   weatherIconefeito.src = `./efeito/${icon}.png`
 
+  /*
+id de cada icone do tempo:
 
-  // background de verão dia
-  if ({ icon } = ['01d, 02d, 03d, 04d, 05d']) {
+01d - sol
+02d - sol com nuvem
+03d - nublado
+04d - tempo carregado
+09d - chuva
+10d - chuva com sol
+01n - lua
+02n - lua com nuvem
+03n - nublado
+04n - tempo carregado
+09n - chuva
+10n - chuva com lua
+11d e 11n - chuva com trovoada
+13d e 13n - neve
+50d e 50n - ventania com nuvem
 
-    weatherIconbg.src = './bg/01d.png';
+id dos icones da estação do ano:
 
-  } else {
-    weatherIconbg.src = './bg/00d.png';
+verao.png
+primavera.png
+outono.png
+inverno.pbg
+
+*/
+
+// verificação da estação do ano
+
+function verificarEstacaoDoAno() {
+  const dataAtual = new Date();
+  const mesAtual = dataAtual.getMonth() + 1; // Obtenha o mês atual (0 a 11)
+
+  let estacao;
+
+  switch (mesAtual) {
+    case 1:
+    case 2:
+    case 3:
+      estacao = 'Verao';
+      break;
+    case 4:
+    case 5:
+    case 6:
+      estacao = 'Outono';
+      break;
+    case 7:
+    case 8:
+    case 9:
+      estacao = 'Inverno';
+      break;
+    case 10:
+    case 11:
+    case 12:
+      estacao = 'Primavera';
+      break;
+    default:
+      estacao = 'Mês desconhecido'; // apocalipse
   }
 
-  // efeito
-  if ({ icon } = ['04n']) {
-    weatherIconefeito.src = './efeito/04d.png';
-  } else {
+  return estacao;
+}
+
+const estacaoAtual = verificarEstacaoDoAno();
+weatherIconbg.src = `./bg/${estacaoAtual}.png`;
+
+
+
+//verificação do efeito que será utilizado de acordo com o clima
+
+  if (['03d', '03n', '04d', '04n', '09d', '09n', '13d', '13n'].includes(icon)) {
+
+    //nublado
+    weatherIconefeito.src = './efeito/nublado.png';
+
+} else if (['02d', '02n'].includes(icon)) { 
+
+  //nuvem
+    weatherIconefeito.src = './efeito/nuvem.png';
+
+} else if (['10d', '10n', '11d', '11n'].includes(icon)) {
+
+  //chuva com sol ou lua e chuva com trovoada
+    weatherIconefeito.src = './efeito/chuva.png';
+
+} else if (['50d', '50n'].includes(icon)) { 
+
+  //ventania
+    weatherIconefeito.src = './efeito/ventania.png';
+
+} else {
     weatherIconefeito.src = './efeito/00d.png';
-  }
+}
 
-  //recomendação
+
+  //recomendação que será apresentado de acordo com o clima
 
   if ({ icon } = ['04n,04d']) {
+
     recomendacaoIcon.src = './recomendacao/04d.gif';
     recomendacaoIcon1.src = './recomendacao/00d.png';
+
   } else if ({ icon } = ['09d,09n']) {
+
     recomendacaoIcon.src = './recomendacao/09d.gif';
     recomendacaoIcon1.src = './recomendacao/09d1.gif';
+
   } else if ({ icon } = ['01d']) {
+
     recomendacaoIcon.src = './recomendacao/01d.gif';
     recomendacaoIcon1.src = './recomendacao/01ds.gif';
+
   } console.log(recomendacaoIcon.src);
 
 
