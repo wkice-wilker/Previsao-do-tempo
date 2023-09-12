@@ -184,18 +184,21 @@ weatherIconbg.src = `./bg/${estacaoAtual}.png`;
 
   //recomendação que será apresentado de acordo com o clima
 
-  if ({ icon } = ['04n,04d']) {
+  if (['04n,04d'].includes(icon)) {
 
+    //recomendação da possibilidade de chuva
     recomendacaoIcon.src = './recomendacao/04d.gif';
     recomendacaoIcon1.src = './recomendacao/00d.png';
 
-  } else if ({ icon } = ['09d,09n']) {
-
+  } else if (['09d,09n'].includes(icon)) {
+    
+    //recomendação para proteção da chuva
     recomendacaoIcon.src = './recomendacao/09d.gif';
-    recomendacaoIcon1.src = './recomendacao/09d1.gif';
+    recomendacaoIcon1.src = './recomendacao/00d.gif';
 
-  } else if ({ icon } = ['01d']) {
+  } else if (['01d'].includes(icon)) {
 
+    //recomendação para proteção do sol
     recomendacaoIcon.src = './recomendacao/01d.gif';
     recomendacaoIcon1.src = './recomendacao/01ds.gif';
 
