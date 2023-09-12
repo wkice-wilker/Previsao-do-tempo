@@ -7,10 +7,12 @@ const citySearchButton = document.getElementById('city-search-button')
 const weatherIcon1 = document.getElementById("weather-icon1");
 const weatherIconbg = document.getElementById("weather-iconbg");
 const weatherIconefeito = document.getElementById("weather-iconefeito");
+const fundoEfeito = document.getElementById("fundo-Efeito");
 
 //chamando recomendação
 const recomendacaoIcon = document.getElementById("recomIcon");
 const recomendacaoIcon1 = document.getElementById("recomIcon1");
+const containerRecomendacao = document.getElementById("conteudo-recomendacao");
 
 //exibição
 const currentDate = document.getElementById("current-date");
@@ -41,7 +43,12 @@ citySearchButton.addEventListener("click", () => {
   requestAccuWeather(requestCityName)
   requestAr(cityName)
   getCityTemp(tempCityName)
-
+  removeAllChildren(containerRecomendacao);
+  function removeAllChildren(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
 
 })
 
@@ -81,13 +88,28 @@ function displayWeather(data) {
   sunriseTime.textContent = formatTime(sunrise);
   sunsetTime.textContent = formatTime(sunset);
 
+  // data e horas (ainda não decidir se irei usar)
+  function formatTime(epochTime) {
+    let date = new Date(epochTime * 1000)
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    return `${hours}:${minutes}`
+  }
+
+  function formatDate(epochTime) {
+    let date = new Date(epochTime * 1000)
+    let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' })
+    return `Hoje, ${formattedDate}`
+  }
+
+
   // adicionando elemento no background de acordo com o clima
   weatherIcon1.src = `./assets/${icon}.svg`
 
   weatherIconefeito.src = `./efeito/${icon}.png`
 
   /*
-id de cada icone do tempo:
+Legenda dos icones do tempo:
 
 01d - sol
 02d - sol com nuvem
@@ -105,7 +127,7 @@ id de cada icone do tempo:
 13d e 13n - neve
 50d e 50n - ventania com nuvem
 
-id dos icones da estação do ano:
+icones da estação do ano:
 
 verao.png
 primavera.png
@@ -114,112 +136,180 @@ inverno.pbg
 
 */
 
-// verificação da estação do ano
+  // verificação da estação do ano
 
-function verificarEstacaoDoAno() {
-  const dataAtual = new Date();
-  const mesAtual = dataAtual.getMonth() + 1; // Obtenha o mês atual (0 a 11)
+  function verificarEstacaoDoAno() {
+    const dataAtual = new Date();
+    const mesAtual = dataAtual.getMonth() + 1; // Obtenha o mês atual (0 a 11)
 
-  let estacao;
+    let estacao;
 
-  switch (mesAtual) {
-    case 1:
-    case 2:
-    case 3:
-      estacao = 'verao';
-      break;
-    case 4:
-    case 5:
-    case 6:
-      estacao = 'outono';
-      break;
-    case 7:
-    case 8:
-    case 9:
-      estacao = 'inverno';
-      break;
-    case 10:
-    case 11:
-    case 12:
-      estacao = 'primavera';
-      break;
-    default:
-      estacao = 'Mês desconhecido'; // apocalipse
+    switch (mesAtual) {
+      case 1:
+      case 2:
+      case 3:
+        estacao = 'verao';
+        break;
+      case 4:
+      case 5:
+      case 6:
+        estacao = 'outono';
+        break;
+      case 7:
+      case 8:
+      case 9:
+        estacao = 'inverno';
+        break;
+      case 10:
+      case 11:
+      case 12:
+        estacao = 'primavera';
+        break;
+      default:
+        estacao = 'Mês desconhecido'; // apocalipse
+    }
+
+    return estacao;
   }
 
-  return estacao;
-}
-
-const estacaoAtual = verificarEstacaoDoAno();
-weatherIconbg.src = `./bg/${estacaoAtual}.png`;
+  const estacaoAtual = verificarEstacaoDoAno();
+  weatherIconbg.src = `./bg/${estacaoAtual}.png`;
 
 
 
-//verificação do efeito que será utilizado de acordo com o clima
+  //verificação do efeito que será utilizado de acordo com o clima
 
   if (['03d', '03n', '04d', '04n', '09d', '09n', '13d', '13n'].includes(icon)) {
 
     //nublado
     weatherIconefeito.src = './efeito/nublado.png';
 
-} else if (['02d', '02n'].includes(icon)) { 
+  } else if (['02d', '02n'].includes(icon)) {
 
-  //nuvem
+    //nuvem
     weatherIconefeito.src = './efeito/nuvem.png';
 
-} else if (['10d', '10n', '11d', '11n'].includes(icon)) {
+  } else if (['10d', '10n', '11d', '11n'].includes(icon)) {
 
-  //chuva com sol ou lua e chuva com trovoada
+    //chuva com sol ou lua e chuva com trovoada
     weatherIconefeito.src = './efeito/chuva.png';
 
-} else if (['50d', '50n'].includes(icon)) { 
+  } else if (['50d', '50n'].includes(icon)) {
 
-  //ventania
+    //ventania
     weatherIconefeito.src = './efeito/ventania.png';
 
-} else {
+  } else {
     weatherIconefeito.src = './efeito/00d.png';
-}
+  }
+
+  if (['02d'].includes(icon)) {
+
+    //ventania
+    fundoEfeito.src = './efeito/nublado.png';
+
+  } else {
+    fundoEfeito.src = './efeito/ensolarado.png';
+  }
+
+
 
 
   //recomendação que será apresentado de acordo com o clima
 
-  if (['04n,04d'].includes(icon)) {
+  if (['04n','04d'].includes(icon)) {
 
-    //recomendação da possibilidade de chuva
-    recomendacaoIcon.src = './recomendacao/04d.gif';
-    recomendacaoIcon1.src = './recomendacao/00d.png';
+    // Array de fontes de imagens
+    const imagensSrc = ["./recomendacao/04d.gif"];
 
-  } else if (['09d,09n'].includes(icon)) {
-    
-    //recomendação para proteção da chuva
-    recomendacaoIcon.src = './recomendacao/09d.gif';
-    recomendacaoIcon1.src = './recomendacao/00d.gif';
+    for (var i = 0; i < imagensSrc.length; i++) {
+      var imgElement = document.createElement("img");
 
-  } else if (['01d'].includes(icon)) {
+      // Define a classe do elemento
+      imgElement.className = "icone-recomendacao";
 
-    //recomendação para proteção do sol
-    recomendacaoIcon.src = './recomendacao/01d.gif';
-    recomendacaoIcon1.src = './recomendacao/01ds.gif';
+      // Define a fonte da imagem
+      imgElement.src = imagensSrc[i];
 
-  } console.log(recomendacaoIcon.src);
+      // Adiciona o elemento à 'containerRecomendacao'
+      containerRecomendacao.appendChild(imgElement);
+    }
+
+
+  } else if (['09d', '09n'].includes(icon)) {
+    // Array de fontes de imagens
+    const imagensSrc = ["./recomendacao/09d.gif"];
+
+    for (var i = 0; i < imagensSrc.length; i++) {
+      var imgElement = document.createElement("img");
+
+      // Define a classe do elemento
+      imgElement.className = "icone-recomendacao";
+
+      // Define a fonte da imagem
+      imgElement.src = imagensSrc[i];
+
+      // Adiciona o elemento à 'containerRecomendacao'
+      containerRecomendacao.appendChild(imgElement);
+    }
+
+  } else if (['01d', '02d'].includes(icon) && containerRecomendacao) {
+    // Array de fontes de imagens
+    const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif"];
+
+    for (var i = 0; i < imagensSrc.length; i++) {
+      var imgElement = document.createElement("img");
+
+      // Define a classe do elemento
+      imgElement.className = "icone-recomendacao";
+
+      // Define a fonte da imagem
+      imgElement.src = imagensSrc[i];
+
+      // Verifica se a fonte da imagem contém "sol.gif"
+      if (imagensSrc[i].includes("sol.gif")) {
+        // Adiciona o atributo style para ajustar o tamanho
+        imgElement.style.width = "50px";
+      }
+
+      // Adiciona o elemento à 'containerRecomendacao'
+      containerRecomendacao.appendChild(imgElement);
+    }
+  } else {
+    console.log("A imagem já existe em 'containerRecomendacao'.");
+  }
+
+  // adicionar um icone de alerta se a temperatura estiver acima de 37 graus
+  if (temp > 37) {
+    var imgElement = document.createElement("img");
+
+    // Define a classe do elemento
+    imgElement.className = "icone-recomendacao";
+
+    // Define a fonte da imagem
+    imgElement.src = "./recomendacao/perigo.gif";
+
+    // Adiciona o elemento à 'containerRecomendacao'
+    containerRecomendacao.appendChild(imgElement);
+
+    console.log("Imagem 'perigo.gif' adicionada em 'containerRecomendacao'.");
+  } else if (temp > 26) {
+    var imgElement = document.createElement("img");
+
+    // Define a classe do elemento
+    imgElement.className = "icone-recomendacao";
+
+    // Define a fonte da imagem
+    imgElement.src = "./recomendacao/agua.gif";
+
+    // Adiciona o elemento à 'containerRecomendacao'
+    containerRecomendacao.appendChild(imgElement);
+  }
 
 
 }
 
-// data e horas (ainda não decidir se irei usar)
-function formatTime(epochTime) {
-  let date = new Date(epochTime * 1000)
-  let hours = date.getHours()
-  let minutes = date.getMinutes()
-  return `${hours}:${minutes}`
-}
 
-function formatDate(epochTime) {
-  let date = new Date(epochTime * 1000)
-  let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' })
-  return `Hoje, ${formattedDate}`
-}
 
 
 // Buscando dados de vento e rajadas de vento
@@ -286,7 +376,7 @@ function requestAr(cityName) {
 
   let urlDado = '';
 
-   //verificando a cidade em que selecionou
+  //verificando a cidade em que selecionou
   if (cityName === 'caraguatatuba') {
     urlDado = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/weather-forecast/45839';
   } else if (cityName === 'sao sebastiao') {
