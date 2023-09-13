@@ -103,10 +103,11 @@ function displayWeather(data) {
   }
 
 
+
+
   // adicionando elemento no background de acordo com o clima
   weatherIcon1.src = `./assets/${icon}.svg`
 
-  weatherIconefeito.src = `./efeito/${icon}.png`
 
   /*
 Legenda dos icones do tempo:
@@ -179,38 +180,39 @@ inverno.pbg
 
   //verificação do efeito que será utilizado de acordo com o clima
 
-  if (['03d', '03n', '04d', '04n', '09d', '09n', '13d', '13n'].includes(icon)) {
+  if (['03d', '03n', '04d', '04n'].includes(icon)) {
 
     //nublado
-    weatherIconefeito.src = './efeito/nublado.png';
+    fundoEfeito.src = './efeito/nublado.png';
 
   } else if (['02d', '02n'].includes(icon)) {
 
     //nuvem
-    weatherIconefeito.src = './efeito/nuvem.png';
+    fundoEfeito.src = './efeito/nuvem.png';
 
-  } else if (['10d', '10n', '11d', '11n'].includes(icon)) {
+  } else if (['09d', '09n','10d', '10n'].includes(icon)) {
 
-    //chuva com sol ou lua e chuva com trovoada
+    //chuva com sol ou lua
+    fundoEfeito.src = './efeito/nublado.png';
+    weatherIconefeito.src = './efeito/chuva.png';
+
+  }else if (['11d', '11n'].includes(icon)) {
+
+    //chuva com trovoada
+    fundoEfeito.src = './efeito/carregado.png';
     weatherIconefeito.src = './efeito/chuva.png';
 
   } else if (['50d', '50n'].includes(icon)) {
 
     //ventania
-    weatherIconefeito.src = './efeito/ventania.png';
+    fundoEfeito.src = './efeito/ventania.png';
 
   } else {
-    weatherIconefeito.src = './efeito/00d.png';
-  }
-
-  if (['02d'].includes(icon)) {
-
-    //ventania
-    fundoEfeito.src = './efeito/nublado.png';
-
-  } else {
+    //ensolarado
     fundoEfeito.src = './efeito/ensolarado.png';
   }
+
+  
 
 
 
@@ -469,15 +471,24 @@ function requestAccuWeather(requestCityName) {
           alertsText.appendChild(alertP);
 
 
+          const divAlerts = document.querySelector('.info-alerts');
+          if (alertsTextElements.length > 0) {
+
+            divAlerts.textContent = 'Alerta';
+
+          }
+
+
         });
 
-      } else {
-        alertsPrevisao.textContent = 'Nenhum alerta';
-      }
+      } 
+      
       console.log(alertsPrevisao);
     })
     .catch(error => {
       console.log(error.message);
     });
+
+    
 }
 
