@@ -180,34 +180,73 @@ inverno.pbg
 
   //verificação do efeito que será utilizado de acordo com o clima
 
-  if (['03d', '03n', '04d', '04n'].includes(icon)) {
+  if (['03d'].includes(icon)) {
 
     //nublado
     fundoEfeito.src = './efeito/nublado.png';
 
-  } else if (['02d', '02n'].includes(icon)) {
+  } else if (['01n'].includes(icon)) {
+
+    //nublado noite
+    fundoEfeito.src = './efeito/noite.png';
+    
+
+  }else if (['03n'].includes(icon)) {
+
+    //nublado noite
+    fundoEfeito.src = './efeito/noite.png';
+    weatherIconefeito.src = './efeito/nuvem.png';
+
+  } else if (['04d', '04n'].includes(icon)) {
+
+    //carregado
+    fundoEfeito.src = './efeito/carregado.png';
+
+  }else if (['02d'].includes(icon)) {
 
     //nuvem
-    fundoEfeito.src = './efeito/nuvem.png';
+    fundoEfeito.src = './efeito/solnuvem.png';
 
-  } else if (['09d', '09n','10d', '10n'].includes(icon)) {
+  }else if (['02n'].includes(icon)) {
 
-    //chuva com sol ou lua
-    fundoEfeito.src = './efeito/nublado.png';
-    weatherIconefeito.src = './efeito/chuva.png';
+    //nuvem noite
+    fundoEfeito.src = './efeito/noite.png';
+    weatherIconefeito.src = './efeito/nuvem.png';
 
-  }else if (['11d', '11n'].includes(icon)) {
+  } else if (['09d' , '10d'].includes(icon)) {
 
-    //chuva com trovoada
-    fundoEfeito.src = './efeito/carregado.png';
-    weatherIconefeito.src = './efeito/chuva.png';
+    //chuva com sol
+    fundoEfeito.src = './efeito/chuva.png';
 
-  } else if (['50d', '50n'].includes(icon)) {
+  }else if (['09n','10n'].includes(icon)) {
 
-    //ventania
-    fundoEfeito.src = './efeito/ventania.png';
+    //chuva com lua
+    fundoEfeito.src = './efeito/chuvanoite.png';
+    
 
-  } else {
+  }else if (['11d'].includes(icon)) {
+
+    //chuva com trovoada de dia
+    fundoEfeito.src = './efeito/trovoada.png';
+
+
+  }else if (['11n'].includes(icon)) {
+
+    //chuva com trovoada de noite
+    fundoEfeito.src = './efeito/trovoadanoite.png';
+
+
+  } else if (['50d'].includes(icon)) {
+
+    //ventania de dia
+    fundoEfeito.src = './efeito/ensolarado.png';
+    weatherIconefeito.src = './efeito/ventania.png';
+  } else if (['50n'].includes(icon)) {
+
+    //ventania de noite
+    fundoEfeito.src = './efeito/noite.png';
+    weatherIconefeito.src = './efeito/ventania.png';
+  }else {
     //ensolarado
     fundoEfeito.src = './efeito/ensolarado.png';
   }
