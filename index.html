@@ -47,12 +47,13 @@
         <div class="header__city-name" id="city-name">Escolha uma cidade</div>
         <div class="text-email">Receba os alertas em seu e-mail:</div>
         <div class="addemail">
-            <input class="email-input" value="digite seu email" id="email">
+            <input class="email-input" value="digite seu e-mail" id="email">
             <button class="email-button" id="botao-email">enviar</button>
         </div>
     </header>
     <div class="grid-coluna" id="coluna">
         <section class="current-temperature">
+            <div class="vidro" id="vidro"></div>
             <div class="current-temperature__info-label" id="tempo">Tempo agora</div>
             <img class="current-temperature__weather-icon" id="weather-icon" src="./assets/loading-icon.svg"
                 alt="Icone que ilustra a temperatura atual.">
@@ -65,11 +66,12 @@
             <div class="container-recomendacao" id="recomendacao">
                 <h1>Recomendação</h1>
                 <div class="conteudo-recomendacao" id="conteudo-recomendacao">
-
+                    <img class="current-temperature__weather-icon" id="weather-icon" src="./assets/loading-icon.svg" alt="Icone que ilustra a temperatura atual.">
                 </div>
+            </div>
         </section>
     </div>
-    <div class="button-container">
+    <div class="button-container" id="button-container">
         <section class="temperature-details">
 
             <div class="temperature-details__item" id="gustA">
@@ -93,12 +95,12 @@
                 <div class="temperature-details__value" id="current-humidity">...</div>
             </div>
             <div class="sunset-sunrise__item">
-                <img class="sunset-sunrise__icon" src="./assets/sunrise.svg" alt="Nascer do sol">
+                <img class="sunset-sunrise__icon" id="iconsunrise" src="./assets/sunrise.svg" alt="Nascer do sol">
                 <div class="sunset-sunrise__value" id="sunrise-time">...</div>
             </div>
 
             <div class="sunset-sunrise__item">
-                <img class="sunset-sunrise__icon" src="./assets/sunset.svg" alt="Pôr do sol">
+                <img class="sunset-sunrise__icon" id="iconsunset" src="./assets/sunset.svg" alt="Pôr do sol">
                 <div class="sunset-sunrise__value" id="sunset-time">...</div>
             </div>
 

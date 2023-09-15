@@ -33,8 +33,73 @@ const qualidadeAr = document.getElementById("qualidadeAr");
 const api_key = "9dd573acf23af2fb1e2b79726072d201";
 const api_key1 = "t616H4VQSxC4C0dHNzBqf1e5OlVfWDJZ";
 
+// para reitirar a informação do value do input e-mail --------------------------------------------------------------------------------------------------------
+
+// Seleciona o elemento de entrada de email
+const emailInput = document.getElementById('email');
+
+// Armazena o valor padrão para posterior comparação
+const valorPadrao = 'digite seu e-mail';
+
+// Adiciona um evento de foco (quando o usuário clica no campo)
+emailInput.addEventListener('focus', function() {
+  // Verifica se o valor atual é igual ao valor padrão
+  if (emailInput.value === valorPadrao) {
+    // Limpa o valor
+    emailInput.value = '';
+  }
+});
+
+// Adiciona um evento de desfoco (quando o usuário clica fora do campo)
+emailInput.addEventListener('blur', function() {
+  // Se o campo estiver vazio, redefina o valor padrão
+  if (emailInput.value === '') {
+    emailInput.value = valorPadrao;
+  }
+});
 
 
+ // verificação da estação do ano -----------------------------------------------------------------------------------
+
+ function verificarEstacaoDoAno() {
+  const dataAtual = new Date();
+  const mesAtual = dataAtual.getMonth() + 1; // Obtenha o mês atual (0 a 11)
+
+  let estacao;
+
+  switch (mesAtual) {
+    case 1:
+    case 2:
+    case 3:
+      estacao = 'verao';
+      break;
+    case 4:
+    case 5:
+    case 6:
+      estacao = 'outono';
+      break;
+    case 7:
+    case 8:
+    case 9:
+      estacao = 'inverno';
+      break;
+    case 10:
+    case 11:
+    case 12:
+      estacao = 'primavera';
+      break;
+    default:
+      estacao = 'Mês desconhecido'; // apocalipse
+  }
+
+  return estacao;
+}
+
+const estacaoAtual = verificarEstacaoDoAno();
+weatherIconbg.src = `./bg/${estacaoAtual}.png`;
+
+
+// ação quando efetuar o clique na busca da cidade
 citySearchButton.addEventListener("click", () => {
 
   const cityName = citySearchInput.value
@@ -58,7 +123,7 @@ citySearchButton.addEventListener("click", () => {
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
 
-
+//adicionando os dados optidos da API nas DIVs ----------------------------------------------------------------------------------------------------
 
 function getCityWeather(cityName) {
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
@@ -106,7 +171,7 @@ function displayWeather(data) {
 
 
 
-  // adicionando elemento no background de acordo com o clima
+  // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
   weatherIcon1.src = `./assets/${icon}.svg`
 
 
@@ -138,49 +203,50 @@ inverno.pbg
 
 */
 
-  // verificação da estação do ano
-
-  function verificarEstacaoDoAno() {
-    const dataAtual = new Date();
-    const mesAtual = dataAtual.getMonth() + 1; // Obtenha o mês atual (0 a 11)
-
-    let estacao;
-
-    switch (mesAtual) {
-      case 1:
-      case 2:
-      case 3:
-        estacao = 'verao';
-        break;
-      case 4:
-      case 5:
-      case 6:
-        estacao = 'outono';
-        break;
-      case 7:
-      case 8:
-      case 9:
-        estacao = 'inverno';
-        break;
-      case 10:
-      case 11:
-      case 12:
-        estacao = 'primavera';
-        break;
-      default:
-        estacao = 'Mês desconhecido'; // apocalipse
-    }
-
-    return estacao;
-  }
-
-  const estacaoAtual = verificarEstacaoDoAno();
-  weatherIconbg.src = `./bg/${estacaoAtual}.png`;
+ 
 
 
+icon = "09n";
 
 
-  //verificação do efeito que será utilizado de acordo com o clima
+//efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
+if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
+
+  document.body.style.color = 'white';
+  document.getElementById('weather-description').style.color = '#fff';
+    document.getElementById('alert').style.color = '#fff';
+  document.getElementById('vidro').style.backgroundColor = '#00000089';
+  document.getElementById('button-container').style.backgroundColor = '#00000089';
+  document.getElementById('header').style.backgroundColor = '#00000089';
+  document.getElementById('recomendacao').style.backgroundColor = '#46464679';
+  document.getElementById('city-search-button').style.background = '#5795dc';
+  document.getElementById('current-temperature').style.color = '#5795dc';
+  document.getElementById('botao-email').style.background = '#5795dc';
+  
+  const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
+  const elementosLabel = document.querySelectorAll('.temperature-details__label');
+  const elementosPraia = document.querySelector('.praia');
+  const sunriseTimeElement = document.getElementById('iconsunrise');
+  const sunsetTimeElement = document.getElementById('iconsunset');
+
+    elementosPraia.src = `./bg/fundonoite.png`;
+    sunriseTimeElement.src = `./assets/sunriseN.svg`;
+    sunsetTimeElement.src = `./assets/sunsetN.svg`;
+
+  elementos.forEach(elemento => {
+    elemento.style.color = 'white'; // Substitua 'sua_cor_aqui' pela cor desejada
+  
+   });
+  elementosLabel.forEach(elementosLabel => {
+   elementosLabel.style.color = '#aba9a9';
+
+  });
+
+}
+
+
+
+  //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
   if (['03d'].includes(icon)) {
 
@@ -189,32 +255,35 @@ inverno.pbg
 
   } else if (['01n'].includes(icon)) {
 
-    document.body.style.color = 'white';
-    document.getElementById('city-search-button').style.background = '#5795dc';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('botao-email').style.background = '#5795dc';
     //nublado noite
     fundoEfeito.src = './efeito/noite.png';
     
 
   }else if (['03n'].includes(icon)) {
 
-    document.body.style.color = 'white';
-    document.getElementById('city-search-button').style.background = '#5795dc';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('botao-email').style.background = '#5795dc';
+
     //nublado noite
     fundoEfeito.src = './efeito/nubladonoite.png';
     weatherIconefeito.src = './efeito/nuvem.png';
 
 
-  } else if (['04d', '04n'].includes(icon)) {
+  } else if (['04d'].includes(icon)) {
 
     // Define a cor de fundo do corpo como branca
     document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
     document.getElementById('email').style.backgroundColor = '#5795dc';
+    document.querySelector('.header__input').style.color = '#fff';
+    document.getElementById('email').style.color = '#fff';
     //carregado
     fundoEfeito.src = './efeito/carregado.png';
+
+  }else if (['04n'].includes(icon)) {
+
+    // Define a cor de fundo do corpo como branca
+    document.getElementById('tempo').style.color = '#fff';
+    document.getElementById('alert').style.color = '#fff';
+    //carregado
+    fundoEfeito.src = './efeito/carregadonoite.png';
 
   }else if (['02d'].includes(icon)) {
 
@@ -225,11 +294,6 @@ inverno.pbg
 
   }else if (['02n'].includes(icon)) {
 
-    // Define a cor de fundo do corpo como branca
-    document.body.style.color = 'white';
-    document.getElementById('city-search-button').style.background = '#5795dc';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('botao-email').style.background = '#5795dc';
     //nuvem noite
     fundoEfeito.src = './efeito/noite.png';
     weatherIconefeito.src = './efeito/nuvem.png';
@@ -238,42 +302,40 @@ inverno.pbg
 
     document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
     document.getElementById('email').style.backgroundColor = '#5795dc';
+    document.querySelector('.header__input').style.color = '#fff';
+    document.getElementById('email').style.color = '#fff';
    
 
     //chuva com sol
     fundoEfeito.src = './efeito/chuva.png';
+    weatherIconefeito.src = './efeito/chuvaT.png';
 
   }else if (['09n','10n'].includes(icon)) {
 
-    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
-    document.getElementById('email').style.backgroundColor = '#5795dc';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('tempo').style.color = '#fff';
-    document.getElementById('alert').style.color = '#fff';
 
     //chuva com lua
     fundoEfeito.src = './efeito/chuvanoite.png';
+    weatherIconefeito.src = './efeito/chuvaT.png';
     
 
   }else if (['11d'].includes(icon)) {
 
     document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
     document.getElementById('email').style.backgroundColor = '#5795dc';
+    document.querySelector('.header__input').style.color = '#fff';
+    document.getElementById('email').style.color = '#fff';
 
     //chuva com trovoada de dia
     fundoEfeito.src = './efeito/trovoada.png';
+    weatherIconefeito.src = './efeito/chuvaT.png';
 
 
   }else if (['11n'].includes(icon)) {
 
-    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
-    document.getElementById('email').style.backgroundColor = '#5795dc';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('tempo').style.color = '#fff';
-    document.getElementById('alert').style.color = '#fff';
 
     //chuva com trovoada de noite
     fundoEfeito.src = './efeito/trovoadanoite.png';
+    weatherIconefeito.src = './efeito/chuvaT.png';
 
 
   } else if (['50d'].includes(icon)) {
@@ -301,7 +363,7 @@ inverno.pbg
 
 
 
-  //recomendação que será apresentado de acordo com o clima
+  //recomendação que será apresentado de acordo com o clima --------------------------------------------------------------------------------------
 
   if (['04n','04d'].includes(icon)) {
 
@@ -398,7 +460,7 @@ inverno.pbg
 
 
 
-// Buscando dados de vento e rajadas de vento
+// Buscando dados de vento e rajadas de vento -------------------------------------------------------------------------------------------
 
 function getCityTemp(tempCityName) {
 
@@ -457,7 +519,7 @@ function getCityTemp(tempCityName) {
 }
 
 
-//buscando dados Qualidade do Ar
+//buscando dados Qualidade do Ar --------------------------------------------------------------------------------------------------
 function requestAr(cityName) {
 
   let urlDado = '';
@@ -506,7 +568,7 @@ function requestAr(cityName) {
 }
 
 
-// buscando alertas do tempo da cidade
+// buscando alertas do tempo da cidade -------------------------------------------------------------------------------------------------
 function requestAccuWeather(requestCityName) {
   let url = '';
 
