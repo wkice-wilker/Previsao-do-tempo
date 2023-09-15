@@ -206,7 +206,7 @@ inverno.pbg
  
 
 
-icon = "09n";
+
 
 
 //efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
