@@ -25,11 +25,11 @@
         <img class="chuva" id="weather-iconefeito" src="./efeito/00d.png">
     </div>
     <div class='ripple-background'>
-        <img class="bkg" id="weather-iconbg" src="./bg/00d.png">
+        <img class="bkg" id="weather-iconbg" src="./bg/verao.png">
         <img class="iconebg" id="weather-icon1" src="./bg/00d.png" alt="Icone que ilustra a temperatura atual.">
     </div>
 
-    <header class="header">
+    <header class="header" id="header">
 
 
         <div class="header__city-search-bar">
@@ -41,24 +41,24 @@
                 <option value="ubatuba">Ubatuba</option>
             </select>
             <button class="header__button" id="city-search-button">
-                <img class="header__button-icon" src="./assets/search-icon.svg" alt="Icone de uma lupa.">
+                <img class="header__button-icon" src="./assets/search-icon.svg" alt="Icone de uma lupa." id="lupa">
             </button>
         </div>
         <div class="header__city-name" id="city-name">Escolha uma cidade</div>
         <div class="text-email">Receba os alertas em seu e-mail:</div>
         <div class="addemail">
-            <input class="email-input" value="digite seu email">
-            <button class="email-button">enviar</button>
+            <input class="email-input" value="digite seu email" id="email">
+            <button class="email-button" id="botao-email">enviar</button>
         </div>
     </header>
-    <div class="grid-coluna">
+    <div class="grid-coluna" id="coluna">
         <section class="current-temperature">
-            <div class="current-temperature__info-label">Tempo agora</div>
+            <div class="current-temperature__info-label" id="tempo">Tempo agora</div>
             <img class="current-temperature__weather-icon" id="weather-icon" src="./assets/loading-icon.svg"
                 alt="Icone que ilustra a temperatura atual.">
             <div class="current-temperature__description" id="weather-description"></div>
             <div class="current-temperature__current-temperature" id="current-temperature"></div>
-            <div class="info-alerts"></div>
+            <div class="info-alerts" id="alert"></div>
             <div class="alert-message_alert" id="alertsPrevisao"></div>
         </section>
         <section class="recomendacao">
@@ -105,6 +105,8 @@
         </section>
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.min.js"></script>
+
     <script src="app.js"></script>
 </body>
 

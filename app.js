@@ -8,6 +8,7 @@ const weatherIcon1 = document.getElementById("weather-icon1");
 const weatherIconbg = document.getElementById("weather-iconbg");
 const weatherIconefeito = document.getElementById("weather-iconefeito");
 const fundoEfeito = document.getElementById("fundo-Efeito");
+const lupa = document.getElementById('lupa');
 
 //chamando recomendação
 const recomendacaoIcon = document.getElementById("recomIcon");
@@ -178,6 +179,7 @@ inverno.pbg
 
 
 
+
   //verificação do efeito que será utilizado de acordo com o clima
 
   if (['03d'].includes(icon)) {
@@ -187,38 +189,67 @@ inverno.pbg
 
   } else if (['01n'].includes(icon)) {
 
+    document.body.style.color = 'white';
+    document.getElementById('city-search-button').style.background = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('botao-email').style.background = '#5795dc';
     //nublado noite
     fundoEfeito.src = './efeito/noite.png';
     
 
   }else if (['03n'].includes(icon)) {
 
+    document.body.style.color = 'white';
+    document.getElementById('city-search-button').style.background = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('botao-email').style.background = '#5795dc';
     //nublado noite
-    fundoEfeito.src = './efeito/noite.png';
+    fundoEfeito.src = './efeito/nubladonoite.png';
     weatherIconefeito.src = './efeito/nuvem.png';
+
 
   } else if (['04d', '04n'].includes(icon)) {
 
+    // Define a cor de fundo do corpo como branca
+    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
+    document.getElementById('email').style.backgroundColor = '#5795dc';
     //carregado
     fundoEfeito.src = './efeito/carregado.png';
 
   }else if (['02d'].includes(icon)) {
+
+    document.getElementById('email').style.backgroundColor = '#5795dc';
 
     //nuvem
     fundoEfeito.src = './efeito/solnuvem.png';
 
   }else if (['02n'].includes(icon)) {
 
+    // Define a cor de fundo do corpo como branca
+    document.body.style.color = 'white';
+    document.getElementById('city-search-button').style.background = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('botao-email').style.background = '#5795dc';
     //nuvem noite
     fundoEfeito.src = './efeito/noite.png';
     weatherIconefeito.src = './efeito/nuvem.png';
 
   } else if (['09d' , '10d'].includes(icon)) {
 
+    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
+    document.getElementById('email').style.backgroundColor = '#5795dc';
+   
+
     //chuva com sol
     fundoEfeito.src = './efeito/chuva.png';
 
   }else if (['09n','10n'].includes(icon)) {
+
+    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
+    document.getElementById('email').style.backgroundColor = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('tempo').style.color = '#fff';
+    document.getElementById('alert').style.color = '#fff';
 
     //chuva com lua
     fundoEfeito.src = './efeito/chuvanoite.png';
@@ -226,11 +257,20 @@ inverno.pbg
 
   }else if (['11d'].includes(icon)) {
 
+    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
+    document.getElementById('email').style.backgroundColor = '#5795dc';
+
     //chuva com trovoada de dia
     fundoEfeito.src = './efeito/trovoada.png';
 
 
   }else if (['11n'].includes(icon)) {
+
+    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
+    document.getElementById('email').style.backgroundColor = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('tempo').style.color = '#fff';
+    document.getElementById('alert').style.color = '#fff';
 
     //chuva com trovoada de noite
     fundoEfeito.src = './efeito/trovoadanoite.png';
@@ -242,6 +282,11 @@ inverno.pbg
     fundoEfeito.src = './efeito/ensolarado.png';
     weatherIconefeito.src = './efeito/ventania.png';
   } else if (['50n'].includes(icon)) {
+
+    document.body.style.color = 'white';
+    document.getElementById('city-search-button').style.background = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('botao-email').style.background = '#5795dc';
 
     //ventania de noite
     fundoEfeito.src = './efeito/noite.png';
