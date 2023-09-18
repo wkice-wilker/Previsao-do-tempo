@@ -296,7 +296,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
 
     //nuvem noite
     fundoEfeito.src = './efeito/noitenuvem.png';
-    weatherIconefeito.src = './efeito/nuvem.png';
+    
 
   } else if (['09d' , '10d'].includes(icon)) {
 
