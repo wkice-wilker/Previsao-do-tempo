@@ -295,8 +295,8 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
   }else if (['02n'].includes(icon)) {
 
     //nuvem noite
-    fundoEfeito.src = './efeito/noite.png';
-    weatherIconefeito.src = './efeito/nuvem.png';
+    fundoEfeito.src = './efeito/noitenuvem.png';
+    
 
   } else if (['09d' , '10d'].includes(icon)) {
 
@@ -637,4 +637,3 @@ function requestAccuWeather(requestCityName) {
 
     
 }
-
