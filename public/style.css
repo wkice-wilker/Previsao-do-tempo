@@ -234,6 +234,7 @@ body {
     overflow: scroll;
    max-width: 500px;
    word-wrap: break-word;
+   margin-top: 10px;
 }
 
 .alert-message_alert::-webkit-scrollbar {
@@ -321,12 +322,12 @@ body {
    align-content: center;
    position:absolute;
    width: 300px;
-   height: 75%;
+   height: 65%;
    border-radius: 15px;
    background-color: #ffffffb1;
    backdrop-filter: blur(5px);
    -webkit-backdrop-filter: blur(5px);
-   padding-bottom: 20px;
+   padding-bottom: 40px;
 }
 
 .current-temperature__weather-icon {
