@@ -105,36 +105,54 @@ body {
     padding: 0 10px;
 }
 
-.add-email {
+.addemail {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 700px;
+    flex: 1;
+    align-items: center;
+    width: 800px;
 }
 
 .email-input {
     flex: 1 auto;
     border: none;
     height: 30px;
-    width: 250px;
     padding: 0 15px;
     border-radius: 10px 0 0 10px;
     appearance: none;
     margin-right: -15px;
+    width: 250px;
 }
 .email-input:focus{
    outline: none;
 }
 
 .email-button {
-    width: 50px;
-    height: 30px;
-    border-radius: 0px 10px 10px 0px;
-    appearance: none;
+    cursor: pointer;
+    min-width: 40px;
+    min-height: 40px;
     border: none;
-    background-color: #393939;
-    color: #fff;
+    border-radius: 100%;
+    background: #393939;
+    color: #f3f4fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    box-shadow:
+        rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3);
 }
+.email-button:hover {
+    filter: brightness(1.25);
+}
+.botao-email{
+    display: flex;
+    width: 20px;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* Header */
 
@@ -146,7 +164,7 @@ body {
     background-color: #ffffff89;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-   border-radius: 0px 0px 15px 15px ;
+    border-radius: 0px 0px 15px 15px;
 }
 
 .header__city-search-bar {
@@ -449,7 +467,14 @@ body {
 
     .container-recomendacao {
         height: 500px;
+        
     }
+    .recomendacao{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
 }
 
 
@@ -522,7 +547,7 @@ body {
       border-radius: 15px ;
    }
    .container-recomendacao{
-       width:auto;
+       width:80%;
    }
 
 
