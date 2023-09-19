@@ -235,6 +235,7 @@ body {
    max-width: 500px;
    word-wrap: break-word;
    margin-top: 10px;
+   text-align: center;
 }
 
 .alert-message_alert::-webkit-scrollbar {
@@ -333,6 +334,7 @@ body {
 .current-temperature__weather-icon {
     width: 125px;
     margin-top: 15px;
+    
     
 }
 
@@ -475,6 +477,10 @@ body {
         justify-content: center;
         align-items: center;
     }
+    .addemail{
+        max-width: 400px;
+       margin-top: 5px;
+    }
     
 }
 
@@ -526,6 +532,7 @@ body {
         margin: 0;
     }
     .addemail{
+        max-width: 350px;
        margin-top: 5px;
     }
     .text-email{
@@ -549,6 +556,7 @@ body {
    }
    .container-recomendacao{
        width:80%;
+        margin-bottom: 20%;
    }
 
 

@@ -214,21 +214,22 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
 
   document.body.style.color = 'white';
   document.getElementById('weather-description').style.color = '#fff';
-    document.getElementById('alert').style.color = '#fff';
+  document.getElementById('alert').style.color = '#fff';
   document.getElementById('vidro').style.backgroundColor = '#00000089';
   document.getElementById('button-container').style.backgroundColor = '#00000089';
   document.getElementById('header').style.backgroundColor = '#00000089';
-  document.getElementById('recomendacao').style.backgroundColor = '#46464679';
+  document.getElementById('recomendacao').style.backgroundColor = '#00000089';
   document.getElementById('city-search-button').style.background = '#5795dc';
   document.getElementById('current-temperature').style.color = '#5795dc';
   document.getElementById('botao-email').style.background = '#5795dc';
+ 
   
   const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
   const elementosLabel = document.querySelectorAll('.temperature-details__label');
   const elementosPraia = document.querySelector('.praia');
   const sunriseTimeElement = document.getElementById('iconsunrise');
   const sunsetTimeElement = document.getElementById('iconsunset');
-
+   
     elementosPraia.src = `./bg/fundonoite.png`;
     sunriseTimeElement.src = `./assets/sunriseN.svg`;
     sunsetTimeElement.src = `./assets/sunsetN.svg`;
@@ -242,9 +243,10 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
 
   });
 
+  
+ 
+
 }
-
-
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
@@ -365,7 +367,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
 
   //recomendação que será apresentado de acordo com o clima --------------------------------------------------------------------------------------
 
-  if (['04n','04d'].includes(icon)) {
+  if (['01n','04d'].includes(icon)) {
 
     // Array de fontes de imagens
     const imagensSrc = ["./recomendacao/04d.gif"];
@@ -633,6 +635,25 @@ function requestAccuWeather(requestCityName) {
     })
     .catch(error => {
       console.log(error.message);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const add = document.getElementById('alertsPrevisao');
+    
+      if (add) {
+        const texto = add.textContent.toLowerCase(); // Obtém o texto e converte para letras minúsculas
+        add.style.removeProperty('color');
+    
+        if (texto.includes('laranja')) {
+          add.style.color = '#FFA500'; // Laranja
+        } else if (texto.includes('vermelho')) {
+          add.style.color = '#FF0000'; // Vermelho
+        } else {
+          console.log('Nenhuma correspondência encontrada');
+        }
+      } else {
+        console.log("Elemento <p> não encontrado dentro de '#alertsPrevisao'");
+      }
     });
 
     
