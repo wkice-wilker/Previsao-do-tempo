@@ -203,8 +203,6 @@ inverno.pbg
 
 */
 
- 
-
 
 
 
@@ -219,6 +217,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
   document.getElementById('button-container').style.backgroundColor = '#00000089';
   document.getElementById('header').style.backgroundColor = '#00000089';
   document.getElementById('recomendacao').style.backgroundColor = '#00000089';
+  document.getElementById('alert-vidro').style.backgroundColor = '#00000089';
   document.getElementById('city-search-button').style.background = '#5795dc';
   document.getElementById('current-temperature').style.color = '#5795dc';
   document.getElementById('botao-email').style.background = '#5795dc';
@@ -235,7 +234,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
     sunsetTimeElement.src = `./assets/sunsetN.svg`;
 
   elementos.forEach(elemento => {
-    elemento.style.color = 'white'; // Substitua 'sua_cor_aqui' pela cor desejada
+    elemento.style.color = 'white'; 
   
    });
   elementosLabel.forEach(elementosLabel => {
@@ -615,6 +614,24 @@ function requestAccuWeather(requestCityName) {
           const alertP = document.createElement('p');
           alertP.textContent = text;
 
+          if (alertP) {
+            const texto = alertP.textContent.toLowerCase(); // Obtém o texto e converte para letras minúsculas
+            alertP.style.removeProperty('color');
+            document.getElementById('alert-vidro').style.display='flex';
+        
+            if (texto.includes('laranja')) {
+              alertP.style.background = '#FFA50097'; // Laranja
+            } else if (texto.includes('vermelho')) {
+              alertP.style.background = '#FF000097'; // Vermelho
+            } else if (texto.includes('amarelo')) {
+              alertP.style.background = '#ffff0097'; // Vermelho
+            } else {
+              console.log('Nenhuma correspondência encontrada');
+            }
+          } else {
+            console.log("Elemento <p> não encontrado dentro de '#alertsPrevisao'");
+          }
+
           // Adiciona o elemento <p> ao contêiner
           alertsText.appendChild(alertP);
 
@@ -622,7 +639,7 @@ function requestAccuWeather(requestCityName) {
           const divAlerts = document.querySelector('.info-alerts');
           if (alertsTextElements.length > 0) {
 
-            divAlerts.textContent = 'Alerta';
+            divAlerts.textContent = 'Alerta(s):';
 
           }
 
@@ -635,25 +652,6 @@ function requestAccuWeather(requestCityName) {
     })
     .catch(error => {
       console.log(error.message);
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const add = document.getElementById('alertsPrevisao');
-    
-      if (add) {
-        const texto = add.textContent.toLowerCase(); // Obtém o texto e converte para letras minúsculas
-        add.style.removeProperty('color');
-    
-        if (texto.includes('laranja')) {
-          add.style.color = '#FFA500'; // Laranja
-        } else if (texto.includes('vermelho')) {
-          add.style.color = '#FF0000'; // Vermelho
-        } else {
-          console.log('Nenhuma correspondência encontrada');
-        }
-      } else {
-        console.log("Elemento <p> não encontrado dentro de '#alertsPrevisao'");
-      }
     });
 
     

@@ -76,6 +76,7 @@ body {
     grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
     align-items: stretch;
     gap: 10px;
+    font-family: "Ubuntu";
 
 
 }
@@ -200,10 +201,6 @@ body {
     align-items: center;
     justify-content: center;
     transition: 0.2s;
-    box-shadow:
-        rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-        rgba(0, 0, 0, 0.3);
-    ;
 
 }
 
@@ -219,23 +216,34 @@ body {
     font-family: "Ubuntu", sans-serif;
 }
 
+.alert-vidro{
+    margin-top: 50px;
+    align-items:center;
+    flex-direction: column;
+    background-color: #ffffff89;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 15px;
+    display: none; 
+}
+
 .info-alerts {
+    text-align: center;
     font-weight: 500;
-    font-size: 20px;
-    margin-top: 20px;
+    font-size: 28px;
     padding-bottom: 10px;
     font-weight: bold;
+    font-family: "Ubuntu", sans-serif;
 }
 
 .alert-message_alert {
     font-size: 16px;
-    color: #c30000;
-    padding: 15px;
     overflow: scroll;
    max-width: 500px;
    word-wrap: break-word;
-   margin-top: 10px;
    text-align: center;
+   font-family: "Ubuntu", sans-serif;
 }
 
 .alert-message_alert::-webkit-scrollbar {
@@ -313,6 +321,7 @@ body {
     grid-column: temperatura;
     flex-wrap: wrap;
     position: relative;
+    margin-bottom: 50px;
     
    
 }
@@ -323,12 +332,12 @@ body {
    align-content: center;
    position:absolute;
    width: 300px;
-   height: 65%;
+   height: 280px;
    border-radius: 15px;
    background-color: #ffffffb1;
    backdrop-filter: blur(5px);
    -webkit-backdrop-filter: blur(5px);
-   padding-bottom: 40px;
+   
 }
 
 .current-temperature__weather-icon {
@@ -520,10 +529,12 @@ body {
 
     .header__city-search-bar {
         width: 350px;
+        position: relative;
+        margin-top: 50px;
        
     }
     .header{
-       border-radius: 0px 0px 15px 15px;
+       border-radius: 0;
     }
     
 
@@ -540,6 +551,7 @@ body {
     }
     .header__city-name{
        margin-top: 10px;
+       position: absolute;
     }
     .alert-message_alert {
        width: 350px;
