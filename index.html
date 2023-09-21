@@ -20,8 +20,8 @@
 
 <body>
     <div class="fundo">
-        <img class = praia src="./bg/fundo.png" alt="fundo">
-        <img class = ceu id="fundo-Efeito" src="./efeito/ensolarado.png" alt="fundo de efeito">
+        <img class=praia src="./bg/fundo.png" alt="fundo">
+        <img class=ceu id="fundo-Efeito" src="./efeito/ensolarado.png" alt="fundo de efeito">
         <img class="chuva" id="weather-iconefeito" src="./efeito/00d.png">
     </div>
     <div class='ripple-background'>
@@ -54,6 +54,7 @@
         </div>
     </header>
     <div class="grid-coluna" id="coluna">
+
         <section class="current-temperature">
             <div class="vidro" id="vidro"></div>
             <div class="current-temperature__info-label" id="tempo">Tempo agora</div>
@@ -70,12 +71,27 @@
             <div class="container-recomendacao" id="recomendacao">
                 <h1>Recomendação</h1>
                 <div class="conteudo-recomendacao" id="conteudo-recomendacao">
-                    <img class="recomendacao_weather-icon" id="weather-icon" src="./assets/loading-icon.svg" alt="Icone que ilustra a temperatura atual.">
+                    <img class="recomendacao_weather-icon" id="weather-icon" src="./assets/loading-icon.svg"
+                        alt="Icone que ilustra a temperatura atual.">
                 </div>
             </div>
         </section>
+
     </div>
+    <div class="grid-coluna-2" id="coluna">
+        <section class="container-saude">
+            <div class="saude" id="saude"></div>
+        </section>
+        <section class="container-atividade">
+            <div class="atividade" id="atividade"></div>
+        </section>
+        <section class="container-alergia">
+            <div class="alergia" id="alergia"></div>
+        </section>
+    </div>
+    <footer class="correcao-button"></footer>
     <div class="button-container" id="button-container">
+
         <section class="temperature-details">
 
             <div class="temperature-details__item" id="gustA">

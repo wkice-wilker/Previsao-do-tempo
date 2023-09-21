@@ -73,12 +73,21 @@ body {
 .grid-coluna {
     padding: 20px 0px 5% 0px;
     display: grid;
-    grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
+    grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr ;
     align-items: stretch;
     gap: 10px;
     font-family: "Ubuntu";
 
 
+}
+.grid-coluna-2 {
+    display: grid;
+    grid-template-columns: [vazio]1fr [temperatura]1fr [recomendacao]1fr;
+    justify-content: center;
+    justify-items:auto;
+    align-items:flex-start;
+    font-family: "Ubuntu";
+    align-content: center;
 }
 
 .sunset-sunrise {
@@ -217,7 +226,7 @@ body {
 }
 
 .alert-vidro{
-    margin-top: 50px;
+    margin-top: 100px;
     align-items:center;
     flex-direction: column;
     background-color: #ffffff89;
@@ -251,7 +260,6 @@ body {
 }
 
 .alert-message_alert p {
-    margin-bottom: 10px;
     background-color: #ffffff89;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -308,7 +316,77 @@ body {
     justify-content: center;
 }
 
+/*pop up*/
 
+.popup-saude, .popup-alergia, .popup-atividade{
+        display: none;
+        position: absolute;
+        top: -130px;
+        background-color: #fffffff3;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 10px;
+  
+    }
+
+/*CSS do conteudo saude, alergia e atividade*/
+.container-saude, .container-alergia, .container-atividade{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+.saude, .alergia, .atividade{
+    display: flex;
+    margin: 0px 5px 0px 5px;
+    flex-direction: row;
+    align-items: center;
+    justify-content:flex-start;
+    align-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    border-radius: 15px;
+    padding: 5px;
+   
+}
+.conteudo-saude, .conteudo-alergia, .conteudo-atividade{
+    width:200px;
+    margin: 10px;
+    align-items: center;
+    justify-content:center;
+    text-align: center;
+    padding: 5px;
+    border-radius: 15px;
+    background-color: #ffffffb1;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    font-size: 14px;
+}
+.conteudo-saude .index-status-color,.conteudo-alergia .index-status-color, .conteudo-atividade .index-status-color{
+    max-height: 10px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 5px 10px 5px 10px;
+}
+.conteudo-saude .index-status-text, .conteudo-alergia .index-status-text, .conteudo-atividade .index-status-text{
+    font-size: 20px;
+}
+.conteudo-saude .index-icon svg, .conteudo-alergia .index-icon svg, .conteudo-atividade .index-icon svg{
+    width: 30px;
+    min-height: 30px;
+}
+.titulo-saude, .titulo-alergia, .titulo-atividade{
+    padding-top: 10px;
+    font-family:'ubuntu';
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+}
 
 
 /*current temperature */
@@ -321,18 +399,19 @@ body {
     grid-column: temperatura;
     flex-wrap: wrap;
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     
    
 }
-.current-temperature .vidro {
+ .vidro {
    content:'';
    z-index: -1;
    justify-content: center;
    align-content: center;
    position:absolute;
    width: 300px;
-   height: 280px;
+   height: 300px;
+   padding-bottom: 5%;
    border-radius: 15px;
    background-color: #ffffffb1;
    backdrop-filter: blur(5px);
@@ -343,8 +422,6 @@ body {
 .current-temperature__weather-icon {
     width: 125px;
     margin-top: 15px;
-    
-    
 }
 
 .current-temperature__description {
@@ -367,7 +444,9 @@ body {
     font-size: 40px;
     font-weight: 600;
     margin-top: 10px;
+    margin-bottom: 30px;
 }
+
 
 /*Button container */
 
@@ -443,20 +522,29 @@ body {
 }
 
 
+.correcao-button{
+    margin-top: 100px;
+}
 
 /* Quando a largura da tela atingir 1060px ou mais */
 @media (max-width: 1060px) {
+    .container-saude{
+        backdrop-filter: blur(13.5px);
+        -webkit-backdrop-filter: blur(13.5px);
+        background-color: #ffffff33;
+        margin-top: 0;
+    }
 
     .grid-coluna {
         display: flex;
         flex-direction: column;
-        /* Mudar para layout de coluna flexível */
-        /* gap: 10px; */
-        /* Espaçamento entre os itens */
         justify-content: center;
         backdrop-filter: blur(13.5px);
         -webkit-backdrop-filter: blur(13.5px);
         background-color: #ffffff33;
+    }
+    .alert-vidro{
+        margin-top: 70px;
     }
 
     .header {
@@ -490,7 +578,10 @@ body {
         max-width: 400px;
        margin-top: 5px;
     }
-    
+    .saude, .alergia{
+        padding: 0;
+        margin: 0px 5px 50px 5px;
+    }
 }
 
 
@@ -569,6 +660,11 @@ body {
    .container-recomendacao{
        width:80%;
         margin-bottom: 20%;
+   }
+   .saude, .alergia{
+    justify-content: center;
+    align-content: center;
+    align-items: center;
    }
 
 

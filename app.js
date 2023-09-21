@@ -42,7 +42,7 @@ const emailInput = document.getElementById('email');
 const valorPadrao = 'digite seu e-mail';
 
 // Adiciona um evento de foco (quando o usuário clica no campo)
-emailInput.addEventListener('focus', function() {
+emailInput.addEventListener('focus', function () {
   // Verifica se o valor atual é igual ao valor padrão
   if (emailInput.value === valorPadrao) {
     // Limpa o valor
@@ -51,7 +51,7 @@ emailInput.addEventListener('focus', function() {
 });
 
 // Adiciona um evento de desfoco (quando o usuário clica fora do campo)
-emailInput.addEventListener('blur', function() {
+emailInput.addEventListener('blur', function () {
   // Se o campo estiver vazio, redefina o valor padrão
   if (emailInput.value === '') {
     emailInput.value = valorPadrao;
@@ -59,9 +59,9 @@ emailInput.addEventListener('blur', function() {
 });
 
 
- // verificação da estação do ano -----------------------------------------------------------------------------------
+// verificação da estação do ano -----------------------------------------------------------------------------------
 
- function verificarEstacaoDoAno() {
+function verificarEstacaoDoAno() {
   const dataAtual = new Date();
   const mesAtual = dataAtual.getMonth() + 1; // Obtenha o mês atual (0 a 11)
 
@@ -110,6 +110,7 @@ citySearchButton.addEventListener("click", () => {
   requestAr(cityName)
   getCityTemp(tempCityName)
   removeAllChildren(containerRecomendacao);
+  requestsaude(requestCityName)
   function removeAllChildren(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -207,45 +208,47 @@ inverno.pbg
 
 
 
-//efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
-if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
+  //efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
+  if (['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)) {
 
-  document.body.style.color = 'white';
-  document.getElementById('weather-description').style.color = '#fff';
-  document.getElementById('alert').style.color = '#fff';
-  document.getElementById('vidro').style.backgroundColor = '#00000089';
-  document.getElementById('button-container').style.backgroundColor = '#00000089';
-  document.getElementById('header').style.backgroundColor = '#00000089';
-  document.getElementById('recomendacao').style.backgroundColor = '#00000089';
-  document.getElementById('alert-vidro').style.backgroundColor = '#00000089';
-  document.getElementById('city-search-button').style.background = '#5795dc';
-  document.getElementById('current-temperature').style.color = '#5795dc';
-  document.getElementById('botao-email').style.background = '#5795dc';
- 
-  
-  const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
-  const elementosLabel = document.querySelectorAll('.temperature-details__label');
-  const elementosPraia = document.querySelector('.praia');
-  const sunriseTimeElement = document.getElementById('iconsunrise');
-  const sunsetTimeElement = document.getElementById('iconsunset');
-   
+    document.body.style.color = 'white';
+    document.getElementById('weather-description').style.color = '#fff';
+    document.getElementById('alert').style.color = '#fff';
+    document.getElementById('vidro').style.backgroundColor = '#00000089';
+    document.getElementById('button-container').style.backgroundColor = '#00000089';
+    document.getElementById('header').style.backgroundColor = '#00000089';
+    document.getElementById('recomendacao').style.backgroundColor = '#00000089';
+    document.getElementById('alert-vidro').style.backgroundColor = '#00000089';
+    document.getElementById('saude').style.backgroundColor = '#00000089';
+    document.getElementById('alergia').style.backgroundColor = '#00000089';
+    document.getElementById('city-search-button').style.background = '#5795dc';
+    document.getElementById('current-temperature').style.color = '#5795dc';
+    document.getElementById('botao-email').style.background = '#5795dc';
+
+
+    const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
+    const elementosLabel = document.querySelectorAll('.temperature-details__label');
+    const elementosPraia = document.querySelector('.praia');
+    const sunriseTimeElement = document.getElementById('iconsunrise');
+    const sunsetTimeElement = document.getElementById('iconsunset');
+
     elementosPraia.src = `./bg/fundonoite.png`;
     sunriseTimeElement.src = `./assets/sunriseN.svg`;
     sunsetTimeElement.src = `./assets/sunsetN.svg`;
 
-  elementos.forEach(elemento => {
-    elemento.style.color = 'white'; 
-  
-   });
-  elementosLabel.forEach(elementosLabel => {
-   elementosLabel.style.color = '#aba9a9';
+    elementos.forEach(elemento => {
+      elemento.style.color = 'white';
 
-  });
+    });
+    elementosLabel.forEach(elementosLabel => {
+      elementosLabel.style.color = '#aba9a9';
 
-  
- 
+    });
 
-}
+
+
+
+  }
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
@@ -258,9 +261,9 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
 
     //nublado noite
     fundoEfeito.src = './efeito/noite.png';
-    
 
-  }else if (['03n'].includes(icon)) {
+
+  } else if (['03n'].includes(icon)) {
 
 
     //nublado noite
@@ -278,7 +281,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
     //carregado
     fundoEfeito.src = './efeito/carregado.png';
 
-  }else if (['04n'].includes(icon)) {
+  } else if (['04n'].includes(icon)) {
 
     // Define a cor de fundo do corpo como branca
     document.getElementById('tempo').style.color = '#fff';
@@ -286,40 +289,41 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
     //carregado
     fundoEfeito.src = './efeito/carregadonoite.png';
 
-  }else if (['02d'].includes(icon)) {
+  } else if (['02d'].includes(icon)) {
 
     document.getElementById('email').style.backgroundColor = '#5795dc';
+    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
 
     //nuvem
     fundoEfeito.src = './efeito/solnuvem.png';
 
-  }else if (['02n'].includes(icon)) {
+  } else if (['02n'].includes(icon)) {
 
     //nuvem noite
     fundoEfeito.src = './efeito/noitenuvem.png';
-    
 
-  } else if (['09d' , '10d'].includes(icon)) {
+
+  } else if (['09d', '10d'].includes(icon)) {
 
     document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
     document.getElementById('email').style.backgroundColor = '#5795dc';
     document.querySelector('.header__input').style.color = '#fff';
     document.getElementById('email').style.color = '#fff';
-   
+
 
     //chuva com sol
     fundoEfeito.src = './efeito/chuva.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
-  }else if (['09n','10n'].includes(icon)) {
+  } else if (['09n', '10n'].includes(icon)) {
 
 
     //chuva com lua
     fundoEfeito.src = './efeito/chuvanoite.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
-    
 
-  }else if (['11d'].includes(icon)) {
+
+  } else if (['11d'].includes(icon)) {
 
     document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
     document.getElementById('email').style.backgroundColor = '#5795dc';
@@ -331,7 +335,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
     weatherIconefeito.src = './efeito/chuvaT.png';
 
 
-  }else if (['11n'].includes(icon)) {
+  } else if (['11n'].includes(icon)) {
 
 
     //chuva com trovoada de noite
@@ -354,19 +358,19 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
     //ventania de noite
     fundoEfeito.src = './efeito/noite.png';
     weatherIconefeito.src = './efeito/ventania.png';
-  }else {
+  } else {
     //ensolarado
     fundoEfeito.src = './efeito/ensolarado.png';
   }
 
-  
+
 
 
 
 
   //recomendação que será apresentado de acordo com o clima --------------------------------------------------------------------------------------
 
-  if (['01n','04d'].includes(icon)) {
+  if (['01n', '04d'].includes(icon)) {
 
     // Array de fontes de imagens
     const imagensSrc = ["./recomendacao/04d.gif"];
@@ -385,7 +389,7 @@ if (['01n','02n','03n','04n','09n','10n','11n','50n'].includes(icon)) {
     }
 
 
-  } else if (['09d', '09n'].includes(icon)) {
+  } else if (['09d', '09n', '10d', '10n'].includes(icon)) {
     // Array de fontes de imagens
     const imagensSrc = ["./recomendacao/09d.gif"];
 
@@ -617,8 +621,8 @@ function requestAccuWeather(requestCityName) {
           if (alertP) {
             const texto = alertP.textContent.toLowerCase(); // Obtém o texto e converte para letras minúsculas
             alertP.style.removeProperty('color');
-            document.getElementById('alert-vidro').style.display='flex';
-        
+            document.getElementById('alert-vidro').style.display = 'flex';
+
             if (texto.includes('laranja')) {
               alertP.style.background = '#FFA50097'; // Laranja
             } else if (texto.includes('vermelho')) {
@@ -646,13 +650,388 @@ function requestAccuWeather(requestCityName) {
 
         });
 
-      } 
-      
+      }
+
       console.log(alertsPrevisao);
     })
     .catch(error => {
       console.log(error.message);
     });
 
-    
+
 }
+
+// buscando dados de saude -------------------------------------------------------------------------------------------------
+
+function requestsaude(requestCityName) {
+  let url = '';
+
+  if (requestCityName === 'caraguatatuba') {
+    url = 'https://www.accuweather.com/pt/br/caraguatatuba/45839/health-activities/45839';
+  } else if (requestCityName === 'sao sebastiao') {
+    url = 'https://www.accuweather.com/pt/br/s%C3%A3o-sebasti%C3%A3o/41642/health-activities/41642';
+  } else if (requestCityName === 'ilhabela') {
+    url = 'https://www.accuweather.com/pt/br/ilhabela/41748/health-activities/41748';
+  } else if (requestCityName === 'ubatuba') {
+    url = 'https://www.accuweather.com/pt/br/ubatuba/41645/health-activities/41645';
+  } else {
+    console.log('Cidade não suportada para alertas de previsão');
+    return;
+  }
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Falha ao recuperar a página');
+      }
+    })
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      // Selecione a div principal com a classe desejada
+      const mainDivAlergia = doc.querySelector('.page-content ');
+      const mainDiv = doc.querySelector('.lifestyle-index-list.unrendered.content-module.lifestyle-hub__list');
+      const mainDivAtividade = doc.querySelector('.page-content ');
+      console.log('Saude:', mainDiv);
+      console.log('Alergia:', mainDivAlergia);
+
+      document.getElementById('saude').style.backgroundColor = '#ffffffb1';
+      document.getElementById('saude').style.backdropFilter = 'blur(5px)';
+      document.getElementById('saude').style.webkitBackdropFilter = 'blur(5px)';
+
+
+      if (mainDiv) {
+        const saudeText = document.getElementById('saude');
+        saudeText.innerHTML = '';
+
+        // Selecione todas as divs com a classe "index-list-card" dentro da div principal
+        const divsIndexListCard = mainDiv.querySelectorAll('.index-list-card');
+
+        // Itere sobre as divs com a classe "index-list-card"
+        divsIndexListCard.forEach(indexListCard => {
+          // Crie um novo div pai
+          const divPai = document.createElement('div');
+          divPai.className = 'conteudo-saude'; // Adicione a classe desejada ao div pai
+
+          // Selecione todas as divs filhas dentro da div "index-list-card"
+          const divsFilhas = indexListCard.querySelectorAll('div:not(.index-name)');
+
+          // Itere sobre as divs filhas e adicione cada uma ao div pai
+          divsFilhas.forEach(divFilha => {
+            divPai.appendChild(divFilha.cloneNode(true)); // Use cloneNode para copiar a div filha
+          });
+
+          // Adicione o div pai à div com o ID "saude"
+          saudeText.appendChild(divPai);
+        });
+      }
+
+
+      // configuração da Div Saude ---------------------------------------------------------------------------
+
+      // Verifique se há conteúdo na div com a classe "saude"
+      const saudeDiv = document.querySelector('.saude');
+      if (saudeDiv && saudeDiv.innerHTML.trim() !== '') {
+        // Crie a div do título
+        const tituloSaudeDiv = document.createElement('div');
+        tituloSaudeDiv.className = 'titulo-saude';
+        tituloSaudeDiv.id = 'titulo-saude';
+        tituloSaudeDiv.textContent = 'Saúde';
+
+        const popUpSaude = document.createElement('div');
+        popUpSaude.className = 'popup-saude';
+          popUpSaude.id = 'popup-saude';
+          popUpSaude.textContent = 'A sua saúde está muito mais conectada com o clima do que você imagina. Analisando as condições meteorológicas atuais e como elas estão previstas para mudar, além de outros fatores como a sua localização, você pode identificar o risco de experienciar problemas de saúde.';
+          
+         // Insira a div do título no início da div "saude"
+         saudeDiv.insertBefore(tituloSaudeDiv, saudeDiv.firstChild);
+        saudeDiv.insertBefore(popUpSaude, saudeDiv.firstChild);
+
+        
+        const tituloSaude = document.querySelector('.titulo-saude');
+        const popupSaude = document.querySelector('.popup-saude');
+
+        // Adicione um ouvinte de evento ao elemento do título para mostrar o popup
+        tituloSaude.addEventListener('mouseover', function () {
+          popupSaude.style.display = 'block';
+        });
+
+        // Adicione um ouvinte de evento para esconder o popup quando o mouse sai
+        tituloSaude.addEventListener('mouseout', function () {
+          popupSaude.style.display = 'none';
+        });
+
+      
+      }
+
+
+
+
+
+      const conteudoDivs = document.querySelectorAll('.conteudo-saude');
+
+
+      conteudoDivs.forEach(conteudoSaudeDiv => {
+        const indexStatusColorDiv = conteudoSaudeDiv.querySelector('.index-status-color');
+
+        if (indexStatusColorDiv) {
+          // Obtenha a cor de fundo da div "index-status-color"
+          const backgroundColor = window.getComputedStyle(indexStatusColorDiv).backgroundColor;
+
+          // Adicione transparência à cor de fundo
+          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
+
+          // Aplique a cor de fundo à div "conteudo-saude"
+          conteudoSaudeDiv.style.backgroundColor = rgbaBackgroundColor;
+        }
+
+      });
+
+      // Selecione todas as divs com a classe "conteudo-saude"
+      const conteudoSaudeDivs = document.querySelectorAll('.conteudo-saude');
+
+      // Encontre a altura máxima das divs filhas
+      let maxHeight = 0;
+      conteudoSaudeDivs.forEach(divPai => {
+        const divFilhas = divPai.querySelectorAll('div');
+        divFilhas.forEach(divFilha => {
+          const divHeight = divFilha.offsetHeight;
+          maxHeight = Math.max(maxHeight, divHeight);
+        });
+      });
+
+      // Defina a altura máxima em todas as divs filhas
+      conteudoSaudeDivs.forEach(divPai => {
+        const divFilhas = divPai.querySelectorAll('div');
+        divFilhas.forEach(divFilha => {
+          divFilha.style.height = maxHeight + 'px';
+        });
+      });
+
+
+      //buscando dados da Alergia ---------------------------------------------------------------------------------------------------------------------
+
+      document.getElementById('alergia').style.backgroundColor = '#ffffffb1';
+      document.getElementById('alergia').style.backdropFilter = 'blur(5px)';
+      document.getElementById('alergia').style.webkitBackdropFilter = 'blur(5px)';
+
+      if (mainDivAlergia) {
+        const alergiaText = document.getElementById('alergia');
+        alergiaText.innerHTML = '';
+
+        // Selecione todas as divs com a classe "[data-index-slug="dust-dander"]" dentro da div principal
+        const divsIndexListCard = mainDivAlergia.querySelectorAll('[data-index-slug="dust-dander"]');
+
+        // Itere sobre as divs com a classe "[data-index-slug="dust-dander"]"
+        divsIndexListCard.forEach(indexListCard => {
+          // Crie um novo div pai
+          const divPai = document.createElement('div');
+          divPai.className = 'conteudo-alergia'; // Adicione a classe desejada ao div pai
+
+          const divsFilhas = indexListCard.querySelectorAll('div:not(.index-name)');
+
+          // Itere sobre as divs filhas e adicione cada uma ao div pai
+          divsFilhas.forEach(divFilha => {
+            divPai.appendChild(divFilha.cloneNode(true)); // Use cloneNode para copiar a div filha
+          });
+
+          // Adicione o div pai à div com o ID "alergia"
+          alergiaText.appendChild(divPai);
+        });
+      }
+
+      const alergiaDiv = document.querySelector('.alergia');
+      if (alergiaDiv && alergiaDiv.innerHTML.trim() !== '') {
+
+        // Criando a div do título
+        const tituloAlergiaDiv = document.createElement('div');
+        tituloAlergiaDiv.className = 'titulo-alergia';
+        tituloAlergiaDiv.id = 'titulo-alergia';
+        tituloAlergiaDiv.textContent = 'Alergia';
+
+          const popUpAlergia = document.createElement('div');
+          popUpAlergia.className = 'popup-alergia';
+          popUpAlergia.id = 'popup-alergia';
+          popUpAlergia.textContent = 'Você também sofrem com alergias? Mudanças meteorológicas podem afetar a intensidade dos sintomas alérgicos e quando eles ocorrerão. Fatores como temperatura, umidade, padrões de vento e localização influenciam o nosso panorama para alergias.';
+          
+        // Inseri a div do título depois da div "conteudo-alergia"
+        alergiaDiv.insertBefore(tituloAlergiaDiv, alergiaDiv.firstChild);
+        alergiaDiv.insertBefore(popUpAlergia, alergiaDiv.firstChild);
+
+
+        const tituloAlergia = document.querySelector('.titulo-alergia');
+        const popupAlergia = document.querySelector('.popup-alergia');
+
+        // Adicione um ouvinte de evento ao elemento do título para mostrar o popup
+        tituloAlergia.addEventListener('mouseover', function () {
+          popupAlergia.style.display = 'block';
+        });
+
+        // Adicione um ouvinte de evento para esconder o popup quando o mouse sai
+        tituloAlergia.addEventListener('mouseout', function () {
+          popupAlergia.style.display = 'none';
+        });
+
+      }
+
+      const conteudoDivsAlergia = document.querySelectorAll('.conteudo-alergia');
+
+
+      conteudoDivsAlergia.forEach(conteudoSaudeDiv => {
+        const indexStatusColorDiv = conteudoSaudeDiv.querySelector('.index-status-color');
+
+        if (indexStatusColorDiv) {
+          // Obtenha a cor de fundo da div "index-status-color"
+          const backgroundColor = window.getComputedStyle(indexStatusColorDiv).backgroundColor;
+
+          // Adicione transparência à cor de fundo
+          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
+
+          // Aplique a cor de fundo à div "conteudo-alergia"
+          conteudoSaudeDiv.style.backgroundColor = rgbaBackgroundColor;
+        }
+
+      });
+
+      // Selecione todas as divs com a classe "conteudo-alergia"
+      const conteudoSaudeDivsAlergia = document.querySelectorAll('.conteudo-alergia');
+
+      // Encontre a altura máxima das divs filhas
+      let maxHeightAlergia = 0;
+      conteudoSaudeDivsAlergia.forEach(divPai => {
+        const divFilhas = divPai.querySelectorAll('div');
+        divFilhas.forEach(divFilha => {
+          const divHeight = divFilha.offsetHeight;
+          maxHeightAlergia = Math.max(maxHeightAlergia, divHeight);
+        });
+      });
+
+      // Defina a altura máxima em todas as divs filhas
+      conteudoSaudeDivsAlergia.forEach(divPai => {
+        const divFilhas = divPai.querySelectorAll('div');
+        divFilhas.forEach(divFilha => {
+          divFilha.style.height = maxHeightAlergia + 'px';
+        });
+      });
+
+
+      //buscando dados de atividades físicas -------------------------------------------------------------------------------------------------------
+
+      document.getElementById('atividade').style.backgroundColor = '#ffffffb1';
+      document.getElementById('atividade').style.backdropFilter = 'blur(5px)';
+      document.getElementById('atividade').style.webkitBackdropFilter = 'blur(5px)';
+
+
+      if (mainDivAtividade) {
+        const atividadeText = document.getElementById('atividade');
+        atividadeText.innerHTML = '';
+
+        // Selecione todas as divs com a classe "[data-index-slug="dust-dander"]" dentro da div principal
+        const divsIndexListCard = mainDivAtividade.querySelectorAll('body > div > div.two-column-page-content.single-column > div > div > div:nth-child(4) > div.lifestyle-index-list__cards > div.index-list-cards-container .index-list-card');
+
+        console.log('atividade', divsIndexListCard);
+        // Itere sobre as divs com a classe "[data-index-slug="dust-dander"]"
+        divsIndexListCard.forEach(indexListCard => {
+          // Crie um novo div pai
+          const divPai = document.createElement('div');
+          divPai.className = 'conteudo-atividade'; // Adicione a classe desejada ao div pai
+
+          const divsFilhas = indexListCard.querySelectorAll('div:not(.index-name)');
+
+          // Itere sobre as divs filhas e adicione cada uma ao div pai
+          divsFilhas.forEach(divFilha => {
+            divPai.appendChild(divFilha.cloneNode(true)); // Use cloneNode para copiar a div filha
+          });
+
+          // Adicione o div pai à div com o ID "atividade"
+          atividadeText.appendChild(divPai);
+        });
+      }
+
+      const atividadeDiv = document.querySelector('.atividade');
+      if (atividadeDiv && atividadeDiv.innerHTML.trim() !== '') {
+
+        // Criando a div do título
+        const tituloAtividadeDiv = document.createElement('div');
+        tituloAtividadeDiv.className = 'titulo-atividade';
+        tituloAtividadeDiv.id = 'titulo-atividade';
+        tituloAtividadeDiv.textContent = 'Atividades ao ar livre';
+
+        const popUpAtividade = document.createElement('div');
+        popUpAtividade.className = 'popup-atividade';
+        popUpAtividade.id = 'popup-atividade';
+        popUpAtividade.textContent = 'Para atividades ao ar livre, não basta saber se vai chover ou se vai fazer sol. A umidade, as rajadas de vento, as horas de luz solar e a cobertura de nuvens são apenas alguns dos fatores que afetarão a sua segurança e performance ao realizar atividades ao ar livre.';
+          
+        // Inseri a div do título depois da div "conteudo-atividade"
+        atividadeDiv.insertBefore(tituloAtividadeDiv, atividadeDiv.firstChild);
+        atividadeDiv.insertBefore(popUpAtividade, atividadeDiv.firstChild);
+
+        
+        const tituloAtividade = document.querySelector('.titulo-atividade');
+        const popupAtividade = document.querySelector('.popup-atividade');
+
+        // Adicione um ouvinte de evento ao elemento do título para mostrar o popup
+        tituloAtividade.addEventListener('mouseover', function () {
+          popupAtividade.style.display = 'block';
+        });
+
+        // Adicione um ouvinte de evento para esconder o popup quando o mouse sai
+        tituloAtividade.addEventListener('mouseout', function () {
+          popupAtividade.style.display = 'none';
+        });
+
+        
+      }
+
+      const conteudoDivsAtividade = document.querySelectorAll('.conteudo-atividade');
+
+
+      conteudoDivsAtividade.forEach(conteudoAtividade => {
+        const indexStatusColorDiv = conteudoAtividade.querySelector('.index-status-color');
+
+        if (indexStatusColorDiv) {
+          // Obtenha a cor de fundo da div "index-status-color"
+          const backgroundColor = window.getComputedStyle(indexStatusColorDiv).backgroundColor;
+
+          // Adicione transparência à cor de fundo
+          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
+
+          // Aplique a cor de fundo à div "conteudo-alergia"
+          conteudoAtividade.style.backgroundColor = rgbaBackgroundColor;
+        }
+
+      });
+
+      // Selecione todas as divs com a classe "conteudo-alergia"
+      const conteudoAtividadeDivs = document.querySelectorAll('.conteudo-atividade');
+
+      // Encontre a altura máxima das divs filhas
+      let maxHeightAtividade = 0;
+      conteudoAtividadeDivs.forEach(divPai => {
+        const divFilhas = divPai.querySelectorAll('div');
+        divFilhas.forEach(divFilha => {
+          const divHeight = divFilha.offsetHeight;
+          maxHeightAtividade = Math.max(maxHeightAtividade, divHeight);
+        });
+      });
+
+      // Defina a altura máxima em todas as divs filhas
+      conteudoAtividadeDivs.forEach(divPai => {
+        const divFilhas = divPai.querySelectorAll('div');
+        divFilhas.forEach(divFilha => {
+          divFilha.style.height = maxHeightAtividade + 'px';
+        });
+      });
+
+
+
+
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
