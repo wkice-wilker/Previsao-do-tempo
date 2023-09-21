@@ -205,9 +205,6 @@ inverno.pbg
 */
 
 
-
-
-
   //efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
   if (['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)) {
 
@@ -220,6 +217,8 @@ inverno.pbg
     document.getElementById('recomendacao').style.backgroundColor = '#00000089';
     document.getElementById('alert-vidro').style.backgroundColor = '#00000089';
     document.getElementById('saude').style.backgroundColor = '#00000089';
+    document.getElementById('alergia').style.backgroundColor = '#00000089';
+    document.getElementById('atividade').style.backgroundColor = '#00000089';
     document.getElementById('alergia').style.backgroundColor = '#00000089';
     document.getElementById('city-search-button').style.background = '#5795dc';
     document.getElementById('current-temperature').style.color = '#5795dc';
@@ -855,7 +854,7 @@ function requestsaude(requestCityName) {
           const popUpAlergia = document.createElement('div');
           popUpAlergia.className = 'popup-alergia';
           popUpAlergia.id = 'popup-alergia';
-          popUpAlergia.textContent = 'Você também sofrem com alergias? Mudanças meteorológicas podem afetar a intensidade dos sintomas alérgicos e quando eles ocorrerão. Fatores como temperatura, umidade, padrões de vento e localização influenciam o nosso panorama para alergias.';
+          popUpAlergia.textContent = 'Você também sofre com alergias? Mudanças climáticas podem afetar a intensidade dos sintomas alérgicos e quando eles ocorrerão. Fatores como temperatura, umidade, padrões de vento e localização influenciam o nosso panorama para alergias.';
           
         // Inseri a div do título depois da div "conteudo-alergia"
         alergiaDiv.insertBefore(tituloAlergiaDiv, alergiaDiv.firstChild);
@@ -999,13 +998,13 @@ function requestsaude(requestCityName) {
           // Adicione transparência à cor de fundo
           const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
 
-          // Aplique a cor de fundo à div "conteudo-alergia"
+          // Aplique a cor de fundo à div "conteudo-atividade"
           conteudoAtividade.style.backgroundColor = rgbaBackgroundColor;
         }
 
       });
 
-      // Selecione todas as divs com a classe "conteudo-alergia"
+      // Selecione todas as divs com a classe "conteudo-atividade"
       const conteudoAtividadeDivs = document.querySelectorAll('.conteudo-atividade');
 
       // Encontre a altura máxima das divs filhas
