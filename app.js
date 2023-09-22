@@ -432,7 +432,7 @@ inverno.pbg
   }
 
   // adicionar um icone de alerta se a temperatura estiver acima de 37 graus
-  if (temp > 37) {
+  if (temp > 35) {
     var imgElement = document.createElement("img");
 
     // Define a classe do elemento
