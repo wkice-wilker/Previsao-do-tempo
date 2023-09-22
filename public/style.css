@@ -330,6 +330,9 @@ body {
         padding: 10px;
   
     }
+    .popup-saude:focus, .popup-alergia:focus, .popup-atividade:focus{
+        transition: 1.0s linear;
+    }
 
 /*CSS do conteudo saude, alergia e atividade*/
 .container-saude, .container-alergia, .container-atividade{
@@ -693,13 +696,34 @@ body {
     align-items: center;
    }
    .conteudo-saude, .conteudo-alergia, .conteudo-atividade{
-    justify-content: center;
+    display: flex;
+    flex-direction: row;
     justify-items: center;
-    align-content: center;
     align-items: center;
+    text-align: center;
     font-size: 12px;
-    width: 140px;
+    height: 50px;
+    width: 320px;
+    justify-content: space-between;
+    padding: 0 5% 0 5%;
    }
-
-
+   .index-status-color{
+    display: none;
+   }
+   .index-name-container{
+    margin-top: 15px;
+    justify-items:center;
+    align-content: center;
+   }
+   .index-name{
+    position: absolute;
+    left: 17%;
+   }
+   .index-status-text{
+    display: flex;
+    align-items: center;
+   }
+   .popup-saude{
+    top:-32%;
+   }
 }
