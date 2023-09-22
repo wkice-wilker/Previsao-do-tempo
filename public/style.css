@@ -573,7 +573,7 @@ body {
     }
 
     .container-recomendacao {
-        height: 500px;
+        height: 50%;
         
     }
     .recomendacao{
@@ -587,9 +587,16 @@ body {
        margin-top: 5px;
     }
     .saude, .alergia, .atividade{
-        /* padding: 0; */
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
         margin: 0px 5px 50px 5px;
     }
+    .container-alergia{
+        width: 100%;
+    }
+    
     .current-temperature{
         padding-bottom: 50px;
     }
@@ -676,9 +683,9 @@ body {
         margin-bottom: 10%;
    }
    .container-saude .container-alergia, .container-atividade{
-       
     margin-top: 0;
 }
+
    .saude, .alergia, .atividade{
     margin-bottom: 10px;
     justify-content: center;
@@ -691,6 +698,7 @@ body {
     align-content: center;
     align-items: center;
     font-size: 12px;
+    width: 140px;
    }
 
 
