@@ -445,7 +445,9 @@ inverno.pbg
     containerRecomendacao.appendChild(imgElement);
 
     console.log("Imagem 'perigo.gif' adicionada em 'containerRecomendacao'.");
-  } else if (temp > 26) {
+  }
+  
+  if (temp > 26) {
     var imgElement = document.createElement("img");
 
     // Define a classe do elemento
