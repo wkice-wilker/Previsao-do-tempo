@@ -693,7 +693,8 @@ function requestsaude(requestCityName) {
       // Selecione a div principal com a classe desejada
       const mainDivAlergia = doc.querySelector('.page-content ');
       const mainDiv = doc.querySelector('.lifestyle-index-list.unrendered.content-module.lifestyle-hub__list');
-      const mainDivAtividade = doc.querySelector('.page-content ');
+      const mainDivAtividade = doc.querySelector('.page-content');
+      console.log("atividade main:", mainDivAtividade);
       console.log('Saude:', mainDiv);
       console.log('Alergia:', mainDivAlergia);
 
@@ -742,14 +743,14 @@ function requestsaude(requestCityName) {
 
         const popUpSaude = document.createElement('div');
         popUpSaude.className = 'popup-saude';
-          popUpSaude.id = 'popup-saude';
-          popUpSaude.textContent = 'A sua saúde está muito mais conectada com o clima do que você imagina. Analisando as condições meteorológicas atuais e como elas estão previstas para mudar, além de outros fatores como a sua localização, você pode identificar o risco de experienciar problemas de saúde.';
-          
-         // Insira a div do título no início da div "saude"
-         saudeDiv.insertBefore(tituloSaudeDiv, saudeDiv.firstChild);
+        popUpSaude.id = 'popup-saude';
+        popUpSaude.textContent = 'A sua saúde está muito mais conectada com o clima do que você imagina. Analisando as condições meteorológicas atuais e como elas estão previstas para mudar, além de outros fatores como a sua localização, você pode identificar o risco de experienciar problemas de saúde.';
+
+        // Insira a div do título no início da div "saude"
+        saudeDiv.insertBefore(tituloSaudeDiv, saudeDiv.firstChild);
         saudeDiv.insertBefore(popUpSaude, saudeDiv.firstChild);
 
-        
+
         const tituloSaude = document.querySelector('.titulo-saude');
         const popupSaude = document.querySelector('.popup-saude');
 
@@ -763,7 +764,7 @@ function requestsaude(requestCityName) {
           popupSaude.style.display = 'none';
         });
 
-      
+
       }
 
 
@@ -851,11 +852,11 @@ function requestsaude(requestCityName) {
         tituloAlergiaDiv.id = 'titulo-alergia';
         tituloAlergiaDiv.textContent = 'Alergia';
 
-          const popUpAlergia = document.createElement('div');
-          popUpAlergia.className = 'popup-alergia';
-          popUpAlergia.id = 'popup-alergia';
-          popUpAlergia.textContent = 'Você também sofre com alergias? Mudanças climáticas podem afetar a intensidade dos sintomas alérgicos e quando eles ocorrerão. Fatores como temperatura, umidade, padrões de vento e localização influenciam o nosso panorama para alergias.';
-          
+        const popUpAlergia = document.createElement('div');
+        popUpAlergia.className = 'popup-alergia';
+        popUpAlergia.id = 'popup-alergia';
+        popUpAlergia.textContent = 'Você também sofre com alergias? Mudanças climáticas podem afetar a intensidade dos sintomas alérgicos e quando eles ocorrerão. Fatores como temperatura, umidade, padrões de vento e localização influenciam o nosso panorama para alergias.';
+
         // Inseri a div do título depois da div "conteudo-alergia"
         alergiaDiv.insertBefore(tituloAlergiaDiv, alergiaDiv.firstChild);
         alergiaDiv.insertBefore(popUpAlergia, alergiaDiv.firstChild);
@@ -919,6 +920,7 @@ function requestsaude(requestCityName) {
 
       //buscando dados de atividades físicas -------------------------------------------------------------------------------------------------------
 
+
       document.getElementById('atividade').style.backgroundColor = '#ffffffb1';
       document.getElementById('atividade').style.backdropFilter = 'blur(5px)';
       document.getElementById('atividade').style.webkitBackdropFilter = 'blur(5px)';
@@ -927,28 +929,41 @@ function requestsaude(requestCityName) {
       if (mainDivAtividade) {
         const atividadeText = document.getElementById('atividade');
         atividadeText.innerHTML = '';
+      
+        // Seleciona todas as divs com a classe "lifestyle-index-list__cards" dentro da div principal
+        const divsIndexListCardContainer = mainDivAtividade.querySelectorAll('.lifestyle-index-list__cards');
+      
+        console.log('atividade', divsIndexListCardContainer);
+      
+        // Verifica se há pelo menos duas divs encontradas
+        if (divsIndexListCardContainer.length >= 2) {
 
-        // Selecione todas as divs com a classe "[data-index-slug="dust-dander"]" dentro da div principal
-        const divsIndexListCard = mainDivAtividade.querySelectorAll('body > div > div.two-column-page-content.single-column > div > div > div:nth-child(4) > div.lifestyle-index-list__cards > div.index-list-cards-container .index-list-card');
-
-        console.log('atividade', divsIndexListCard);
-        // Itere sobre as divs com a classe "[data-index-slug="dust-dander"]"
-        divsIndexListCard.forEach(indexListCard => {
-          // Crie um novo div pai
-          const divPai = document.createElement('div');
-          divPai.className = 'conteudo-atividade'; // Adicione a classe desejada ao div pai
-
-          const divsFilhas = indexListCard.querySelectorAll('div:not(.index-name)');
-
-          // Itere sobre as divs filhas e adicione cada uma ao div pai
-          divsFilhas.forEach(divFilha => {
-            divPai.appendChild(divFilha.cloneNode(true)); // Use cloneNode para copiar a div filha
+         
+          const segundaDiv = divsIndexListCardContainer[1];
+      
+          const divsIndexListCard = segundaDiv.querySelectorAll('.index-list-card');
+      
+          
+          divsIndexListCard.forEach(indexListCard => {
+            
+            const divPai = document.createElement('div');
+            divPai.className = 'conteudo-atividade'; 
+      
+            // Seleciona todas as filhas da classe "index-list-card" e adicione cada uma ao div pai
+            const filhasDaIndexListCard = indexListCard.querySelectorAll('.index-list-card > *');
+            filhasDaIndexListCard.forEach(filha => {
+              divPai.appendChild(filha.cloneNode(true)); 
+            });
+      
+            // Adicione o div pai à div com o ID "atividade"
+            atividadeText.appendChild(divPai);
           });
-
-          // Adicione o div pai à div com o ID "atividade"
-          atividadeText.appendChild(divPai);
-        });
+        }
       }
+      
+      
+      
+
 
       const atividadeDiv = document.querySelector('.atividade');
       if (atividadeDiv && atividadeDiv.innerHTML.trim() !== '') {
@@ -963,12 +978,12 @@ function requestsaude(requestCityName) {
         popUpAtividade.className = 'popup-atividade';
         popUpAtividade.id = 'popup-atividade';
         popUpAtividade.textContent = 'Para atividades ao ar livre, não basta saber se vai chover ou se vai fazer sol. A umidade, as rajadas de vento, as horas de luz solar e a cobertura de nuvens são apenas alguns dos fatores que afetarão a sua segurança e performance ao realizar atividades ao ar livre.';
-          
+
         // Inseri a div do título depois da div "conteudo-atividade"
         atividadeDiv.insertBefore(tituloAtividadeDiv, atividadeDiv.firstChild);
         atividadeDiv.insertBefore(popUpAtividade, atividadeDiv.firstChild);
 
-        
+
         const tituloAtividade = document.querySelector('.titulo-atividade');
         const popupAtividade = document.querySelector('.popup-atividade');
 
@@ -982,8 +997,9 @@ function requestsaude(requestCityName) {
           popupAtividade.style.display = 'none';
         });
 
-        
+
       }
+
 
       const conteudoDivsAtividade = document.querySelectorAll('.conteudo-atividade');
 
@@ -1024,6 +1040,7 @@ function requestsaude(requestCityName) {
           divFilha.style.height = maxHeightAtividade + 'px';
         });
       });
+
 
 
 

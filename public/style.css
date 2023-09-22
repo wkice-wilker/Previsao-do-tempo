@@ -524,16 +524,19 @@ body {
 
 
 .correcao-button{
-    margin-top: 100px;
+   padding-top: 100px;
 }
 
 /* Quando a largura da tela atingir 1060px ou mais */
 @media (max-width: 1060px) {
     .container-saude{
+       
+        margin-top: 0;
+    }
+    .correcao-button{
         backdrop-filter: blur(13.5px);
         -webkit-backdrop-filter: blur(13.5px);
         background-color: #ffffff33;
-        margin-top: 0;
     }
 
     .grid-coluna, .grid-coluna-2 {
@@ -577,14 +580,18 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+        padding-top: 20px;
     }
     .addemail{
         max-width: 400px;
        margin-top: 5px;
     }
-    .saude, .alergia{
-        padding: 0;
+    .saude, .alergia, .atividade{
+        /* padding: 0; */
         margin: 0px 5px 50px 5px;
+    }
+    .current-temperature{
+        padding-bottom: 50px;
     }
 }
 
@@ -668,6 +675,10 @@ body {
        width:100%;
         margin-bottom: 10%;
    }
+   .container-saude .container-alergia, .container-atividade{
+       
+    margin-top: 0;
+}
    .saude, .alergia, .atividade{
     margin-bottom: 10px;
     justify-content: center;
@@ -679,6 +690,7 @@ body {
     justify-items: center;
     align-content: center;
     align-items: center;
+    font-size: 12px;
    }
 
 
