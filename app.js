@@ -289,6 +289,7 @@ inverno.pbg
 
     //nublado
     fundoEfeito.src = './efeito/nublado.png';
+    weatherIconefeito.src = './efeito/nuvem.png';
 
   } else if (['01n'].includes(icon)) {
 
