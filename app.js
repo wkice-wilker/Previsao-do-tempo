@@ -98,7 +98,6 @@ function verificarEstacaoDoAno() {
 const estacaoAtual = verificarEstacaoDoAno();
 weatherIconbg.src = `./bg/${estacaoAtual}.png`;
 
-
 // ação quando efetuar o clique na busca da cidade
 citySearchButton.addEventListener("click", () => {
 
@@ -111,6 +110,14 @@ citySearchButton.addEventListener("click", () => {
   getCityTemp(tempCityName)
   removeAllChildren(containerRecomendacao);
   requestsaude(requestCityName)
+
+
+  //tornando a Div recomendacao visível
+  const RecDiv = document.querySelector('.recomendacao');
+  RecDiv.style.display = 'flex';
+
+
+  // resetando as imagens da Div recomendacao quando muda de cidade
   function removeAllChildren(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -175,6 +182,7 @@ function displayWeather(data) {
   // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
   weatherIcon1.src = `./assets/${icon}.svg`
 
+  
 
   /*
 Legenda dos icones do tempo:
@@ -248,6 +256,7 @@ inverno.pbg
 
 
   }
+  
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
@@ -368,6 +377,8 @@ inverno.pbg
 
 
   //recomendação que será apresentado de acordo com o clima --------------------------------------------------------------------------------------
+  
+  
 
   if (['01n', '04d'].includes(icon)) {
 
