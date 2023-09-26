@@ -402,30 +402,38 @@ body {
 }
 
 /*pop up*/
+.container-popup-saude, .container-popup-alergia, .container-popup-atividade{
+    position: absolute;
+    top: -130px;
+    padding: 10px;
+    display: none;
+    width: 450px;
+    height: auto;
+    background-color: #fffffff3;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+}
 
-.popup-saude, .popup-alergia, .popup-atividade{
-        display: none;
-        position: absolute;
-        top: -130px;
-        background-color: #fffffff3;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 15px;
-        padding: 10px;
-  
-    }
     .popup-saude:focus, .popup-alergia:focus, .popup-atividade:focus{
         transition: 1.0s linear;
     }
 
 /*CSS do conteudo saude, alergia e atividade*/
 .container-saude, .container-alergia, .container-atividade{
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     align-content: center;
     justify-content: flex-start;
+    border-radius: 15px;
+    background-color: #ffffffb1;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    margin: 9px;
+    
 }
 .saude, .alergia, .atividade{
     display: flex;
@@ -436,8 +444,7 @@ body {
     align-content: center;
     width: 100%;
     flex-wrap: wrap;
-    border-radius: 15px;
-    padding: 5px;
+    
    
 }
 .conteudo-saude, .conteudo-alergia, .conteudo-atividade{
@@ -448,9 +455,6 @@ body {
     text-align: center;
     padding: 5px;
     border-radius: 15px;
-    background-color: #ffffffb1;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     font-size: 14px;
 }
 .conteudo-saude .index-status-color,.conteudo-alergia .index-status-color, .conteudo-atividade .index-status-color{

@@ -116,6 +116,14 @@ citySearchButton.addEventListener("click", () => {
   const RecDiv = document.querySelector('.recomendacao');
   RecDiv.style.display = 'flex';
 
+  //tornando a Divs visíveis
+  const RecDivSaude = document.querySelector('.container-saude');
+  const RecDivAlergia = document.querySelector('.container-alergia');
+  const RecDivAtividade = document.querySelector('.container-atividade');
+  RecDivSaude.style.display = 'flex';
+  RecDivAlergia.style.display = 'flex';
+  RecDivAtividade.style.display = 'flex';
+
 
   // resetando as imagens da Div recomendacao quando muda de cidade
   function removeAllChildren(element) {
@@ -177,7 +185,7 @@ function displayWeather(data) {
   }
 
 
-
+  requestsaude(icon);
 
   // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
   weatherIcon1.src = `./assets/${icon}.svg`
@@ -213,24 +221,40 @@ inverno.pbg
 */
 
 
+
   //efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
   if (['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)) {
 
     document.body.style.color = 'white';
+
+    const elementosParaAtualizar = [
+      'vidro',
+      'button-container',
+      'header',
+      'recomendacao',
+      'alert-vidro',
+      'container-saude',
+      'container-alergia',
+      'container-atividade',
+      'container-popup-saude',
+      'container-popup-alergia',
+      'container-popup-atividade',
+  ];
+
+  elementosParaAtualizar.forEach(elementId => {
+      const element = document.getElementById(elementId);
+      if (element) {
+          element.style.backgroundColor = '#00000089';
+      }
+  });
+
+  
     document.getElementById('weather-description').style.color = '#fff';
     document.getElementById('alert').style.color = '#fff';
-    document.getElementById('vidro').style.backgroundColor = '#00000089';
-    document.getElementById('button-container').style.backgroundColor = '#00000089';
-    document.getElementById('header').style.backgroundColor = '#00000089';
-    document.getElementById('recomendacao').style.backgroundColor = '#00000089';
-    document.getElementById('alert-vidro').style.backgroundColor = '#00000089';
-    document.getElementById('saude').style.backgroundColor = '#00000089';
-    document.getElementById('alergia').style.backgroundColor = '#00000089';
-    document.getElementById('atividade').style.backgroundColor = '#00000089';
-    document.getElementById('alergia').style.backgroundColor = '#00000089';
     document.getElementById('city-search-button').style.background = '#5795dc';
     document.getElementById('current-temperature').style.color = '#5795dc';
     document.getElementById('botao-email').style.background = '#5795dc';
+   
 
 
     const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
@@ -243,6 +267,7 @@ inverno.pbg
     sunriseTimeElement.src = `./assets/sunriseN.svg`;
     sunsetTimeElement.src = `./assets/sunsetN.svg`;
 
+    
     elementos.forEach(elemento => {
       elemento.style.color = 'white';
 
@@ -252,10 +277,10 @@ inverno.pbg
 
     });
 
-
-
-
   }
+  
+  
+ 
   
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
@@ -711,10 +736,7 @@ function requestsaude(requestCityName) {
       console.log('Saude:', mainDiv);
       console.log('Alergia:', mainDivAlergia);
 
-      document.getElementById('saude').style.backgroundColor = '#ffffffb1';
-      document.getElementById('saude').style.backdropFilter = 'blur(5px)';
-      document.getElementById('saude').style.webkitBackdropFilter = 'blur(5px)';
-
+     
 
       if (mainDiv) {
         const saudeText = document.getElementById('saude');
@@ -754,18 +776,17 @@ function requestsaude(requestCityName) {
         tituloSaudeDiv.id = 'titulo-saude';
         tituloSaudeDiv.textContent = 'Saúde';
 
-        const popUpSaude = document.createElement('div');
-        popUpSaude.className = 'popup-saude';
-        popUpSaude.id = 'popup-saude';
-        popUpSaude.textContent = 'A sua saúde está muito mais conectada com o clima do que você imagina. Analisando as condições meteorológicas atuais e como elas estão previstas para mudar, além de outros fatores como a sua localização, você pode identificar o risco de experienciar problemas de saúde.';
-
         // Insira a div do título no início da div "saude"
         saudeDiv.insertBefore(tituloSaudeDiv, saudeDiv.firstChild);
-        saudeDiv.insertBefore(popUpSaude, saudeDiv.firstChild);
+      
 
 
+      }
+      const popDivSaude = document.querySelector('.container-popup-saude');
+      if (popDivSaude) {
+        
         const tituloSaude = document.querySelector('.titulo-saude');
-        const popupSaude = document.querySelector('.popup-saude');
+        const popupSaude = document.querySelector('.container-popup-saude');
 
         // Adicione um ouvinte de evento ao elemento do título para mostrar o popup
         tituloSaude.addEventListener('mouseover', function () {
@@ -795,7 +816,7 @@ function requestsaude(requestCityName) {
           const backgroundColor = window.getComputedStyle(indexStatusColorDiv).backgroundColor;
 
           // Adicione transparência à cor de fundo
-          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
+          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.6)`; // 0.5 é o valor de opacidade
 
           // Aplique a cor de fundo à div "conteudo-saude"
           conteudoSaudeDiv.style.backgroundColor = rgbaBackgroundColor;
@@ -827,9 +848,7 @@ function requestsaude(requestCityName) {
 
       //buscando dados da Alergia ---------------------------------------------------------------------------------------------------------------------
 
-      document.getElementById('alergia').style.backgroundColor = '#ffffffb1';
-      document.getElementById('alergia').style.backdropFilter = 'blur(5px)';
-      document.getElementById('alergia').style.webkitBackdropFilter = 'blur(5px)';
+
 
       if (mainDivAlergia) {
         const alergiaText = document.getElementById('alergia');
@@ -865,28 +884,27 @@ function requestsaude(requestCityName) {
         tituloAlergiaDiv.id = 'titulo-alergia';
         tituloAlergiaDiv.textContent = 'Alergia';
 
-        const popUpAlergia = document.createElement('div');
-        popUpAlergia.className = 'popup-alergia';
-        popUpAlergia.id = 'popup-alergia';
-        popUpAlergia.textContent = 'Você também sofre com alergias? Mudanças climáticas podem afetar a intensidade dos sintomas alérgicos e quando eles ocorrerão. Fatores como temperatura, umidade, padrões de vento e localização influenciam o nosso panorama para alergias.';
-
+        
         // Inseri a div do título depois da div "conteudo-alergia"
         alergiaDiv.insertBefore(tituloAlergiaDiv, alergiaDiv.firstChild);
-        alergiaDiv.insertBefore(popUpAlergia, alergiaDiv.firstChild);
 
+      }
+      const popDivAlergia = document.querySelector('.container-popup-alergia');
+      if (popDivAlergia) {
 
         const tituloAlergia = document.querySelector('.titulo-alergia');
-        const popupAlergia = document.querySelector('.popup-alergia');
+        const SelecionepopUpAlergia = document.querySelector('.container-popup-alergia');
 
         // Adicione um ouvinte de evento ao elemento do título para mostrar o popup
         tituloAlergia.addEventListener('mouseover', function () {
-          popupAlergia.style.display = 'block';
+          SelecionepopUpAlergia.style.display = 'block';
         });
 
         // Adicione um ouvinte de evento para esconder o popup quando o mouse sai
         tituloAlergia.addEventListener('mouseout', function () {
-          popupAlergia.style.display = 'none';
+          SelecionepopUpAlergia.style.display = 'none';
         });
+
 
       }
 
@@ -901,7 +919,7 @@ function requestsaude(requestCityName) {
           const backgroundColor = window.getComputedStyle(indexStatusColorDiv).backgroundColor;
 
           // Adicione transparência à cor de fundo
-          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
+          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.6)`; // 0.5 é o valor de opacidade
 
           // Aplique a cor de fundo à div "conteudo-alergia"
           conteudoSaudeDiv.style.backgroundColor = rgbaBackgroundColor;
@@ -934,9 +952,6 @@ function requestsaude(requestCityName) {
       //buscando dados de atividades físicas -------------------------------------------------------------------------------------------------------
 
 
-      document.getElementById('atividade').style.backgroundColor = '#ffffffb1';
-      document.getElementById('atividade').style.backdropFilter = 'blur(5px)';
-      document.getElementById('atividade').style.webkitBackdropFilter = 'blur(5px)';
 
 
       if (mainDivAtividade) {
@@ -977,7 +992,6 @@ function requestsaude(requestCityName) {
       
       
 
-
       const atividadeDiv = document.querySelector('.atividade');
       if (atividadeDiv && atividadeDiv.innerHTML.trim() !== '') {
 
@@ -987,32 +1001,33 @@ function requestsaude(requestCityName) {
         tituloAtividadeDiv.id = 'titulo-atividade';
         tituloAtividadeDiv.textContent = 'Atividades ao ar livre';
 
-        const popUpAtividade = document.createElement('div');
-        popUpAtividade.className = 'popup-atividade';
-        popUpAtividade.id = 'popup-atividade';
-        popUpAtividade.textContent = 'Para atividades ao ar livre, não basta saber se vai chover ou se vai fazer sol. A umidade, as rajadas de vento, as horas de luz solar e a cobertura de nuvens são apenas alguns dos fatores que afetarão a sua segurança e performance ao realizar atividades ao ar livre.';
-
+        
         // Inseri a div do título depois da div "conteudo-atividade"
         atividadeDiv.insertBefore(tituloAtividadeDiv, atividadeDiv.firstChild);
-        atividadeDiv.insertBefore(popUpAtividade, atividadeDiv.firstChild);
 
 
-        const tituloAtividade = document.querySelector('.titulo-atividade');
-        const popupAtividade = document.querySelector('.popup-atividade');
+      }
+  
+      
+      const popDivAtividade = document.querySelector('.container-popup-atividade');
+      if (popDivAtividade) {
+
+        const tituloAlergia = document.querySelector('.titulo-atividade');
+        const SelecionepopUpAtividade = document.querySelector('.container-popup-atividade');
 
         // Adicione um ouvinte de evento ao elemento do título para mostrar o popup
-        tituloAtividade.addEventListener('mouseover', function () {
-          popupAtividade.style.display = 'block';
+        tituloAlergia.addEventListener('mouseover', function () {
+          SelecionepopUpAtividade.style.display = 'block';
         });
 
         // Adicione um ouvinte de evento para esconder o popup quando o mouse sai
-        tituloAtividade.addEventListener('mouseout', function () {
-          popupAtividade.style.display = 'none';
+        tituloAlergia.addEventListener('mouseout', function () {
+          SelecionepopUpAtividade.style.display = 'none';
         });
 
 
       }
-
+    
 
       const conteudoDivsAtividade = document.querySelectorAll('.conteudo-atividade');
 
@@ -1025,7 +1040,7 @@ function requestsaude(requestCityName) {
           const backgroundColor = window.getComputedStyle(indexStatusColorDiv).backgroundColor;
 
           // Adicione transparência à cor de fundo
-          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.5)`; // 0.5 é o valor de opacidade
+          const rgbaBackgroundColor = `rgba(${backgroundColor.match(/\d+/g).join(', ')}, 0.6)`; // 0.5 é o valor de opacidade
 
           // Aplique a cor de fundo à div "conteudo-atividade"
           conteudoAtividade.style.backgroundColor = rgbaBackgroundColor;
@@ -1053,14 +1068,12 @@ function requestsaude(requestCityName) {
           divFilha.style.height = maxHeightAtividade + 'px';
         });
       });
-
-
-
-
-
+     
     })
+    
     .catch(error => {
       console.error(error);
     });
+    
 }
 
