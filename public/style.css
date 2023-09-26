@@ -409,16 +409,10 @@ body {
     display: none;
     width: 450px;
     height: auto;
-    background-color: #fffffff3;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background-color: #ffffff;
     border-radius: 15px;
 }
 
-    .popup-saude:focus, .popup-alergia:focus, .popup-atividade:focus{
-        transition: 1.0s linear;
-    }
 
 /*CSS do conteudo saude, alergia e atividade*/
 .container-saude, .container-alergia, .container-atividade{
@@ -473,11 +467,16 @@ body {
     min-height: 30px;
 }
 .titulo-saude, .titulo-alergia, .titulo-atividade{
+    cursor: pointer;
     padding-top: 10px;
     font-family:'ubuntu';
     width: 100%;
     text-align: center;
     font-size: 30px;
+    
+}
+.titulo-saude:hover, .titulo-alergia:hover, .titulo-atividade:hover{
+    color: #6e9fd7;
 }
 
 
@@ -685,12 +684,17 @@ body {
         margin: 0px 5px 50px 5px;
     }
     .container-alergia{
-        width: 100%;
+        width: 96vw;
     }
     
     .current-temperature{
         padding-bottom: 50px;
     }
+    .container-popup-saude, .container-popup-alergia, .container-popup-atividade{
+        width: 95%;
+        margin: 20px;
+    }
+  
 }
 
 
@@ -814,4 +818,21 @@ body {
    .popup-saude{
     top:-32%;
    }
+   .container-popup-saude{
+    width: 95%;
+    top: -45vw;
+    margin: 0;
+
+}
+.container-popup-alergia{
+    width: 90vw;
+    top: -40vw;
+    margin: 0;
+}
+.container-popup-atividade{
+    width: 95%;
+    top: -45vw;
+    margin: 0;
+}
+   
 }
