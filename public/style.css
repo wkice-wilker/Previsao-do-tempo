@@ -2,21 +2,22 @@
     bottom: -35px;
     position: fixed;
     z-index: -2;
-    
+
 }
 
-.ripple-background{
+.ripple-background {
     width: 550px;
     height: 700px;
 }
-.bkg{
-   width: 550px;
+
+.bkg {
+    width: 550px;
     height: 700px;
-   z-index: -1;
+    z-index: -1;
 }
 
 .iconebg {
-    opacity: 80% ;
+    opacity: 80%;
     position: fixed;
     left: -4%;
     top: 6%;
@@ -25,9 +26,9 @@
 }
 
 .navio1 {
-    position:fixed;
-    top: 56%; 
-    left: -100px; 
+    position: fixed;
+    top: 56%;
+    left: -100px;
     width: 100px;
     height: 100px;
     animation-name: navio1;
@@ -35,19 +36,22 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     z-index: -6;
-  }
-  @keyframes navio1 {
+}
+
+@keyframes navio1 {
     from {
-      transform: translateX(-10vw); 
+        transform: translateX(-10vw);
     }
+
     to {
-      transform: translateX(120vw);
+        transform: translateX(120vw);
     }
-  }
-  .navio2 {
+}
+
+.navio2 {
     position: fixed;
-    top: 56%; 
-    left: -100px; 
+    top: 56%;
+    left: -100px;
     width: 100px;
     height: 100px;
     animation-name: navio2;
@@ -55,20 +59,22 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     z-index: -7;
-  }
-  
-  @keyframes navio2 {
+}
+
+@keyframes navio2 {
     from {
-      transform: translateX(120vw); 
+        transform: translateX(120vw);
     }
+
     to {
-      transform: translateX(-10vw);
+        transform: translateX(-10vw);
     }
-  }
-  .navio3 {
+}
+
+.navio3 {
     position: fixed;
-    top: 62%; 
-    right: 30px; 
+    top: 62%;
+    right: 30px;
     width: 30px;
     height: 100px;
     animation-name: navio3;
@@ -76,20 +82,22 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     z-index: -5;
-  }
-  
-  @keyframes navio3 {
+}
+
+@keyframes navio3 {
     from {
-      transform: translateX(100%); 
+        transform: translateX(100%);
     }
+
     to {
-      transform: translateX(-120vw);
+        transform: translateX(-120vw);
     }
-  }
-  .navio4 {
+}
+
+.navio4 {
     position: fixed;
-    top: 56%; 
-    right: 30px; 
+    top: 56%;
+    right: 30px;
     width: 30px;
     height: 100px;
     animation-name: navio4;
@@ -97,16 +105,17 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     z-index: -6;
-  }
-  
-  @keyframes navio4 {
+}
+
+@keyframes navio4 {
     from {
-      transform: translateX(-105vw); 
+        transform: translateX(-105vw);
     }
+
     to {
-      transform: translateX(120vw);
+        transform: translateX(120vw);
     }
-  }
+}
 
 * {
     margin: 0;
@@ -121,35 +130,39 @@ body {
     flex-direction: column;
 
 }
-.fundo{
-   width: 100%;
- 
+
+.fundo {
+    width: 100%;
+
 }
-.praia{
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 105%;
-   z-index: -8;
+
+.praia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 105%;
+    z-index: -8;
 }
-.ceu{
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: -9;
-   opacity: 80%;
+
+.ceu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9;
+    opacity: 80%;
 }
-.chuva{
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: -3;
-   opacity: 10%;
+
+.chuva {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    opacity: 10%;
 }
 
 
@@ -157,19 +170,20 @@ body {
 .grid-coluna {
     padding: 20px 0px 5% 0px;
     display: grid;
-    grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr ;
+    grid-template-columns: [vazio]2fr [temperatura]3fr [recomendacao]2fr;
     align-items: stretch;
     gap: 10px;
     font-family: "Ubuntu";
 
 
 }
+
 .grid-coluna-2 {
     display: grid;
     grid-template-columns: [vazio]1fr [temperatura]1fr [recomendacao]1fr;
     justify-content: center;
-    justify-items:auto;
-    align-items:flex-start;
+    justify-items: auto;
+    align-items: flex-start;
     font-family: "Ubuntu";
     align-content: center;
 }
@@ -216,8 +230,9 @@ body {
     margin-right: -15px;
     width: 250px;
 }
-.email-input:focus{
-   outline: none;
+
+.email-input:focus {
+    outline: none;
 }
 
 .email-button {
@@ -236,10 +251,12 @@ body {
         rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
         rgba(0, 0, 0, 0.3);
 }
+
 .email-button:hover {
     filter: brightness(1.25);
 }
-.botao-email{
+
+.botao-email {
     display: flex;
     width: 20px;
     margin: auto;
@@ -278,8 +295,9 @@ body {
     margin-right: -15px;
     width: 300px;
 }
-.header__input:focus{
-   outline: none;
+
+.header__input:focus {
+    outline: none;
 }
 
 .header__button {
@@ -309,16 +327,16 @@ body {
     font-family: "Ubuntu", sans-serif;
 }
 
-.alert-vidro{
+.alert-vidro {
     margin-top: 100px;
-    align-items:center;
+    align-items: center;
     flex-direction: column;
     background-color: #ffffff89;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 10px;
     border-radius: 15px;
-    display: none; 
+    display: none;
 }
 
 .info-alerts {
@@ -333,10 +351,10 @@ body {
 .alert-message_alert {
     font-size: 16px;
     overflow: scroll;
-   max-width: 500px;
-   word-wrap: break-word;
-   text-align: center;
-   font-family: "Ubuntu", sans-serif;
+    max-width: 500px;
+    word-wrap: break-word;
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
 }
 
 .alert-message_alert::-webkit-scrollbar {
@@ -350,17 +368,17 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 15px;
-    
-   
-    
+
+
+
 }
 
 .recomendacao {
-    display:none;
+    display: none;
     flex-direction: column;
     grid-column: recomendacao;
     align-content: space-around;
-    
+
 }
 
 .recomendacao h1 {
@@ -402,7 +420,9 @@ body {
 }
 
 /*pop up*/
-.container-popup-saude, .container-popup-alergia, .container-popup-atividade{
+.container-popup-saude,
+.container-popup-alergia,
+.container-popup-atividade {
     position: absolute;
     top: -130px;
     padding: 10px;
@@ -415,7 +435,9 @@ body {
 
 
 /*CSS do conteudo saude, alergia e atividade*/
-.container-saude, .container-alergia, .container-atividade{
+.container-saude,
+.container-alergia,
+.container-atividade {
     display: none;
     flex-wrap: wrap;
     flex-direction: row;
@@ -427,31 +449,40 @@ body {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     margin: 9px;
-    
+
 }
-.saude, .alergia, .atividade{
+
+.saude,
+.alergia,
+.atividade {
     display: flex;
     margin: 0px 5px 0px 5px;
     flex-direction: row;
     align-items: center;
-    justify-content:flex-start;
+    justify-content: flex-start;
     align-content: center;
     width: 100%;
     flex-wrap: wrap;
-    
-   
+
+
 }
-.conteudo-saude, .conteudo-alergia, .conteudo-atividade{
-    width:200px;
+
+.conteudo-saude,
+.conteudo-alergia,
+.conteudo-atividade {
+    width: 200px;
     margin: 10px;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
     text-align: center;
     padding: 5px;
     border-radius: 15px;
     font-size: 14px;
 }
-.conteudo-saude .index-status-color,.conteudo-alergia .index-status-color, .conteudo-atividade .index-status-color{
+
+.conteudo-saude .index-status-color,
+.conteudo-alergia .index-status-color,
+.conteudo-atividade .index-status-color {
     max-height: 10px;
     align-items: center;
     align-content: center;
@@ -459,23 +490,35 @@ body {
     border-radius: 5px;
     margin: 5px 10px 5px 10px;
 }
-.conteudo-saude .index-status-text, .conteudo-alergia .index-status-text, .conteudo-atividade .index-status-text{
+
+.conteudo-saude .index-status-text,
+.conteudo-alergia .index-status-text,
+.conteudo-atividade .index-status-text {
     font-size: 20px;
 }
-.conteudo-saude .index-icon svg, .conteudo-alergia .index-icon svg, .conteudo-atividade .index-icon svg{
+
+.conteudo-saude .index-icon svg,
+.conteudo-alergia .index-icon svg,
+.conteudo-atividade .index-icon svg {
     width: 30px;
     min-height: 30px;
 }
-.titulo-saude, .titulo-alergia, .titulo-atividade{
+
+.titulo-saude,
+.titulo-alergia,
+.titulo-atividade {
     cursor: pointer;
     padding-top: 10px;
-    font-family:'ubuntu';
+    font-family: 'ubuntu';
     width: 100%;
     text-align: center;
     font-size: 30px;
-    
+
 }
-.titulo-saude:hover, .titulo-alergia:hover, .titulo-atividade:hover{
+
+.titulo-saude:hover,
+.titulo-alergia:hover,
+.titulo-atividade:hover {
     color: #6e9fd7;
 }
 
@@ -491,23 +534,24 @@ body {
     flex-wrap: wrap;
     position: relative;
     margin-bottom: 0px;
-    
-   
+
+
 }
- .vidro {
-   content:'';
-   z-index: -1;
-   justify-content: center;
-   align-content: center;
-   position:absolute;
-   width: 300px;
-   height: 300px;
-   padding-bottom: 5%;
-   border-radius: 15px;
-   background-color: #ffffffb1;
-   backdrop-filter: blur(5px);
-   -webkit-backdrop-filter: blur(5px);
-   
+
+.vidro {
+    content: '';
+    z-index: -1;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    padding-bottom: 5%;
+    border-radius: 15px;
+    background-color: #ffffffb1;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
 }
 
 .current-temperature__weather-icon {
@@ -586,7 +630,7 @@ body {
 
 .temperature-details__value,
 .sunset-sunrise__value {
-   color: #2e2e2e;
+    color: #2e2e2e;
     margin-top: 7px;
     font-size: 14px;
     font-weight: bold;
@@ -613,23 +657,25 @@ body {
 }
 
 
-.correcao-button{
-   padding-top: 100px;
+.correcao-button {
+    padding-top: 100px;
 }
 
 /* Quando a largura da tela atingir 1060px ou mais */
 @media (max-width: 1060px) {
-    .container-saude{
-       
+    .container-saude {
+
         margin-top: 0;
     }
-    .correcao-button{
+
+    .correcao-button {
         backdrop-filter: blur(13.5px);
         -webkit-backdrop-filter: blur(13.5px);
         background-color: #ffffff33;
     }
 
-    .grid-coluna, .grid-coluna-2 {
+    .grid-coluna,
+    .grid-coluna-2 {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -640,7 +686,8 @@ body {
         -webkit-backdrop-filter: blur(13.5px);
         background-color: #ffffff33;
     }
-    .alert-vidro{
+
+    .alert-vidro {
         margin-top: 70px;
     }
 
@@ -664,37 +711,46 @@ body {
 
     .container-recomendacao {
         height: 50%;
-        
+
     }
-    .recomendacao{
+
+    .recomendacao {
         display: flex;
         justify-content: center;
         align-items: center;
         padding-top: 20px;
     }
-    .addemail{
+
+    .addemail {
         max-width: 400px;
-       margin-top: 5px;
+        margin-top: 5px;
     }
-    .saude, .alergia, .atividade{
+
+    .saude,
+    .alergia,
+    .atividade {
         justify-content: center;
         justify-items: center;
         align-content: center;
         align-items: center;
         margin: 0px 5px 50px 5px;
     }
-    .container-alergia{
+
+    .container-alergia {
         width: 96vw;
     }
-    
-    .current-temperature{
+
+    .current-temperature {
         padding-bottom: 50px;
     }
-    .container-popup-saude, .container-popup-alergia, .container-popup-atividade{
+
+    .container-popup-saude,
+    .container-popup-alergia,
+    .container-popup-atividade {
         width: 95%;
         margin: 20px;
     }
-  
+
 }
 
 
@@ -735,104 +791,126 @@ body {
         width: 350px;
         position: relative;
         margin-top: 50px;
-       
+
     }
-    .header{
-       border-radius: 0;
+
+    .header {
+        border-radius: 0;
     }
-    
+
 
     .grid-coluna {
         width: auto;
         margin: 0;
     }
-    .addemail{
+
+    .addemail {
         max-width: 350px;
-       margin-top: 5px;
+        margin-top: 5px;
     }
-    .text-email{
-       margin-top: 20px;
+
+    .text-email {
+        margin-top: 20px;
     }
-    .header__city-name{
-       margin-top: 10px;
-       position: absolute;
+
+    .header__city-name {
+        margin-top: 10px;
+        position: absolute;
     }
+
     .alert-message_alert {
-       width: 350px;
-       text-align: center;
+        width: 350px;
+        text-align: center;
     }
 
     .current-temperature::before {
-       width: 300px;
-       height: 70%;
-       background-color: #ffffff89;
-       backdrop-filter: blur(10px);
-       -webkit-backdrop-filter: blur(10px);
-      border-radius: 15px ;
-   }
-   .recomendacao{
-    width: 90%;
-   }
-   .container-recomendacao{
-       width:100%;
+        width: 300px;
+        height: 70%;
+        background-color: #ffffff89;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 15px;
+    }
+
+    .recomendacao {
+        width: 90%;
+    }
+
+    .container-recomendacao {
+        width: 100%;
         margin-bottom: 10%;
-   }
-   .container-saude .container-alergia, .container-atividade{
-    margin-top: 0;
-}
+    }
 
-   .saude, .alergia, .atividade{
-    margin-bottom: 10px;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-   }
-   .conteudo-saude, .conteudo-alergia, .conteudo-atividade{
-    display: flex;
-    flex-direction: row;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
-    font-size: 12px;
-    height: 50px;
-    width: 320px;
-    justify-content: space-between;
-    padding: 0 5% 0 5%;
-   }
-   .index-status-color{
-    display: none;
-   }
-   .index-name-container{
-    margin-top: 15px;
-    justify-items:center;
-    align-content: center;
-   }
-   .index-name{
-    position: absolute;
-    left: 17%;
-   }
-   .index-status-text{
-    display: flex;
-    align-items: center;
-   }
-   .popup-saude{
-    top:-32%;
-   }
-   .container-popup-saude{
-    width: 95%;
-    top: -45vw;
-    margin: 0;
+    .container-saude .container-alergia,
+    .container-atividade {
+        margin-top: 0;
+    }
 
-}
-.container-popup-alergia{
-    width: 90vw;
-    top: -40vw;
-    margin: 0;
-}
-.container-popup-atividade{
-    width: 95%;
-    top: -45vw;
-    margin: 0;
-}
-   
+    .saude,
+    .alergia,
+    .atividade {
+        margin-bottom: 10px;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .conteudo-saude,
+    .conteudo-alergia,
+    .conteudo-atividade {
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        font-size: 12px;
+        height: 50px;
+        width: 320px;
+        justify-content: space-between;
+        padding: 0 5% 0 5%;
+    }
+
+    .index-status-color {
+        display: none;
+    }
+
+    .index-name-container {
+        margin-top: 15px;
+        justify-items: center;
+        align-content: center;
+    }
+
+    .index-name {
+        position: absolute;
+        left: 17%;
+    }
+
+    .index-status-text {
+        display: flex;
+        align-items: center;
+    }
+
+    .popup-saude {
+        top: -32%;
+    }
+
+    .container-popup-saude {
+        width: 95%;
+        top: -45vw;
+        margin: 0;
+
+    }
+
+    .container-popup-alergia {
+        width: 90vw;
+        top: -40vw;
+        margin: 0;
+    }
+
+    .container-popup-atividade {
+        width: 95%;
+        top: -45vw;
+        margin: 0;
+    }
+
 }

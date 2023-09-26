@@ -190,21 +190,21 @@ function displayWeather(data) {
   // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
   weatherIcon1.src = `./assets/${icon}.svg`
 
-  
+
 
   /*
 Legenda dos icones do tempo:
 
 01d - sol
 02d - sol com nuvem
-03d - nublado
-04d - tempo carregado
+03d - parcialmente nublado
+04d - nublado
 09d - chuva
 10d - chuva com sol
 01n - lua
 02n - lua com nuvem
-03n - nublado
-04n - tempo carregado
+03n - parcialmente nublado
+04n - nublado
 09n - chuva
 10n - chuva com lua
 11d e 11n - chuva com trovoada
@@ -239,22 +239,22 @@ inverno.pbg
       'container-popup-saude',
       'container-popup-alergia',
       'container-popup-atividade',
-  ];
+    ];
 
-  elementosParaAtualizar.forEach(elementId => {
+    elementosParaAtualizar.forEach(elementId => {
       const element = document.getElementById(elementId);
       if (element) {
-          element.style.backgroundColor = '#00000089';
+        element.style.backgroundColor = '#00000089';
       }
-  });
+    });
 
-  
+
     document.getElementById('weather-description').style.color = '#fff';
     document.getElementById('alert').style.color = '#fff';
     document.getElementById('city-search-button').style.background = '#5795dc';
     document.getElementById('current-temperature').style.color = '#5795dc';
     document.getElementById('botao-email').style.background = '#5795dc';
-   
+
 
 
     const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
@@ -267,7 +267,7 @@ inverno.pbg
     sunriseTimeElement.src = `./assets/sunriseN.svg`;
     sunsetTimeElement.src = `./assets/sunsetN.svg`;
 
-    
+
     elementos.forEach(elemento => {
       elemento.style.color = 'white';
 
@@ -278,10 +278,10 @@ inverno.pbg
     });
 
   }
-  
-  
- 
-  
+
+
+
+
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
@@ -403,8 +403,8 @@ inverno.pbg
 
 
   //recomendação que será apresentado de acordo com o clima --------------------------------------------------------------------------------------
-  
-  
+
+
 
   if (['01n', '04d'].includes(icon)) {
 
@@ -483,7 +483,7 @@ inverno.pbg
 
     console.log("Imagem 'perigo.gif' adicionada em 'containerRecomendacao'.");
   }
-  
+
   if (temp > 26) {
     var imgElement = document.createElement("img");
 
@@ -737,7 +737,7 @@ function requestsaude(requestCityName) {
       console.log('Saude:', mainDiv);
       console.log('Alergia:', mainDivAlergia);
 
-     
+
 
       if (mainDiv) {
         const saudeText = document.getElementById('saude');
@@ -779,13 +779,13 @@ function requestsaude(requestCityName) {
 
         // Insira a div do título no início da div "saude"
         saudeDiv.insertBefore(tituloSaudeDiv, saudeDiv.firstChild);
-      
+
 
 
       }
       const popDivSaude = document.querySelector('.container-popup-saude');
       if (popDivSaude) {
-        
+
         const tituloSaude = document.querySelector('.titulo-saude');
         const popupSaude = document.querySelector('.container-popup-saude');
 
@@ -885,7 +885,7 @@ function requestsaude(requestCityName) {
         tituloAlergiaDiv.id = 'titulo-alergia';
         tituloAlergiaDiv.textContent = 'Alergia';
 
-        
+
         // Inseri a div do título depois da div "conteudo-alergia"
         alergiaDiv.insertBefore(tituloAlergiaDiv, alergiaDiv.firstChild);
 
@@ -958,40 +958,40 @@ function requestsaude(requestCityName) {
       if (mainDivAtividade) {
         const atividadeText = document.getElementById('atividade');
         atividadeText.innerHTML = '';
-      
+
         // Seleciona todas as divs com a classe "lifestyle-index-list__cards" dentro da div principal
         const divsIndexListCardContainer = mainDivAtividade.querySelectorAll('.lifestyle-index-list__cards');
-      
+
         console.log('atividade', divsIndexListCardContainer);
-      
+
         // Verifica se há pelo menos duas divs encontradas
         if (divsIndexListCardContainer.length >= 2) {
 
-         
+
           const segundaDiv = divsIndexListCardContainer[1];
-      
+
           const divsIndexListCard = segundaDiv.querySelectorAll('.index-list-card');
-      
-          
+
+
           divsIndexListCard.forEach(indexListCard => {
-            
+
             const divPai = document.createElement('div');
-            divPai.className = 'conteudo-atividade'; 
-      
+            divPai.className = 'conteudo-atividade';
+
             // Seleciona todas as filhas da classe "index-list-card" e adicione cada uma ao div pai
             const filhasDaIndexListCard = indexListCard.querySelectorAll('.index-list-card > *');
             filhasDaIndexListCard.forEach(filha => {
-              divPai.appendChild(filha.cloneNode(true)); 
+              divPai.appendChild(filha.cloneNode(true));
             });
-      
+
             // Adicione o div pai à div com o ID "atividade"
             atividadeText.appendChild(divPai);
           });
         }
       }
-      
-      
-      
+
+
+
 
       const atividadeDiv = document.querySelector('.atividade');
       if (atividadeDiv && atividadeDiv.innerHTML.trim() !== '') {
@@ -1002,14 +1002,14 @@ function requestsaude(requestCityName) {
         tituloAtividadeDiv.id = 'titulo-atividade';
         tituloAtividadeDiv.textContent = 'Atividades ao ar livre';
 
-        
+
         // Inseri a div do título depois da div "conteudo-atividade"
         atividadeDiv.insertBefore(tituloAtividadeDiv, atividadeDiv.firstChild);
 
 
       }
-  
-      
+
+
       const popDivAtividade = document.querySelector('.container-popup-atividade');
       if (popDivAtividade) {
 
@@ -1028,7 +1028,7 @@ function requestsaude(requestCityName) {
 
 
       }
-    
+
 
       const conteudoDivsAtividade = document.querySelectorAll('.conteudo-atividade');
 
@@ -1069,12 +1069,12 @@ function requestsaude(requestCityName) {
           divFilha.style.height = maxHeightAtividade + 'px';
         });
       });
-     
+
     })
-    
+
     .catch(error => {
       console.error(error);
     });
-    
+
 }
 
