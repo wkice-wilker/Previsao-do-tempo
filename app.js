@@ -268,7 +268,7 @@ inverno.pbg
       'container-popup-saude',
       'container-popup-alergia',
       'container-popup-atividade',
-      'conteudo-semana',
+      'dia',
     ];
 
     elementosParaAtualizar.forEach(elementId => {
@@ -289,6 +289,7 @@ inverno.pbg
     const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
     const elementosLabel = document.querySelectorAll('.temperature-details__label');
     const elementosPraia = document.querySelector('.praia');
+
     const sunriseTimeElement = document.getElementById('iconsunrise');
     const sunsetTimeElement = document.getElementById('iconsunset');
 
@@ -560,7 +561,7 @@ function requestSemana(cityName) {
           // Crie uma div para representar cada dia
           const divDia = document.createElement('div');
           divDia.classList.add('dia'); // Adicione uma classe para estilização
-      
+          divDia.id = 'dia';
           
       
           const datapadrao = previsaoDia.dt; // Data no formato dos EUA
