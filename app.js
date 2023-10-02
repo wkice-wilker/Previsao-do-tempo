@@ -268,6 +268,7 @@ inverno.pbg
       'container-popup-saude',
       'container-popup-alergia',
       'container-popup-atividade',
+      'conteudo-semana',
     ];
 
     elementosParaAtualizar.forEach(elementId => {
@@ -280,7 +281,6 @@ inverno.pbg
 
     document.getElementById('weather-description').style.color = '#fff';
     document.getElementById('alert').style.color = '#fff';
-    document.getElementById('city-search-button').style.background = '#5795dc';
     document.getElementById('current-temperature').style.color = '#5795dc';
     document.getElementById('botao-email').style.background = '#5795dc';
 
