@@ -16,6 +16,7 @@ const recomendacaoIcon1 = document.getElementById("recomIcon1");
 const containerRecomendacao = document.getElementById("conteudo-recomendacao");
 
 //exibição
+const semana = document.getElementById("conteudo-semana");
 const currentDate = document.getElementById("current-date");
 const cityName = document.getElementById("city-name");
 const weatherIcon = document.getElementById("weather-icon");
@@ -23,6 +24,7 @@ const weatherDescription = document.getElementById("weather-description");
 const currentTemperature = document.getElementById("current-temperature");
 const windSpeed = document.getElementById("wind-speed");
 const windGust = document.getElementById("wind-gust");
+const windUv = document.getElementById("wind-uv");
 const feelsLikeTemperature = document.getElementById("feels-like-temperature");
 const currentHumidity = document.getElementById("current-humidity");
 const sunriseTime = document.getElementById("sunrise-time");
@@ -98,28 +100,52 @@ function verificarEstacaoDoAno() {
 const estacaoAtual = verificarEstacaoDoAno();
 weatherIconbg.src = `./bg/${estacaoAtual}.png`;
 
-// ação quando efetuar o clique na busca da cidade
-citySearchButton.addEventListener("click", () => {
+// Selecionar todos os botões da cidade
+const cityButtons = document.querySelectorAll('.city-button');
 
-  const cityName = citySearchInput.value
-  const tempCityName = citySearchInput.value
-  const requestCityName = cityName
-  getCityWeather(cityName)
-  requestAccuWeather(requestCityName)
-  requestAr(cityName)
-  getCityTemp(tempCityName)
-  removeAllChildren(containerRecomendacao);
-  requestsaude(requestCityName)
+function highlightCityButton(clickedButton) {
+  cityButtons.forEach((button) => {
+    if (button === clickedButton) {
+      button.classList.add('active'); // Adicionar a classe ao botão clicado
+    } else {
+      button.classList.remove('active'); // Remover a classe dos outros botões
+    }
+  });
+}
+
+// Adicionar um evento de clique para cada botão da cidade
+cityButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const cityName = button.value; // Obter o nome da cidade a partir do valor do botão
+    const tempCityName = button.value; // Você pode ajustar isso de acordo com sua necessidade
+    const requestCityName = cityName;
+    //tornando a Div recomendacao visível
+    const RecDiv = document.querySelector('.recomendacao');
+    RecDiv.style.display = 'flex';
 
 
-  //tornando a Div recomendacao visível
-  const RecDiv = document.querySelector('.recomendacao');
-  RecDiv.style.display = 'flex';
+    // Chamar as funções com o nome da cidade correto
+    getCityWeather(cityName);
+    requestAccuWeather(requestCityName);
+    requestAr(cityName);
+    requestSemana(cityName);
+    getCityTemp(tempCityName);
+    removeAllChildren(containerRecomendacao);
+    requestsaude(requestCityName);
+  
+
+    highlightCityButton(button);
+  });
+
+  
+  
 
   //tornando a Divs visíveis
+  
   const RecDivSaude = document.querySelector('.container-saude');
   const RecDivAlergia = document.querySelector('.container-alergia');
   const RecDivAtividade = document.querySelector('.container-atividade');
+  
   RecDivSaude.style.display = 'flex';
   RecDivAlergia.style.display = 'flex';
   RecDivAtividade.style.display = 'flex';
@@ -139,6 +165,10 @@ citySearchButton.addEventListener("click", () => {
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
 
+
+
+
+
 //adicionando os dados optidos da API nas DIVs ----------------------------------------------------------------------------------------------------
 
 function getCityWeather(cityName) {
@@ -155,7 +185,7 @@ function displayWeather(data) {
   let {
     name,
     weather: [{ icon, description }],
-    main: { temp, feels_like, humidity },
+    main: { temp, humidity },
     sys: { sunrise, sunset },
 
   } = data
@@ -165,7 +195,6 @@ function displayWeather(data) {
   weatherIcon.src = `./assets/${icon}.svg`
   weatherDescription.textContent = description;
   currentTemperature.textContent = `${Math.round(temp)} °C`;
-  feelsLikeTemperature.textContent = `${Math.round(feels_like)}°C`;
   currentHumidity.textContent = `${humidity}%`;
   sunriseTime.textContent = formatTime(sunrise);
   sunsetTime.textContent = formatTime(sunset);
@@ -308,9 +337,9 @@ inverno.pbg
   } else if (['04d'].includes(icon)) {
 
     // Define a cor de fundo do corpo como branca
-    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
+   // document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
     document.getElementById('email').style.backgroundColor = '#5795dc';
-    document.querySelector('.header__input').style.color = '#fff';
+    //document.querySelector('.header__input').style.color = '#fff';
     document.getElementById('email').style.color = '#fff';
     //carregado
     fundoEfeito.src = './efeito/carregado.png';
@@ -500,8 +529,85 @@ inverno.pbg
 
 }
 
+//buscando dados da semana --------------------------------------------------------------------------------------------------
 
+function requestSemana(cityName) {
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Erro ao buscar os dados da semana');
+      }
+    })
+    .then((dadoSemana) => {
+      // Você pode acessar 'dadoSemana' apenas dentro deste escopo
+      console.log("semana", dadoSemana);
+      displaySemana(dadoSemana);
 
+      function displaySemana(dadoSemana) {
+        const semanaContainer = document.getElementById('conteudo-semana'); // Supondo que você tenha um elemento HTML onde deseja exibir a previsão semanal
+        semanaContainer.innerHTML = '';
+      
+        const previsaoDiaria = dadoSemana.list; // Supondo que 'list' contenha a previsão diária
+
+        const previsoes09 = previsaoDiaria.filter((previsaoDia) => {
+          // Filtra apenas as previsões com o horário desejado (09:00:00)
+          return previsaoDia.dt_txt.endsWith('09:00:00');
+        });
+      
+        previsoes09.forEach((previsaoDia) => {
+          // Crie uma div para representar cada dia
+          const divDia = document.createElement('div');
+          divDia.classList.add('dia'); // Adicione uma classe para estilização
+      
+          
+      
+          const datapadrao = previsaoDia.dt; // Data no formato dos EUA
+          const data = formatarData(datapadrao); // Chama a função para formatar a data
+      
+          const icon = previsaoDia.weather[0].icon;
+          const temperaturaMaxima = previsaoDia.main.temp_max;
+          const temperaturaMinima = previsaoDia.main.temp_min;
+          const descricao = previsaoDia.weather[0].description;
+
+          if(['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)){
+            novoIcon = icon.replace('n', 'd');
+          
+      
+          divDia.innerHTML = `
+            <p class="data-semana">${data}</p>
+            <p><img class="icone-semana" id="weather-icon" src="./assets/${novoIcon}.svg"></p>
+            <p>Temperatura Máxima: ${temperaturaMaxima}°C</p>
+            <p>Temperatura Mínima: ${temperaturaMinima}°C</p>
+            <p>Descrição: ${descricao}</p>
+          `;
+          }else {
+            divDia.innerHTML = `
+              <p class="data-semana">${data}</p>
+              <p><img class="icone-semana" id="weather-icon" src="./assets/${icon}.svg"></p>
+              <p>Temperatura Máxima: ${temperaturaMaxima}°C</p>
+              <p>Temperatura Mínima: ${temperaturaMinima}°C</p>
+              <p>Descrição: ${descricao}</p>
+            `;
+          }
+      
+          // Anexe a div ao contêiner
+          semanaContainer.appendChild(divDia);
+        });
+       
+        function formatarData(datapadrao) {
+          let date = new Date(datapadrao * 1000)
+          let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' })
+          return `${formattedDate}`
+        }
+      }
+      
+    })
+    .catch((error) => {
+      console.error('Erro na solicitação da semana:', error);
+    });
+}
 
 // Buscando dados de vento e rajadas de vento -------------------------------------------------------------------------------------------
 
@@ -537,26 +643,35 @@ function getCityTemp(tempCityName) {
       const doc = parserDado.parseFromString(html, 'text/html');
 
       const windTextElements = doc.querySelectorAll('[class="detail-item spaced-content"]');
-      console.log(windTextElements);
+      console.log("dados do tempo",windTextElements);
       encontrarDadosVento(windTextElements);
 
       //extraindo dados da div do site da API
       function encontrarDadosVento(windTextElements) {
         let dadoRajada = "";
         let dadoVento = "";
+        let dadoUv = "";
 
         for (let i = 0; i < windTextElements.length; i++) {
           const element = windTextElements[i];
           const labelText = element.querySelector('div:nth-child(1)').textContent.trim();
-
+          console.log("dados do label",labelText);
           if (labelText === "Rajadas de vento") {
             dadoRajada = element.querySelector('div:nth-child(2)').textContent.trim();
           } else if (labelText === "Vento") {
             dadoVento = element.querySelector('div:nth-child(2)').textContent.trim();
+          } else if (labelText === "Índice máximo de raios UV") {
+            dadoUv = element.querySelector('div:nth-child(2)').textContent.trim();
+          }else if (labelText === "RealFeel®") {
+            dadosensacao = element.querySelector('div:nth-child(2)').textContent.trim();
           }
         }
         windSpeed.textContent = dadoVento;
         windGust.textContent = dadoRajada;
+        windUv.textContent = dadoUv;
+        feelsLikeTemperature.textContent = dadosensacao +'C';
+        console.log("dados do UV",dadoUv);
+
       }
     });
 }
@@ -613,6 +728,12 @@ function requestAr(cityName) {
 
 // buscando alertas do tempo da cidade -------------------------------------------------------------------------------------------------
 function requestAccuWeather(requestCityName) {
+
+  const alertsText = document.getElementById('alertsPrevisao');
+  alertsText.innerHTML = '';
+  document.getElementById('alert-vidro').style.display = 'none'; // Oculta o container de alertas
+  const divAlerts = document.querySelector('.info-alerts');
+  divAlerts.textContent = ''; // Limpa o texto de alerta
   let url = '';
 
   if (requestCityName === 'caraguatatuba') {

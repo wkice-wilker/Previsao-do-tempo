@@ -37,18 +37,20 @@
 
 
         <div class="header__city-search-bar">
-            <select name="cidade" required="required" class="header__input" id="city-search-input">
-                <option value="">Escolha uma Cidade</option>
-                <option value="caraguatatuba">Caraguatatuba</option>
-                <option value="sao sebastiao">São Sebastião</option>
-                <option value="ilhabela">Ilhabela</option>
-                <option value="ubatuba">Ubatuba</option>
-            </select>
-            <button class="header__button" id="city-search-button">
-                <img class="header__button-icon" src="./assets/search-icon.svg" alt="Icone de uma lupa." id="lupa">
+            <button class="header__button city-button" value="caraguatatuba">
+                Caraguatatuba
+            </button>
+            <button class="header__button city-button" value="sao sebastiao">
+                São Sebastião
+            </button>
+            <button class="header__button city-button" value="ilhabela">
+                Ilhabela
+            </button>
+            <button class="header__button city-button" value="ubatuba">
+                Ubatuba
             </button>
         </div>
-        <div class="header__city-name" id="city-name">Escolha uma cidade</div>
+        <div class="header__city-name" id="city-name"></div>
         <div class="text-email">Receba os alertas em seu e-mail:</div>
         <div class="addemail">
             <input class="email-input" value="digite seu e-mail" id="email">
@@ -57,6 +59,7 @@
             </button>
         </div>
     </header>
+ 
     <div class="grid-coluna" id="coluna">
 
         <section class="current-temperature">
@@ -79,8 +82,13 @@
                 </div>
             </div>
         </section>
-
+        
     </div>
+
+    <div class="semana" id="semana">
+        <div class="conteudo-semana" id="conteudo-semana"></div>
+    </div>
+
     <div class="grid-coluna-2" id="coluna">
         <section class="container-saude" id="container-saude">
             <div class="container-popup-saude" id="container-popup-saude">
@@ -129,6 +137,10 @@
             <div class="temperature-details__item">
                 <div class="temperature-details__label">Sensação</div>
                 <div class="temperature-details__value" id="feels-like-temperature">...</div>
+            </div>
+            <div class="temperature-details__item">
+                <div class="temperature-details__label" >Raios UV</div>
+                <div class="temperature-details__value" id="wind-uv">...</div>
             </div>
             <div class="temperature-details__item">
                 <div class="temperature-details__label">Umidade</div>
