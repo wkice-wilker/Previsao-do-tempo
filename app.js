@@ -252,14 +252,6 @@ inverno.pbg
 */
 
 
-
-  //efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
-  
-
-
-
-
-
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
   if (['03d'].includes(icon)) {
@@ -273,37 +265,23 @@ inverno.pbg
     //nublado noite
     fundoEfeito.src = './efeito/noite.png';
 
-
   } else if (['03n'].includes(icon)) {
-
 
     //nublado noite
     fundoEfeito.src = './efeito/nubladonoite.png';
     weatherIconefeito.src = './efeito/nuvem.png';
 
-
   } else if (['04d'].includes(icon)) {
 
-    // Define a cor de fundo do corpo como branca
-   // document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
-    document.getElementById('email').style.backgroundColor = '#5795dc';
-    //document.querySelector('.header__input').style.color = '#fff';
-    document.getElementById('email').style.color = '#fff';
-    //carregado
+    //tempo carregado
     fundoEfeito.src = './efeito/carregado.png';
 
   } else if (['04n'].includes(icon)) {
 
-    // Define a cor de fundo do corpo como branca
-    document.getElementById('tempo').style.color = '#fff';
-    document.getElementById('alert').style.color = '#fff';
-    //carregado
+    //tempo carregado
     fundoEfeito.src = './efeito/carregadonoite.png';
 
   } else if (['02d'].includes(icon)) {
-
-    document.getElementById('email').style.backgroundColor = '#5795dc';
-    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
 
     //nuvem
     fundoEfeito.src = './efeito/solnuvem.png';
@@ -316,60 +294,42 @@ inverno.pbg
 
   } else if (['09d', '10d'].includes(icon)) {
 
-    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
-    document.getElementById('email').style.backgroundColor = '#5795dc';
-    document.querySelector('.header__input').style.color = '#fff';
-    document.getElementById('email').style.color = '#fff';
-
-
     //chuva com sol
     fundoEfeito.src = './efeito/chuva.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
   } else if (['09n', '10n'].includes(icon)) {
 
-
     //chuva com lua
     fundoEfeito.src = './efeito/chuvanoite.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
-
   } else if (['11d'].includes(icon)) {
-
-    document.getElementById('city-search-input').style.backgroundColor = '#5795dc';
-    document.getElementById('email').style.backgroundColor = '#5795dc';
-    document.querySelector('.header__input').style.color = '#fff';
-    document.getElementById('email').style.color = '#fff';
 
     //chuva com trovoada de dia
     fundoEfeito.src = './efeito/trovoada.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
-
   } else if (['11n'].includes(icon)) {
-
 
     //chuva com trovoada de noite
     fundoEfeito.src = './efeito/trovoadanoite.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
-
 
   } else if (['50d'].includes(icon)) {
 
     //ventania de dia
     fundoEfeito.src = './efeito/ensolarado.png';
     weatherIconefeito.src = './efeito/ventania.png';
-  } else if (['50n'].includes(icon)) {
 
-    document.body.style.color = 'white';
-    document.getElementById('city-search-button').style.background = '#5795dc';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('botao-email').style.background = '#5795dc';
+  } else if (['50n'].includes(icon)) {
 
     //ventania de noite
     fundoEfeito.src = './efeito/noite.png';
     weatherIconefeito.src = './efeito/ventania.png';
+
   } else {
+
     //ensolarado
     fundoEfeito.src = './efeito/ensolarado.png';
   }
@@ -419,6 +379,52 @@ inverno.pbg
       containerRecomendacao.appendChild(imgElement);
     }
 
+  }else if (['11d', '11n'].includes(icon) && containerRecomendacao) {
+    // Array de fontes de imagens
+    const imagensSrc = ["./recomendacao/arvore.gif", "./recomendacao/naorecomendado.svg"];
+
+    for (var i = 0; i < imagensSrc.length; i++) {
+      var imgElement = document.createElement("img");
+
+      // Define a classe do elemento
+      imgElement.className = "icone-recomendacao";
+
+      // Define a fonte da imagem
+      imgElement.src = imagensSrc[i];
+
+      if (imagensSrc[i].includes("naorecomendado.svg")) {
+        // Adiciona o atributo style para ajustar o tamanho
+        imgElement.style.width = "80px";
+        imgElement.style.position = "relative";
+        imgElement.style.top = "-60px";
+      }
+
+      // Adiciona o elemento à 'containerRecomendacao'
+      containerRecomendacao.appendChild(imgElement);
+    }
+  }else if (['50d', '50n'].includes(icon) && containerRecomendacao) {
+    // Array de fontes de imagens
+    const imagensSrc = ["./recomendacao/ventania.gif", "./recomendacao/naorecomendado.svg"];
+
+    for (var i = 0; i < imagensSrc.length; i++) {
+      var imgElement = document.createElement("img");
+
+      // Define a classe do elemento
+      imgElement.className = "icone-recomendacao";
+
+      // Define a fonte da imagem
+      imgElement.src = imagensSrc[i];
+
+      if (imagensSrc[i].includes("naorecomendado.svg")) {
+        // Adiciona o atributo style para ajustar o tamanho
+        imgElement.style.width = "80px";
+        imgElement.style.position = "relative";
+        imgElement.style.top = "-60px";
+      }
+
+      // Adiciona o elemento à 'containerRecomendacao'
+      containerRecomendacao.appendChild(imgElement);
+    }
   } else if (['01d', '02d'].includes(icon) && containerRecomendacao) {
     // Array de fontes de imagens
     const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif"];
@@ -435,7 +441,7 @@ inverno.pbg
       // Verifica se a fonte da imagem contém "sol.gif"
       if (imagensSrc[i].includes("sol.gif")) {
         // Adiciona o atributo style para ajustar o tamanho
-        imgElement.style.width = "50px";
+        imgElement.style.width = "30px";
       }
 
       // Adiciona o elemento à 'containerRecomendacao'
@@ -447,6 +453,7 @@ inverno.pbg
 
   // adicionar um icone de alerta se a temperatura estiver acima de 37 graus
   if (temp > 35) {
+    
     var imgElement = document.createElement("img");
 
     // Define a classe do elemento
@@ -459,24 +466,37 @@ inverno.pbg
     containerRecomendacao.appendChild(imgElement);
 
     console.log("Imagem 'perigo.gif' adicionada em 'containerRecomendacao'.");
-  }
+  } else if (temp > 26 && containerRecomendacao) {
+  // Array de fontes de imagens
+  const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif", "./recomendacao/roupaleve.gif"];
 
-  if (temp > 26) {
+  for (var i = 0; i < imagensSrc.length; i++) {
     var imgElement = document.createElement("img");
 
     // Define a classe do elemento
     imgElement.className = "icone-recomendacao";
 
     // Define a fonte da imagem
-    imgElement.src = "./recomendacao/agua.gif";
+    imgElement.src = imagensSrc[i];
+
+    // Verifica se a fonte da imagem contém "sol.gif"
+    if (imagensSrc[i].includes("sol.gif")) {
+      // Adiciona o atributo style para ajustar o tamanho
+      imgElement.style.width = "30px";
+    }
 
     // Adiciona o elemento à 'containerRecomendacao'
     containerRecomendacao.appendChild(imgElement);
   }
 
-
 }
 
+
+
+
+
+
+}
 //buscando dados da semana --------------------------------------------------------------------------------------------------
 
 
