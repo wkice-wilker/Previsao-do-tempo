@@ -205,7 +205,9 @@ function displayWeather(data) {
     let date = new Date(epochTime * 1000)
     let hours = date.getHours()
     let minutes = date.getMinutes()
-    return `${hours}:${minutes}`
+
+    let formattedMinutes = String(minutes).padStart(2, '0');
+    return `${hours}:${formattedMinutes}`
   }
 
   function formatDate(epochTime) {
