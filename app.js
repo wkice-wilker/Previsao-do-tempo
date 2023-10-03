@@ -122,7 +122,15 @@ cityButtons.forEach((button) => {
     //tornando a Div recomendacao visível
     const RecDiv = document.querySelector('.recomendacao');
     RecDiv.style.display = 'flex';
-
+ //tornando a Divs visíveis
+  
+ const RecDivSaude = document.querySelector('.container-saude');
+ const RecDivAlergia = document.querySelector('.container-alergia');
+ const RecDivAtividade = document.querySelector('.container-atividade');
+ 
+ RecDivSaude.style.display = 'flex';
+ RecDivAlergia.style.display = 'flex';
+ RecDivAtividade.style.display = 'flex';
 
     // Chamar as funções com o nome da cidade correto
     getCityWeather(cityName);
@@ -140,15 +148,7 @@ cityButtons.forEach((button) => {
   
   
 
-  //tornando a Divs visíveis
-  
-  const RecDivSaude = document.querySelector('.container-saude');
-  const RecDivAlergia = document.querySelector('.container-alergia');
-  const RecDivAtividade = document.querySelector('.container-atividade');
-  
-  RecDivSaude.style.display = 'flex';
-  RecDivAlergia.style.display = 'flex';
-  RecDivAtividade.style.display = 'flex';
+ 
 
 
   // resetando as imagens da Div recomendacao quando muda de cidade
@@ -190,6 +190,7 @@ function displayWeather(data) {
 
   } = data
 
+
   //adicionando os dados optidos da API nas DIVs
   cityName.textContent = name;
   weatherIcon.src = `./assets/${icon}.svg`
@@ -215,6 +216,7 @@ function displayWeather(data) {
 
 
   requestsaude(icon);
+
 
   // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
   weatherIcon1.src = `./assets/${icon}.svg`
@@ -252,62 +254,7 @@ inverno.pbg
 
 
   //efeito vidro escuro no fundo do tempo ---------------------------------------------------------------------------
-  if (['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)) {
-
-    document.body.style.color = 'white';
-
-    const elementosParaAtualizar = [
-      'vidro',
-      'button-container',
-      'header',
-      'recomendacao',
-      'alert-vidro',
-      'container-saude',
-      'container-alergia',
-      'container-atividade',
-      'container-popup-saude',
-      'container-popup-alergia',
-      'container-popup-atividade',
-      'dia',
-    ];
-
-    elementosParaAtualizar.forEach(elementId => {
-      const element = document.getElementById(elementId);
-      if (element) {
-        element.style.backgroundColor = '#00000089';
-      }
-    });
-
-
-    document.getElementById('weather-description').style.color = '#fff';
-    document.getElementById('alert').style.color = '#fff';
-    document.getElementById('current-temperature').style.color = '#5795dc';
-    document.getElementById('botao-email').style.background = '#5795dc';
-
-
-
-    const elementos = document.querySelectorAll('.temperature-details__value, .sunset-sunrise__value');
-    const elementosLabel = document.querySelectorAll('.temperature-details__label');
-    const elementosPraia = document.querySelector('.praia');
-
-    const sunriseTimeElement = document.getElementById('iconsunrise');
-    const sunsetTimeElement = document.getElementById('iconsunset');
-
-    elementosPraia.src = `./bg/fundonoite.png`;
-    sunriseTimeElement.src = `./assets/sunriseN.svg`;
-    sunsetTimeElement.src = `./assets/sunsetN.svg`;
-
-
-    elementos.forEach(elemento => {
-      elemento.style.color = 'white';
-
-    });
-    elementosLabel.forEach(elementosLabel => {
-      elementosLabel.style.color = '#aba9a9';
-
-    });
-
-  }
+  
 
 
 
@@ -532,6 +479,7 @@ inverno.pbg
 
 //buscando dados da semana --------------------------------------------------------------------------------------------------
 
+
 function requestSemana(cityName) {
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
     .then((response) => {
@@ -562,14 +510,13 @@ function requestSemana(cityName) {
           const divDia = document.createElement('div');
           divDia.classList.add('dia'); // Adicione uma classe para estilização
           divDia.id = 'dia';
-          
-      
+
+
           const datapadrao = previsaoDia.dt; // Data no formato dos EUA
           const data = formatarData(datapadrao); // Chama a função para formatar a data
       
           const icon = previsaoDia.weather[0].icon;
-          const temperaturaMaxima = previsaoDia.main.temp_max;
-          const temperaturaMinima = previsaoDia.main.temp_min;
+          const temperatura = previsaoDia.main.temp;
           const descricao = previsaoDia.weather[0].description;
 
           if(['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)){
@@ -579,17 +526,15 @@ function requestSemana(cityName) {
           divDia.innerHTML = `
             <p class="data-semana">${data}</p>
             <p><img class="icone-semana" id="weather-icon" src="./assets/${novoIcon}.svg"></p>
-            <p>Temperatura Máxima: ${temperaturaMaxima}°C</p>
-            <p>Temperatura Mínima: ${temperaturaMinima}°C</p>
-            <p>Descrição: ${descricao}</p>
+            <pclass="temperatura-semana">${Math.round(temperatura)}°C</p>
+            <p>${descricao}</p>
           `;
           }else {
             divDia.innerHTML = `
               <p class="data-semana">${data}</p>
               <p><img class="icone-semana" id="weather-icon" src="./assets/${icon}.svg"></p>
-              <p>Temperatura Máxima: ${temperaturaMaxima}°C</p>
-              <p>Temperatura Mínima: ${temperaturaMinima}°C</p>
-              <p>Descrição: ${descricao}</p>
+              <p class="temperatura-semana">${Math.round(temperatura)}°C</p>
+              <p>${descricao}</p>
             `;
           }
       
@@ -609,7 +554,6 @@ function requestSemana(cityName) {
       console.error('Erro na solicitação da semana:', error);
     });
 }
-
 // Buscando dados de vento e rajadas de vento -------------------------------------------------------------------------------------------
 
 function getCityTemp(tempCityName) {
@@ -1200,3 +1144,4 @@ function requestsaude(requestCityName) {
 
 }
 
+//----------------------------------------------------------------
