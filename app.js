@@ -338,7 +338,7 @@ inverno.pbg
 
 
 
-  if (['01n', '04d'].includes(icon)) {
+  if (['04n', '04d'].includes(icon)) {
 
     const imagensSrc = ["./recomendacao/04d.gif"];
 
