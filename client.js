@@ -1,0 +1,53 @@
+console.log("Iniciando o aplicativo Firebase...");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+console.log("Módulos Firebase importados com sucesso!");
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyABceDMCup6Z1LmclNegasDGLMKAYmOk-0",
+  authDomain: "clima-a12f5.firebaseapp.com",
+  projectId: "clima-a12f5",
+  storageBucket: "clima-a12f5.appspot.com",
+  messagingSenderId: "234130570534",
+  appId: "1:234130570534:web:b8851322d6e9a236b5d5e7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+console.log("Firebase inicializado com sucesso!");
+
+const db = getFirestore(app);
+
+// Selecionar o botão de e-mail e o campo de entrada de e-mail
+const botaoEmail = document.getElementById('botao-email');
+const emailInput = document.getElementById('input-email');
+
+botaoEmail.addEventListener('click', async function() {
+  // Obter o valor do campo de entrada de e-mail
+  const email = emailInput.value;
+
+  // Verificar se o e-mail não está vazio
+  if (email.trim() !== '') {
+    try {
+      // Adicionar o e-mail ao Firestore
+      const docRef = await addDoc(collection(db, 'email'), {
+        email: email,
+      });
+      console.log('E-mail adicionado com sucesso com ID: ', docRef.id);
+      // Limpar o campo de entrada após a adição do e-mail
+      emailInput.value = '';
+    } catch (error) {
+      console.error('Erro ao adicionar o e-mail: ', error);
+    }
+  } else {
+    console.log('Campo de e-mail vazio. Nenhum e-mail adicionado.');
+  }
+  
+});
+
+

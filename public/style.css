@@ -783,6 +783,10 @@ overflow-x: auto;
         max-width: 400px;
         margin-top: 5px;
     }
+    .email-button .fas.fa-check {
+        color: green; /* Cor verde para indicar sucesso */
+        margin-right: 5px; /* Espaço entre o ícone e o texto (opcional) */
+    }
 
     .saude,
     .alergia,

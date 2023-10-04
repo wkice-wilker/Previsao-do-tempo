@@ -38,7 +38,7 @@ const api_key1 = "t616H4VQSxC4C0dHNzBqf1e5OlVfWDJZ";
 // para reitirar a informação do value do input e-mail --------------------------------------------------------------------------------------------------------
 
 // Seleciona o elemento de entrada de email
-const emailInput = document.getElementById('email');
+const emailInput = document.getElementById('input-email');
 
 // Armazena o valor padrão para posterior comparação
 const valorPadrao = 'digite seu e-mail';
@@ -100,7 +100,10 @@ function verificarEstacaoDoAno() {
 const estacaoAtual = verificarEstacaoDoAno();
 weatherIconbg.src = `./bg/${estacaoAtual}.png`;
 
-// Selecionar todos os botões da cidade
+
+
+// Selecionar todos os botões da cidade ----------------------------------------------------------------------------------------------
+
 const cityButtons = document.querySelectorAll('.city-button');
 
 function highlightCityButton(clickedButton) {
@@ -117,22 +120,25 @@ function highlightCityButton(clickedButton) {
 cityButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const cityName = button.value; // Obter o nome da cidade a partir do valor do botão
-    const tempCityName = button.value; // Você pode ajustar isso de acordo com sua necessidade
+    const tempCityName = button.value;
     const requestCityName = cityName;
-    //tornando a Div recomendacao visível
-    const RecDiv = document.querySelector('.recomendacao');
-    RecDiv.style.display = 'flex';
- //tornando a Divs visíveis
-  
- const RecDivSaude = document.querySelector('.container-saude');
- const RecDivAlergia = document.querySelector('.container-alergia');
- const RecDivAtividade = document.querySelector('.container-atividade');
- 
- RecDivSaude.style.display = 'flex';
- RecDivAlergia.style.display = 'flex';
- RecDivAtividade.style.display = 'flex';
 
-    // Chamar as funções com o nome da cidade correto
+
+
+    //tornando a Divs visíveis --------------------------------------------------------------------------------------------------------
+
+    const RecDiv = document.querySelector('.recomendacao');
+    const RecDivSaude = document.querySelector('.container-saude');
+    const RecDivAlergia = document.querySelector('.container-alergia');
+    const RecDivAtividade = document.querySelector('.container-atividade');
+
+    RecDiv.style.display = 'flex';
+    RecDivSaude.style.display = 'flex';
+    RecDivAlergia.style.display = 'flex';
+    RecDivAtividade.style.display = 'flex';
+
+
+    // Chamar as funções com o nome da cidade -------------------------------------------------------------------------------------
     getCityWeather(cityName);
     requestAccuWeather(requestCityName);
     requestAr(cityName);
@@ -140,18 +146,14 @@ cityButtons.forEach((button) => {
     getCityTemp(tempCityName);
     removeAllChildren(containerRecomendacao);
     requestsaude(requestCityName);
-  
+
 
     highlightCityButton(button);
   });
 
-  
-  
-
- 
 
 
-  // resetando as imagens da Div recomendacao quando muda de cidade
+  // resetando as imagens da Div recomendacao quando muda de cidade ----------------------------------------------------------------------------------------
   function removeAllChildren(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -160,16 +162,13 @@ cityButtons.forEach((button) => {
 
 })
 
-//https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=pt_br&appid=${API key} // 896ed49c5ba70ed7875c3f89e7ef0128
-// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-
-
-
-
 
 
 //adicionando os dados optidos da API nas DIVs ----------------------------------------------------------------------------------------------------
+
+//https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=pt_br&appid=${API key} // 896ed49c5ba70ed7875c3f89e7ef0128
+// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
 function getCityWeather(cityName) {
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
@@ -200,7 +199,7 @@ function displayWeather(data) {
   sunriseTime.textContent = formatTime(sunrise);
   sunsetTime.textContent = formatTime(sunset);
 
-  // data e horas (ainda não decidir se irei usar)
+  // data e horas
   function formatTime(epochTime) {
     let date = new Date(epochTime * 1000)
     let hours = date.getHours()
@@ -208,12 +207,6 @@ function displayWeather(data) {
 
     let formattedMinutes = String(minutes).padStart(2, '0');
     return `${hours}:${formattedMinutes}`
-  }
-
-  function formatDate(epochTime) {
-    let date = new Date(epochTime * 1000)
-    let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' })
-    return `Hoje, ${formattedDate}`
   }
 
 
@@ -264,7 +257,7 @@ inverno.pbg
 
   } else if (['01n'].includes(icon)) {
 
-    //nublado noite
+    //céu limpo noite
     fundoEfeito.src = './efeito/noite.png';
 
   } else if (['03n'].includes(icon)) {
@@ -347,7 +340,6 @@ inverno.pbg
 
   if (['01n', '04d'].includes(icon)) {
 
-    // Array de fontes de imagens
     const imagensSrc = ["./recomendacao/04d.gif"];
 
     for (var i = 0; i < imagensSrc.length; i++) {
@@ -359,13 +351,12 @@ inverno.pbg
       // Define a fonte da imagem
       imgElement.src = imagensSrc[i];
 
-      // Adiciona o elemento à 'containerRecomendacao'
       containerRecomendacao.appendChild(imgElement);
     }
 
 
   } else if (['09d', '09n', '10d', '10n'].includes(icon)) {
-    // Array de fontes de imagens
+
     const imagensSrc = ["./recomendacao/09d.gif"];
 
     for (var i = 0; i < imagensSrc.length; i++) {
@@ -377,12 +368,11 @@ inverno.pbg
       // Define a fonte da imagem
       imgElement.src = imagensSrc[i];
 
-      // Adiciona o elemento à 'containerRecomendacao'
       containerRecomendacao.appendChild(imgElement);
     }
 
-  }else if (['11d', '11n'].includes(icon) && containerRecomendacao) {
-    // Array de fontes de imagens
+  } else if (['11d', '11n'].includes(icon) && containerRecomendacao) {
+
     const imagensSrc = ["./recomendacao/arvore.gif", "./recomendacao/naorecomendado.svg"];
 
     for (var i = 0; i < imagensSrc.length; i++) {
@@ -401,11 +391,10 @@ inverno.pbg
         imgElement.style.top = "-60px";
       }
 
-      // Adiciona o elemento à 'containerRecomendacao'
       containerRecomendacao.appendChild(imgElement);
     }
-  }else if (['50d', '50n'].includes(icon) && containerRecomendacao) {
-    // Array de fontes de imagens
+  } else if (['50d', '50n'].includes(icon) && containerRecomendacao) {
+
     const imagensSrc = ["./recomendacao/ventania.gif", "./recomendacao/naorecomendado.svg"];
 
     for (var i = 0; i < imagensSrc.length; i++) {
@@ -424,11 +413,10 @@ inverno.pbg
         imgElement.style.top = "-60px";
       }
 
-      // Adiciona o elemento à 'containerRecomendacao'
       containerRecomendacao.appendChild(imgElement);
     }
   } else if (['01d', '02d'].includes(icon) && containerRecomendacao) {
-    // Array de fontes de imagens
+
     const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif"];
 
     for (var i = 0; i < imagensSrc.length; i++) {
@@ -442,20 +430,22 @@ inverno.pbg
 
       // Verifica se a fonte da imagem contém "sol.gif"
       if (imagensSrc[i].includes("sol.gif")) {
+
         // Adiciona o atributo style para ajustar o tamanho
         imgElement.style.width = "30px";
       }
 
-      // Adiciona o elemento à 'containerRecomendacao'
       containerRecomendacao.appendChild(imgElement);
     }
   } else {
     console.log("A imagem já existe em 'containerRecomendacao'.");
   }
 
-  // adicionar um icone de alerta se a temperatura estiver acima de 37 graus
+
+
+  // adicionar um icones de acordo com a temperatura ----------------------------------------------------------------
   if (temp > 35) {
-    
+
     var imgElement = document.createElement("img");
 
     // Define a classe do elemento
@@ -464,34 +454,35 @@ inverno.pbg
     // Define a fonte da imagem
     imgElement.src = "./recomendacao/perigo.gif";
 
-    // Adiciona o elemento à 'containerRecomendacao'
     containerRecomendacao.appendChild(imgElement);
 
     console.log("Imagem 'perigo.gif' adicionada em 'containerRecomendacao'.");
+
   } else if (temp > 26 && containerRecomendacao) {
-  // Array de fontes de imagens
-  const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif", "./recomendacao/roupaleve.gif"];
+    // Array de fontes de imagens
+    const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif", "./recomendacao/roupaleve.gif"];
 
-  for (var i = 0; i < imagensSrc.length; i++) {
-    var imgElement = document.createElement("img");
+    for (var i = 0; i < imagensSrc.length; i++) {
+      var imgElement = document.createElement("img");
 
-    // Define a classe do elemento
-    imgElement.className = "icone-recomendacao";
+      // Define a classe do elemento
+      imgElement.className = "icone-recomendacao";
 
-    // Define a fonte da imagem
-    imgElement.src = imagensSrc[i];
+      // Define a fonte da imagem
+      imgElement.src = imagensSrc[i];
 
-    // Verifica se a fonte da imagem contém "sol.gif"
-    if (imagensSrc[i].includes("sol.gif")) {
-      // Adiciona o atributo style para ajustar o tamanho
-      imgElement.style.width = "30px";
+      // Verifica se a fonte da imagem contém "sol.gif"
+      if (imagensSrc[i].includes("sol.gif")) {
+
+        // Adiciona o atributo style para ajustar o tamanho
+        imgElement.style.width = "30px";
+      }
+
+      // Adiciona o elemento à 'containerRecomendacao'
+      containerRecomendacao.appendChild(imgElement);
     }
 
-    // Adiciona o elemento à 'containerRecomendacao'
-    containerRecomendacao.appendChild(imgElement);
   }
-
-}
 
 
 
@@ -512,23 +503,25 @@ function requestSemana(cityName) {
       }
     })
     .then((dadoSemana) => {
-      // Você pode acessar 'dadoSemana' apenas dentro deste escopo
+
       console.log("semana", dadoSemana);
       displaySemana(dadoSemana);
 
       function displaySemana(dadoSemana) {
-        const semanaContainer = document.getElementById('conteudo-semana'); // Supondo que você tenha um elemento HTML onde deseja exibir a previsão semanal
+        const semanaContainer = document.getElementById('conteudo-semana');
         semanaContainer.innerHTML = '';
-      
-        const previsaoDiaria = dadoSemana.list; // Supondo que 'list' contenha a previsão diária
+
+        const previsaoDiaria = dadoSemana.list;
 
         const previsoes09 = previsaoDiaria.filter((previsaoDia) => {
-          // Filtra apenas as previsões com o horário desejado (09:00:00)
+
+          // Filtrar a lista apenas as previsões com o horário (09:00:00)
           return previsaoDia.dt_txt.endsWith('09:00:00');
         });
-      
+
         previsoes09.forEach((previsaoDia) => {
-          // Crie uma div para representar cada dia
+
+          // Cria uma div para representar cada dia
           const divDia = document.createElement('div');
           divDia.classList.add('dia'); // Adicione uma classe para estilização
           divDia.id = 'dia';
@@ -536,22 +529,24 @@ function requestSemana(cityName) {
 
           const datapadrao = previsaoDia.dt; // Data no formato dos EUA
           const data = formatarData(datapadrao); // Chama a função para formatar a data
-      
+
+
+          // adicionando os dados retirado da API nas Divs 
           const icon = previsaoDia.weather[0].icon;
           const temperatura = previsaoDia.main.temp;
           const descricao = previsaoDia.weather[0].description;
 
-          if(['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)){
+          if (['01n', '02n', '03n', '04n', '09n', '10n', '11n', '50n'].includes(icon)) {
             novoIcon = icon.replace('n', 'd');
-          
-      
-          divDia.innerHTML = `
+
+
+            divDia.innerHTML = `
             <p class="data-semana">${data}</p>
             <p><img class="icone-semana" id="weather-icon" src="./assets/${novoIcon}.svg"></p>
             <pclass="temperatura-semana">${Math.round(temperatura)}°C</p>
             <p>${descricao}</p>
           `;
-          }else {
+          } else {
             divDia.innerHTML = `
               <p class="data-semana">${data}</p>
               <p><img class="icone-semana" id="weather-icon" src="./assets/${icon}.svg"></p>
@@ -559,23 +554,29 @@ function requestSemana(cityName) {
               <p>${descricao}</p>
             `;
           }
-      
+
           // Anexe a div ao contêiner
           semanaContainer.appendChild(divDia);
         });
-       
+
+        //convertendo a data para padrão Brasileira
         function formatarData(datapadrao) {
           let date = new Date(datapadrao * 1000)
           let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' })
           return `${formattedDate}`
         }
       }
-      
+
     })
     .catch((error) => {
       console.error('Erro na solicitação da semana:', error);
     });
 }
+
+
+
+
+
 // Buscando dados de vento e rajadas de vento -------------------------------------------------------------------------------------------
 
 function getCityTemp(tempCityName) {
@@ -610,7 +611,7 @@ function getCityTemp(tempCityName) {
       const doc = parserDado.parseFromString(html, 'text/html');
 
       const windTextElements = doc.querySelectorAll('[class="detail-item spaced-content"]');
-      console.log("dados do tempo",windTextElements);
+      console.log("dados do tempo", windTextElements);
       encontrarDadosVento(windTextElements);
 
       //extraindo dados da div do site da API
@@ -622,22 +623,22 @@ function getCityTemp(tempCityName) {
         for (let i = 0; i < windTextElements.length; i++) {
           const element = windTextElements[i];
           const labelText = element.querySelector('div:nth-child(1)').textContent.trim();
-          console.log("dados do label",labelText);
+          console.log("dados do label", labelText);
           if (labelText === "Rajadas de vento") {
             dadoRajada = element.querySelector('div:nth-child(2)').textContent.trim();
           } else if (labelText === "Vento") {
             dadoVento = element.querySelector('div:nth-child(2)').textContent.trim();
           } else if (labelText === "Índice máximo de raios UV") {
             dadoUv = element.querySelector('div:nth-child(2)').textContent.trim();
-          }else if (labelText === "RealFeel®") {
+          } else if (labelText === "RealFeel®") {
             dadosensacao = element.querySelector('div:nth-child(2)').textContent.trim();
           }
         }
         windSpeed.textContent = dadoVento;
         windGust.textContent = dadoRajada;
         windUv.textContent = dadoUv;
-        feelsLikeTemperature.textContent = dadosensacao +'C';
-        console.log("dados do UV",dadoUv);
+        feelsLikeTemperature.textContent = dadosensacao + 'C';
+        console.log("dados do UV", dadoUv);
 
       }
     });
@@ -689,6 +690,8 @@ function requestAr(cityName) {
         qualidadeAr.textContent = dadoAr;
 
       }
+
+
     });
 }
 
@@ -838,14 +841,14 @@ function requestsaude(requestCityName) {
         divsIndexListCard.forEach(indexListCard => {
           // Crie um novo div pai
           const divPai = document.createElement('div');
-          divPai.className = 'conteudo-saude'; // Adicione a classe desejada ao div pai
+          divPai.className = 'conteudo-saude'; // Adicione a classe ao div pai
 
           // Selecione todas as divs filhas dentro da div "index-list-card"
           const divsFilhas = indexListCard.querySelectorAll('div:not(.index-name)');
 
           // Itere sobre as divs filhas e adicione cada uma ao div pai
           divsFilhas.forEach(divFilha => {
-            divPai.appendChild(divFilha.cloneNode(true)); // Use cloneNode para copiar a div filha
+            divPai.appendChild(divFilha.cloneNode(true)); // Usando cloneNode para copiar a div filha
           });
 
           // Adicione o div pai à div com o ID "saude"
@@ -854,7 +857,7 @@ function requestsaude(requestCityName) {
       }
 
 
-      // configuração da Div Saude ---------------------------------------------------------------------------
+      // configuração da Div Saude 
 
       // Verifique se há conteúdo na div com a classe "saude"
       const saudeDiv = document.querySelector('.saude');
@@ -890,12 +893,7 @@ function requestsaude(requestCityName) {
 
       }
 
-
-
-
-
       const conteudoDivs = document.querySelectorAll('.conteudo-saude');
-
 
       conteudoDivs.forEach(conteudoSaudeDiv => {
         const indexStatusColorDiv = conteudoSaudeDiv.querySelector('.index-status-color');
@@ -948,7 +946,7 @@ function requestsaude(requestCityName) {
 
         // Itere sobre as divs com a classe "[data-index-slug="dust-dander"]"
         divsIndexListCard.forEach(indexListCard => {
-          // Crie um novo div pai
+          // Cria um novo div pai
           const divPai = document.createElement('div');
           divPai.className = 'conteudo-alergia'; // Adicione a classe desejada ao div pai
 
@@ -959,7 +957,7 @@ function requestsaude(requestCityName) {
             divPai.appendChild(divFilha.cloneNode(true)); // Use cloneNode para copiar a div filha
           });
 
-          // Adicione o div pai à div com o ID "alergia"
+          // Adiciona o div pai à div com o ID "alergia"
           alergiaText.appendChild(divPai);
         });
       }
@@ -1038,10 +1036,9 @@ function requestsaude(requestCityName) {
       });
 
 
+
+
       //buscando dados de atividades físicas -------------------------------------------------------------------------------------------------------
-
-
-
 
       if (mainDivAtividade) {
         const atividadeText = document.getElementById('atividade');
