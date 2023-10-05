@@ -27,7 +27,7 @@ const db = getFirestore(app);
 const botaoEmail = document.getElementById('botao-email');
 const emailInput = document.getElementById('input-email');
 
-botaoEmail.addEventListener('click', async function() {
+botaoEmail.addEventListener('click', async function () {
   // Obter o valor do campo de entrada de e-mail
   const email = emailInput.value;
 
@@ -38,16 +38,39 @@ botaoEmail.addEventListener('click', async function() {
       const docRef = await addDoc(collection(db, 'email'), {
         email: email,
       });
+
+      // Trocar a imagem do botão para o ícone de sucesso
+      const botaoEmailIcon = document.querySelector('#botao-icon');
+      botaoEmailIcon.src = './assets/sucesso.svg';
+      const backBotao = document.querySelector('#botao-email');
+      backBotao.style.backgroundColor = '#008000';
+
       console.log('E-mail adicionado com sucesso com ID: ', docRef.id);
+
       // Limpar o campo de entrada após a adição do e-mail
       emailInput.value = '';
+      // Aguardar por alguns segundos antes de restaurar a imagem original do botão
+      setTimeout(function () {
+        botaoEmailIcon.src = './assets/botao-enviar.png';
+        backBotao.style.backgroundColor = '#393939';
+
+        const valorPadrao = 'digite seu e-mail';
+        
+          // Se o campo estiver vazio, redefina o valor padrão
+          if (emailInput.value === '') {
+            emailInput.value = valorPadrao;
+          }
+      }, 3000); // 3000 milissegundos (3 segundos)
+
+
+
     } catch (error) {
       console.error('Erro ao adicionar o e-mail: ', error);
     }
   } else {
     console.log('Campo de e-mail vazio. Nenhum e-mail adicionado.');
   }
-  
+
 });
 
 

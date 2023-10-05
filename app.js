@@ -699,6 +699,7 @@ function requestAr(cityName) {
 // buscando alertas do tempo da cidade -------------------------------------------------------------------------------------------------
 function requestAccuWeather(requestCityName) {
 
+
   const alertsText = document.getElementById('alertsPrevisao');
   alertsText.innerHTML = '';
   document.getElementById('alert-vidro').style.display = 'none'; // Oculta o container de alertas
