@@ -250,6 +250,7 @@ inverno.pbg
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
   weatherIconefeito.src = './efeito/00d.png';
+  document.getElementById('relampago').style.display = 'none';
 
   if (['03d'].includes(icon)) {
 
@@ -318,12 +319,14 @@ inverno.pbg
     //chuva com trovoada de dia
     fundoEfeito.src = './efeito/trovoada.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
+    document.getElementById('relampago').style.display = 'fixed';
 
   } else if (['11n'].includes(icon)) {
 
     //chuva com trovoada de noite
     fundoEfeito.src = './efeito/trovoadanoite.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
+    document.getElementById('relampago').style.display = 'fixed';
 
   } else if (['50d'].includes(icon)) {
 
