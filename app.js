@@ -214,7 +214,7 @@ function displayWeather(data) {
 
 
   // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
-  weatherIcon1.src = `./assets/${icon}.svg`
+ 
 
 
 
@@ -256,6 +256,7 @@ inverno.pbg
     //nublado
     fundoEfeito.src = './efeito/nublado.png';
     weatherIconefeito.src = './efeito/nuvem.png';
+    
 
   } else if (['01n'].includes(icon)) {
 
@@ -288,14 +289,25 @@ inverno.pbg
     //nuvem noite
     fundoEfeito.src = './efeito/noitenuvem.png';
 
+  } else if (['09d'].includes(icon)) {
 
-  } else if (['09d', '10d'].includes(icon)) {
+    //chuva
+    fundoEfeito.src = './efeito/chuva.png';
+    weatherIconefeito.src = './efeito/chuvaT.png';
+
+  }else if (['09n'].includes(icon)) {
+
+    //chuva a noite
+    fundoEfeito.src = './efeito/chuva.png';
+    weatherIconefeito.src = './efeito/chuvaT.png';
+
+  }else if (['10d'].includes(icon)) {
 
     //chuva com sol
     fundoEfeito.src = './efeito/chuva.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
-  } else if (['09n', '10n'].includes(icon)) {
+  } else if (['10n'].includes(icon)) {
 
     //chuva com lua
     fundoEfeito.src = './efeito/chuvanoite.png';
