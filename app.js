@@ -249,6 +249,8 @@ inverno.pbg
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
+  weatherIconefeito.src = './efeito/00d.png';
+
   if (['03d'].includes(icon)) {
 
     //nublado
