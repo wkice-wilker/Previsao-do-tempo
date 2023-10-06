@@ -248,22 +248,34 @@ body {
     padding: 0 10px;
 }
 
+.resultado{
+    font-family: "Ubuntu", sans-serif;
+    color: #c05a00;
+    font-size: 12px;
+    top:10px;
+    flex-direction: column;
+    order: 2;
+    margin-right: 10px;
+}
+
 .addemail {
     display: flex;
-    flex: 3;
     align-items: center;
-    max-width: 250px;
+    max-width: 300px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
 }
 
 .email-input {
-    flex: 1 auto;
+    flex: 2;
     border: none;
     height: 30px;
     padding: 0 15px;
     border-radius: 10px 0 0 10px;
     appearance: none;
     margin-right: -15px;
-    width: 150px;
+    width: 250px;
     background-color: #6e9fd7;
     color: #f3f4fb;
 }
@@ -313,6 +325,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 0px 0px 15px 15px;
+    flex-wrap: wrap;
 }
 
 .header__city-search-bar {
@@ -320,7 +333,7 @@ body {
     white-space: nowrap;
     flex: 1;
     align-items: center;
-    /* min-width: 490px; */
+    min-width: 490px;
 }
 
 .header__input {

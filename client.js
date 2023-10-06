@@ -26,13 +26,20 @@ const db = getFirestore(app);
 // Selecionar o botão de e-mail e o campo de entrada de e-mail
 const botaoEmail = document.getElementById('botao-email');
 const emailInput = document.getElementById('input-email');
+const resultado = document.getElementById('resultado');
 
 botaoEmail.addEventListener('click', async function () {
   // Obter o valor do campo de entrada de e-mail
   const email = emailInput.value;
 
+  function verificarEmail(email) {
+    var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email);
+  }
+
   // Verificar se o e-mail não está vazio
   if (email.trim() !== '') {
+    if (verificarEmail(email)) {
     try {
       // Adicionar o e-mail ao Firestore
       const docRef = await addDoc(collection(db, 'email'), {
@@ -68,8 +75,16 @@ botaoEmail.addEventListener('click', async function () {
       console.error('Erro ao adicionar o e-mail: ', error);
     }
   } else {
+    resultado.style.display ='flex';
+    resultado.innerHTML = 'E-mail inválido. Por favor, insira um e-mail válido.';
+    setTimeout(function () {
+      resultado.style.display = 'none';
+    }, 3000);
+  }
+  }else {
     console.log('Campo de e-mail vazio. Nenhum e-mail adicionado.');
   }
+
 
 });
 
