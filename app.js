@@ -305,13 +305,13 @@ inverno.pbg
   }else if (['10d'].includes(icon)) {
 
     //chuva com sol
-    fundoEfeito.src = './efeito/chuva.png';
+    fundoEfeito.src = './efeito/chuvasol.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
   } else if (['10n'].includes(icon)) {
 
     //chuva com lua
-    fundoEfeito.src = './efeito/chuvanoite.png';
+    fundoEfeito.src = './efeito/chuvalua.png';
     weatherIconefeito.src = './efeito/chuvaT.png';
 
   } else if (['11d'].includes(icon)) {
