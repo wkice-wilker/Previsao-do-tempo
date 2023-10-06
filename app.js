@@ -127,11 +127,13 @@ cityButtons.forEach((button) => {
 
     //tornando a Divs visíveis --------------------------------------------------------------------------------------------------------
 
-    const RecDiv = document.querySelector('.recomendacao');
+    const RecDiv = document.querySelector('.container-recomendacao');
     const RecDivSaude = document.querySelector('.container-saude');
     const RecDivAlergia = document.querySelector('.container-alergia');
     const RecDivAtividade = document.querySelector('.container-atividade');
+    const linkApis = document.querySelector('.link-api');
 
+    linkApis.style.display = 'flex';
     RecDiv.style.display = 'flex';
     RecDivSaude.style.display = 'flex';
     RecDivAlergia.style.display = 'flex';
@@ -209,7 +211,7 @@ function displayWeather(data) {
     return `${hours}:${formattedMinutes}`
   }
 
-
+  console.log(icon);
   requestsaude(icon);
 
 

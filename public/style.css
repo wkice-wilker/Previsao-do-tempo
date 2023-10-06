@@ -264,7 +264,7 @@ body {
     max-width: 300px;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: stretch;
+    align-content: center;
 }
 
 .email-input {
@@ -333,7 +333,7 @@ body {
     white-space: nowrap;
     flex: 1;
     align-items: center;
-    min-width: 490px;
+  
 }
 
 .header__input {
@@ -370,6 +370,8 @@ body {
 .header__button:hover {
     filter: brightness(1.25);
 }
+
+
 .city-button.active {
     color: #0073e7;
     text-decoration:underline;
@@ -433,7 +435,7 @@ body {
 }
 
 .recomendacao {
-    display: none;
+    display: flex;
     flex-direction: column;
     grid-column: recomendacao;
     align-content: space-around;
@@ -446,9 +448,12 @@ body {
     padding-bottom: 10px;
     font-weight: bold;
     text-align: center;
+    justify-content: flex-start;
 }
 
 .container-recomendacao {
+    display: none;
+    flex-direction: column;
     width: 300px;
     align-items: center;
     justify-content: center;
@@ -756,7 +761,34 @@ overflow-x: auto;
 
 
 .correcao-button {
-    padding-top: 100px;
+    display: flex;
+    position: relative;
+    bottom: 1%;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 80px;
+    align-content: center;
+}
+.link-api{
+    margin-top: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 300px;
+    bottom: 5px;
+}
+.link-api a{
+    margin: 10px;
+    font-size: 10px;
+    text-decoration: none;
+    color: #686868;
+}
+.link-api h2{
+    font-size: 12px;
+    text-decoration: none;
+    color: #6d6d6d;
 }
 
 /* Quando a largura da tela atingir 1060px ou mais */
@@ -1021,5 +1053,7 @@ overflow-x: auto;
         top: -45vw;
         margin: 0;
     }
+   
+    
 
 }
