@@ -456,15 +456,12 @@ body {
     flex-direction: column;
     width: 300px;
     align-items: center;
-    justify-content: center;
     background-color: #ffffff89;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 10px;
     border-radius: 15px;
     min-height: 230px;
-
-
 }
 
 .conteudo-recomendacao {

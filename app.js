@@ -251,14 +251,30 @@ inverno.pbg
 
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
+
   weatherIconefeito.src = './efeito/00d.png';
   document.getElementById('relampago').style.display = 'none';
+
+/*const efeitoClima = {
+   sol(){}
+  solNuvemento(){}
+   ParcialmenteNublado(){}
+   nublado(){}
+   chuva(){}
+   chuvaSol(){}
+   lua(){}
+   chuvaLua(){}
+   chuvaTrovoadaDia(){}
+   chuvaTrovoadaNoite(){}
+   ventaniaDia(){}
+   ventaniaNoite(){};
+}*/
 
   if (['03d'].includes(icon)) {
 
     //nublado
     fundoEfeito.src = './efeito/nublado.png';
-    weatherIconefeito.src = './efeito/nuvem.png';
+    weatherIconefeito.src = './efeito/nuvem.jpg';
     
 
   } else if (['01n'].includes(icon)) {
