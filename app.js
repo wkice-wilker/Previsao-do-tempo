@@ -259,11 +259,11 @@ inverno.pbg
     const climaMapeamento = {
       '01d': {
         fundoEfeito: './efeito/ensolarado.png',
-        iconBg: `background-image: url('./efeito/sol.svg');`,
+        iconBg: "background-image: url('../efeito/sol.png');",
       },
       '01n': {
         fundoEfeito: './efeito/noite.png',
-        iconBg: `background-image: url('./efeito/lua.svg');`,
+        iconBg: "background-image: url('../efeito/lua.png');",
         praiaN:'./bg/fundonoite.png',
       },
       '03d': {
