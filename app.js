@@ -4,11 +4,12 @@ const idSearchInput = document.getElementById('city-search-input')
 const citySearchButton = document.getElementById('city-search-button')
 
 //chamando campo background
-const weatherIcon1 = document.getElementById("weather-icon1");
+const iconBg = document.getElementById("iconebg");
 const weatherIconbg = document.getElementById("weather-iconbg");
 const weatherIconefeito = document.getElementById("weather-iconefeito");
 const fundoEfeito = document.getElementById("fundo-Efeito");
 const lupa = document.getElementById('lupa');
+const efeitoRelampago = document.getElementById('relampago');
 
 //chamando recomendação
 const recomendacaoIcon = document.getElementById("recomIcon");
@@ -210,13 +211,13 @@ function displayWeather(data) {
     let formattedMinutes = String(minutes).padStart(2, '0');
     return `${hours}:${formattedMinutes}`
   }
-
   console.log(icon);
   requestsaude(icon);
+  verificarClima(icon);
 
 
   // adicionando elemento no background de acordo com o clima -------------------------------------------------------------
- 
+
 
 
 
@@ -252,119 +253,211 @@ inverno.pbg
   //verificação do efeito que será utilizado de acordo com o clima -----------------------------------------------------
 
 
-  weatherIconefeito.src = './efeito/00d.png';
-  document.getElementById('relampago').style.display = 'none';
 
-/*const efeitoClima = {
-   sol(){}
-  solNuvemento(){}
-   ParcialmenteNublado(){}
-   nublado(){}
-   chuva(){}
-   chuvaSol(){}
-   lua(){}
-   chuvaLua(){}
-   chuvaTrovoadaDia(){}
-   chuvaTrovoadaNoite(){}
-   ventaniaDia(){}
-   ventaniaNoite(){};
-}*/
 
-  if (['03d'].includes(icon)) {
+  function verificarClima(icon) {
+    const climaMapeamento = {
+      '01d': {
+        fundoEfeito: './efeito/ensolarado.png',
+        iconBg: './efeito/sol.svg',
+      },
+      '01n': {
+        fundoEfeito: './efeito/noite.png',
+        iconBg: './efeito/lua.svg',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '03d': {
+        fundoEfeito: './efeito/nublado.png',
+        weatherIconefeito: './efeito/nuvem.jpg',
+      },
+      '03n': {
+        fundoEfeito: './efeito/nubladonoite.png',
+        weatherIconefeito: './efeito/nuvem.png',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '04d': {
+        fundoEfeito: './efeito/carregado.png',
+      },
+      '04n': {
+        fundoEfeito: './efeito/carregadonoite.png',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '02d': {
+        fundoEfeito: './efeito/solnuvem.png',
+      },
+      '02n': {
+        fundoEfeito: './efeito/noitenuvem.png',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '09d': {
+        fundoEfeito: './efeito/chuva.png',
+        weatherIconefeito: './efeito/chuvas.png',
+      },
+      '09n': {
+        fundoEfeito: './efeito/chuva.png',
+        weatherIconefeito: './efeito/chuvas.png',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '10d': {
+        fundoEfeito: './efeito/chuvasol.png',
+        weatherIconefeito: './efeito/chuvas.png',
+      },
+      '10n': {
+        fundoEfeito: './efeito/chuvalua.png',
+        weatherIconefeito: './efeito/chuvas.png',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '11d': {
+        fundoEfeito: './efeito/trovoada.png',
+        weatherIconefeito: './efeito/chuvas.png',
+        relampago: 'block',
+      },
+      '11n': {
+        fundoEfeito: './efeito/trovoadanoite.png',
+        weatherIconefeito: './efeito/chuvas.png',
+        relampago: 'block',
+        praiaN:'./bg/fundonoite.png',
+      },
+      '50d': {
+        fundoEfeito: './efeito/ensolarado.png',
+        weatherIconefeito: './efeito/ventania.png',
+      },
+      '50n': {
+        fundoEfeito: './efeito/noite.png',
+        weatherIconefeito: './efeito/ventania.png',
+        praiaN:'./bg/fundonoite.png',
+      },
+    };
 
-    //nublado
-    fundoEfeito.src = './efeito/nublado.png';
-    weatherIconefeito.src = './efeito/nuvem.jpg';
-    
+    if (climaMapeamento.hasOwnProperty(icon)) {
+      const clima = climaMapeamento[icon];
+      fundoEfeito.src = clima.fundoEfeito;
+      
+      if (clima.weatherIconefeito) {
+        weatherIconefeito.src = clima.weatherIconefeito;
+      } else {
+        weatherIconefeito.src = './efeito/00d.png';
+      }
 
-  } else if (['01n'].includes(icon)) {
+      if (clima.relampago) {
+        efeitoRelampago.style.display = clima.relampago;
+      } else {
+        efeitoRelampago.style.display = 'none';
+      }
 
-    //céu limpo noite
-    fundoEfeito.src = './efeito/noite.png';
+      if (clima.iconBg) {
+        iconBg.src = clima.iconBg;
+      } else {
+        iconBg.src = './efeito/00d.png';
+      }
 
-  } else if (['03n'].includes(icon)) {
+      if (clima.praiaN) {
+        document.getElementById('praia-noite').src = clima.praiaN;     
+      }
+    } else {
+      // Se o ícone não for encontrado, use o clima padrão.
+      fundoEfeito.src = './efeito/ensolarado.png';
 
-    //nublado noite
-    fundoEfeito.src = './efeito/nubladonoite.png';
-    weatherIconefeito.src = './efeito/nuvem.png';
+    }
 
-  } else if (['04d'].includes(icon)) {
-
-    //tempo carregado
-    fundoEfeito.src = './efeito/carregado.png';
-
-  } else if (['04n'].includes(icon)) {
-
-    //tempo carregado
-    fundoEfeito.src = './efeito/carregadonoite.png';
-
-  } else if (['02d'].includes(icon)) {
-
-    //nuvem
-    fundoEfeito.src = './efeito/solnuvem.png';
-
-  } else if (['02n'].includes(icon)) {
-
-    //nuvem noite
-    fundoEfeito.src = './efeito/noitenuvem.png';
-
-  } else if (['09d'].includes(icon)) {
-
-    //chuva
-    fundoEfeito.src = './efeito/chuva.png';
-    weatherIconefeito.src = './efeito/chuvaT.png';
-
-  }else if (['09n'].includes(icon)) {
-
-    //chuva a noite
-    fundoEfeito.src = './efeito/chuva.png';
-    weatherIconefeito.src = './efeito/chuvaT.png';
-
-  }else if (['10d'].includes(icon)) {
-
-    //chuva com sol
-    fundoEfeito.src = './efeito/chuvasol.png';
-    weatherIconefeito.src = './efeito/chuvaT.png';
-
-  } else if (['10n'].includes(icon)) {
-
-    //chuva com lua
-    fundoEfeito.src = './efeito/chuvalua.png';
-    weatherIconefeito.src = './efeito/chuvaT.png';
-
-  } else if (['11d'].includes(icon)) {
-
-    //chuva com trovoada de dia
-    fundoEfeito.src = './efeito/trovoada.png';
-    weatherIconefeito.src = './efeito/chuvaT.png';
-    document.getElementById('relampago').style.display = 'fixed';
-
-  } else if (['11n'].includes(icon)) {
-
-    //chuva com trovoada de noite
-    fundoEfeito.src = './efeito/trovoadanoite.png';
-    weatherIconefeito.src = './efeito/chuvaT.png';
-    document.getElementById('relampago').style.display = 'fixed';
-
-  } else if (['50d'].includes(icon)) {
-
-    //ventania de dia
-    fundoEfeito.src = './efeito/ensolarado.png';
-    weatherIconefeito.src = './efeito/ventania.png';
-
-  } else if (['50n'].includes(icon)) {
-
-    //ventania de noite
-    fundoEfeito.src = './efeito/noite.png';
-    weatherIconefeito.src = './efeito/ventania.png';
-
-  } else {
-
-    //ensolarado
-    fundoEfeito.src = './efeito/ensolarado.png';
   }
 
-
+  /*
+    if (['03d'].includes(icon)) {
+  
+      //nublado
+      fundoEfeito.src = './efeito/nublado.png';
+      weatherIconefeito.src = './efeito/nuvem.jpg';
+      
+  
+    } else if (['01n'].includes(icon)) {
+  
+      //céu limpo noite
+      fundoEfeito.src = './efeito/noite.png';
+  
+    } else if (['03n'].includes(icon)) {
+  
+      //nublado noite
+      fundoEfeito.src = './efeito/nubladonoite.png';
+      weatherIconefeito.src = './efeito/nuvem.png';
+  
+    } else if (['04d'].includes(icon)) {
+  
+      //tempo carregado
+      fundoEfeito.src = './efeito/carregado.png';
+  
+    } else if (['04n'].includes(icon)) {
+  
+      //tempo carregado
+      fundoEfeito.src = './efeito/carregadonoite.png';
+  
+    } else if (['02d'].includes(icon)) {
+  
+      //nuvem
+      fundoEfeito.src = './efeito/solnuvem.png';
+  
+    } else if (['02n'].includes(icon)) {
+  
+      //nuvem noite
+      fundoEfeito.src = './efeito/noitenuvem.png';
+  
+    } else if (['09d'].includes(icon)) {
+  
+      //chuva
+      fundoEfeito.src = './efeito/chuva.png';
+      weatherIconefeito.src = './efeito/chuvaT.png';
+  
+    }else if (['09n'].includes(icon)) {
+  
+      //chuva a noite
+      fundoEfeito.src = './efeito/chuva.png';
+      weatherIconefeito.src = './efeito/chuvaT.png';
+  
+    }else if (['10d'].includes(icon)) {
+  
+      //chuva com sol
+      fundoEfeito.src = './efeito/chuvasol.png';
+      weatherIconefeito.src = './efeito/chuvaT.png';
+  
+    } else if (['10n'].includes(icon)) {
+  
+      //chuva com lua
+      fundoEfeito.src = './efeito/chuvalua.png';
+      weatherIconefeito.src = './efeito/chuvaT.png';
+  
+    } else if (['11d'].includes(icon)) {
+  
+      //chuva com trovoada de dia
+      fundoEfeito.src = './efeito/trovoada.png';
+      weatherIconefeito.src = './efeito/chuvaT.png';
+      document.getElementById('relampago').style.display = 'fixed';
+  
+    } else if (['11n'].includes(icon)) {
+  
+      //chuva com trovoada de noite
+      fundoEfeito.src = './efeito/trovoadanoite.png';
+      weatherIconefeito.src = './efeito/chuvaT.png';
+      document.getElementById('relampago').style.display = 'fixed';
+  
+    } else if (['50d'].includes(icon)) {
+  
+      //ventania de dia
+      fundoEfeito.src = './efeito/ensolarado.png';
+      weatherIconefeito.src = './efeito/ventania.png';
+  
+    } else if (['50n'].includes(icon)) {
+  
+      //ventania de noite
+      fundoEfeito.src = './efeito/noite.png';
+      weatherIconefeito.src = './efeito/ventania.png';
+  
+    } else {
+  
+      //ensolarado
+      fundoEfeito.src = './efeito/ensolarado.png';
+    }
+  
+  */
 
 
 
@@ -493,9 +586,9 @@ inverno.pbg
 
     console.log("Imagem 'perigo.gif' adicionada em 'containerRecomendacao'.");
 
-  } else if (temp > 26 && containerRecomendacao) {
+  } else if (temp > 25 && containerRecomendacao) {
     // Array de fontes de imagens
-    const imagensSrc = ["./recomendacao/sol.gif", "./recomendacao/protetorsolar.gif", "./recomendacao/roupaleve.gif"];
+    const imagensSrc = ["./recomendacao/roupaleve.gif"];
 
     for (var i = 0; i < imagensSrc.length; i++) {
       var imgElement = document.createElement("img");
