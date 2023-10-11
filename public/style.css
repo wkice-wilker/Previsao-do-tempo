@@ -18,10 +18,14 @@
 
 .imgclima {
     position: fixed;
+    background-image: url('../efeito/00d.png');
+    background-repeat:no-repeat;
+    background-size: 300px;
     left: 4%;
     top: 3%;
     z-index: -8;
     width: 300px;
+    height: 300px;
 }
 
 .container-relampago {
