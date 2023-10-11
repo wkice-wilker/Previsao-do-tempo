@@ -211,6 +211,7 @@ function displayWeather(data) {
     let formattedMinutes = String(minutes).padStart(2, '0');
     return `${hours}:${formattedMinutes}`
   }
+  icon = "01d";
   console.log(icon);
   requestsaude(icon);
   verificarClima(icon);
@@ -263,7 +264,7 @@ inverno.pbg
       },
       '01n': {
         fundoEfeito: './efeito/noite.png',
-        iconBg: "url('./efeito/lua.png');",
+        iconBg: "url('./efeito/lua.png')",
         praiaN:'./bg/fundonoite.png',
       },
       '03d': {
