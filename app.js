@@ -259,11 +259,11 @@ inverno.pbg
     const climaMapeamento = {
       '01d': {
         fundoEfeito: './efeito/ensolarado.png',
-        iconBg: "background-image: url('../efeito/sol.png');",
+        iconBg: "url('./efeito/sol.png')",
       },
       '01n': {
         fundoEfeito: './efeito/noite.png',
-        iconBg: "background-image: url('../efeito/lua.png');",
+        iconBg: "url('./efeito/lua.png');",
         praiaN:'./bg/fundonoite.png',
       },
       '03d': {
@@ -346,9 +346,9 @@ inverno.pbg
       }
 
       if (clima.iconBg) {
-        iconBg.style = clima.iconBg;
+        iconBg.style.backgroundImage = clima.iconBg;
       } else {
-        iconBg.back = './efeito/00d.png';
+        iconBg.style.backgroundImage = "url('./efeito/00d.png')";
       }
 
       if (clima.praiaN) {
