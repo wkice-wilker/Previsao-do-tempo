@@ -211,7 +211,6 @@ function displayWeather(data) {
     let formattedMinutes = String(minutes).padStart(2, '0');
     return `${hours}:${formattedMinutes}`
   }
-  
   console.log(icon);
   requestsaude(icon);
   verificarClima(icon);
