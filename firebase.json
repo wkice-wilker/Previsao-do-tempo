@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "tempocerto",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
