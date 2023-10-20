@@ -17,4 +17,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIMA_A12F5 }}'
           channelId: live
-          projectId: clima-a12f5
+          projectId: tempocerto
