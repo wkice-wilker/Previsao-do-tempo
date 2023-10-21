@@ -759,7 +759,10 @@ function getCityTemp(tempCityName) {
             dadoVento = element.querySelector('div:nth-child(2)').textContent.trim();
           } else if (labelText === "Índice máximo de raios UV") {
             dadoUv = element.querySelector('div:nth-child(2)').textContent.trim();
-          } else if (labelText === "RealFeel®") {
+          }else {
+            dadoUv = "...";
+          }
+          if (labelText === "RealFeel®") {
             dadosensacao = element.querySelector('div:nth-child(2)').textContent.trim();
           }
         }
@@ -866,7 +869,6 @@ function requestAccuWeather(requestCityName) {
       console.log(alertsTextElements);
 
       const alertas = [];
-
       // Simule a adição de alertas ao array
    /* alertas.push('Alerta 1');
     alertas.push('Alerta 2');
