@@ -28,6 +28,9 @@ const botaoEmail = document.getElementById('botao-email');
 const emailInput = document.getElementById('input-email');
 const resultado = document.getElementById('resultado');
 
+// selecionar o alerta climática
+const alerta = document.getElementById('alertsPrevisao');
+
 botaoEmail.addEventListener('click', async function () {
   // Obter o valor do campo de entrada de e-mail
   const email = emailInput.value;
@@ -84,8 +87,17 @@ botaoEmail.addEventListener('click', async function () {
   }else {
     console.log('Campo de e-mail vazio. Nenhum e-mail adicionado.');
   }
-
-
 });
 
+if (alerta.trim() !== '') {
+  try {
+    // Adicionar o e-mail ao Firestore
+    const docAlerta = await addDoc(collection(db, 'alertas'), {
+      alerta: alerta,
+    });
+    console.log('Alerta adicionado com sucesso com ID: ', docAlerta.id);
 
+  }catch (error) {
+    console.error('Erro ao adicionar o Alerta: ', error);
+  }
+}
