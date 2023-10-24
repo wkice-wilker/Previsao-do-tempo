@@ -1,6 +1,6 @@
 console.log("Iniciando o aplicativo Firebase...");
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
 console.log("Módulos Firebase importados com sucesso!");
 
@@ -29,7 +29,7 @@ const emailInput = document.getElementById('input-email');
 const resultado = document.getElementById('resultado');
 
 // selecionar o alerta climática
-const alerta = document.getElementById('alertsPrevisao');
+const botaoCidade = document.querySelectorAll('.city-button');
 
 botaoEmail.addEventListener('click', async function () {
   // Obter o valor do campo de entrada de e-mail
@@ -89,15 +89,51 @@ botaoEmail.addEventListener('click', async function () {
   }
 });
 
-if (alerta.trim() !== '') {
-  try {
-    // Adicionar o e-mail ao Firestore
-    const docAlerta = await addDoc(collection(db, 'alertas'), {
-      alerta: alerta,
-    });
-    console.log('Alerta adicionado com sucesso com ID: ', docAlerta.id);
+async function verificarEAdicionarAlerta() {
+  const alerta = document.getElementById('alertsPrevisao');
+  const cidade = document.getElementById('city-name');
+  const dataAtual = new Date();
+  const ano = dataAtual.getFullYear();
+  const mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
+  const dia = dataAtual.getDate().toString().padStart(2, '0');
+  const dataFormatada = `${dia}-${mes}-${ano}`;
+  const data = dataFormatada;
+  const alertaTexto = alerta.textContent.trim();
+  const cidadeTexto = cidade.textContent.trim();
 
-  }catch (error) {
-    console.error('Erro ao adicionar o Alerta: ', error);
+  if (alertaTexto !== '') {
+    try {
+      // Recuperar alertas existentes do Firestore
+      const alertasCollection = collection(db, 'alerta');
+      const querySnapshot = await getDocs(alertasCollection);
+
+      let alertaJaExistente = false;
+
+      querySnapshot.forEach((doc) => {
+        const dadosDoAlerta = doc.data();
+        if (dadosDoAlerta.data === data && dadosDoAlerta.cidade === cidadeTexto) {
+          alertaJaExistente = true;
+        }
+      });
+
+      if (!alertaJaExistente) {
+        // Se não houver um alerta com a mesma cidade e data, adicione-o ao Firestore
+        const docAlerta = await addDoc(alertasCollection, {
+          alerta: alertaTexto,
+          cidade: cidadeTexto,
+          data: data,
+        });
+        console.log('Alerta adicionado com sucesso com ID: ', docAlerta.id);
+      } else {
+        console.log('Alerta com a mesma cidade e data já existe, não adicionado.');
+      }
+    } catch (error) {
+      console.error('Erro ao adicionar o Alerta: ', error);
+    }
   }
 }
+// Configurar um observador de mutações para o elemento com o ID 'city-name'
+const cidadeVerificado = document.getElementById('city-name');
+const observer = new MutationObserver(verificarEAdicionarAlerta);
+const config = { childList: true, subtree: true };
+observer.observe(cidadeVerificado, config);

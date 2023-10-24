@@ -26,6 +26,7 @@ const db = getFirestore(appFirebase);
 async function buscarEmails() {
   try {
     const emailsRef = collection(db, 'email'); // 'email' é o nome da coleção no Firestore
+    const alertasRef = collection(db, 'alerta');
     const querySnapshot = await getDocs(emailsRef);
     const destinatarios = [];
 
@@ -34,20 +35,74 @@ async function buscarEmails() {
       destinatarios.push(emailData.email);
     });
 
+    const querySnapshotAlerta = await getDocs(alertasRef);
+    const alertas = [];
+
+    querySnapshotAlerta.forEach((doc) => {
+      const alertaData = doc.data();
+      alertas.push(alertaData.alerta);
+    });
+
     return destinatarios;
   } catch (error) {
     console.error('Erro ao buscar e-mails:', error);
     return [];
   }
 }
+// Função para buscar alertas do Firestore
+async function buscarAlertas() {
+  try {
+    const alertasRef = collection(db, 'alerta'); // 'alertas' é o nome da coleção no Firestore
+    const querySnapshot = await getDocs(alertasRef);
+    const alertas = [];
+    let cidade = '';
 
-async function enviarEmail(destinatarios) {
+    querySnapshot.forEach((doc) => {
+      const alertaData = doc.data();
+      alertas.push(alertaData.alerta);
+      cidade = alertaData.cidade;
+
+    });
+
+    // Exiba a cidade no elemento HTML
+    const cidadeElement = document.getElementById('cidade-info');
+    cidadeElement.textContent = `Cidade: ${cidade}`;
+
+    return alertas;
+  } catch (error) {
+    console.error('Erro ao buscar alertas:', error);
+    return [];
+  }
+}
+
+async function enviarEmail(destinatarios, alertas) {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     host: "smtp-relay.gmail.com",
     secure: true,
     port: 465,
     auth: { user, pass },
+  });
+
+  const cidadeElement = [
+    { cidade: 'Cidade 1', alerta: 'Alerta 1' },
+    { cidade: 'Cidade 2', alerta: 'Alerta 2' },
+    // ... outros pares cidade-alerta
+  ];
+  
+  const cidadeInfoDiv = document.getElementById('cidade-info');
+  
+  // Para cada par cidade-alerta, crie um elemento <p> e adicione-o à div cidade-info
+  cidadeAlertas.forEach((cidadeAlerta) => {
+    const cidadeParaExibir = cidadeAlerta.cidade;
+    const alertaParaExibir = cidadeAlerta.alerta;
+  
+    // Crie um elemento <p> e defina o texto com a cidade e o alerta
+    const paragrafo = document.createElement('p');
+    paragrafo.textContent = `Cidade: ${cidadeParaExibir}, Alerta: ${alertaParaExibir}`;
+  
+    // Adicione o elemento <p> à div cidade-info
+    cidadeInfoDiv.appendChild(paragrafo);
   });
 
   // Construir o conteúdo HTML do email
@@ -59,8 +114,9 @@ async function enviarEmail(destinatarios) {
       </style>
     </head>
     <body>
-      <h1>Texto de email</h1>
-      <p>Este é um exemplo de email com HTML.</p>
+    <h1>Alertas Meteorológicos</h1>
+    <div id="cidade-info"></div>
+    <p>${alertas.join('<br>')}</p>
     </body>
   </html>
   `;
@@ -68,7 +124,7 @@ async function enviarEmail(destinatarios) {
   const mailOptions = {
     from: user,
     to: destinatarios.join(', '),
-    subject: "Seja bem vindo",
+    subject: "Alertas Meteorológicos",
     html: emailHTML,
   };
 
@@ -81,22 +137,24 @@ async function enviarEmail(destinatarios) {
   });
 }
 
-const eventEmitter = new EventEmitter();
+async function enviarEmailSeNecessario() {
+  // Busca os alertas do Firestore
+  const alertas = await buscarAlertas();
+  const dataAtual = new Date();
+  const ano = dataAtual.getFullYear();
+  const mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
+  const dia = dataAtual.getDate().toString().padStart(2, '0');
+  const dataFormatada = `${dia}-${mes}-${ano}`;
 
-// Esta função emite o evento 'alertaRecuperado'
-function emitAlertaRecuperado() {
-  eventEmitter.emit('alertaRecuperado');
+  // Verifique se há um alerta na data atual
+  if (alertas.includes(dataFormatada)) {
+    // Busque os e-mails dos destinatários
+    const destinatarios = await buscarEmails();
+
+    // Envie o e-mail com os alertas
+    enviarEmail(destinatarios, alertas);
+  }
 }
 
-// Chame a função para buscar destinatários
-async function processarAlertas() {
-  const destinatarios = await buscarEmails();
-  // Chame a função para enviar emails, passando os destinatários
-  enviarEmail(destinatarios);
-}
-
-// Chame a função para processar alertas e enviar emails
-processarAlertas();
-
-// Exemplo de chamada da função emitAlertaRecuperado
-emitAlertaRecuperado();
+// Configure um intervalo para verificar e enviar e-mails, por exemplo, a cada 1 hora
+setInterval(enviarEmailSeNecessario, 3600000); // 3600000 milissegundos = 1 hora

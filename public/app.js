@@ -134,12 +134,15 @@ cityButtons.forEach((button) => {
     const RecDivAlergia = document.querySelector('.container-alergia');
     const RecDivAtividade = document.querySelector('.container-atividade');
     const linkApis = document.querySelector('.link-api');
+    const h2Cidade = document.querySelector('.h2-cidade');
 
     linkApis.style.display = 'flex';
     RecDiv.style.display = 'flex';
     RecDivSaude.style.display = 'flex';
     RecDivAlergia.style.display = 'flex';
     RecDivAtividade.style.display = 'flex';
+    h2Cidade.style.display = 'none';
+   
 
 
     // Chamar as funções com o nome da cidade -------------------------------------------------------------------------------------
@@ -927,23 +930,7 @@ function requestAccuWeather(requestCityName) {
         
 
       }
-      gerarConteudoHTML(alertas, qualidadeAr);
-        function gerarConteudoHTML(alertas, qualidadeAr) {
-          const alertasHTML = alertas.map(alerta => `<li>${alerta}</li>`).join('');
-          const qualidadeArHTML = qualidadeAr;
-          const emailHTML = alertasHTML;
-          return emailHTML;
-        }
-        console.log('Total de alertas:', alertas.length);
-        if (alertas.length > 0) {
-          const emailHTML = gerarConteudoHTML(alertas);
-          const event = new CustomEvent('alertaRecuperado', { detail: { emailHTML } });
-          document.dispatchEvent(event);
-          console.log('Evento "alertaRecuperado" emitido:', event);
-        }
-        console.log('Após emitir o evento "alertaRecuperado"');
-     
-
+      
      
     })
     .catch(error => {
