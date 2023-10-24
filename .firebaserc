@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "clima-a12f5"
+    "default": "clima-a12f5",
+    "site": "tempocerto"
   }
 }
