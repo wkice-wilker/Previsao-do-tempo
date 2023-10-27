@@ -1,0 +1,50 @@
+<html>
+  <head>
+  <title>Tempo Certo</title>
+    <style>
+    .alerta-vidro p{
+      margin-top: 100px;
+      text-align: center;
+      align-items: center;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 25px;
+    }
+    .alerta-vidro{
+    margin-top: 5px;
+    padding-top: 4px;
+    width: 600px;
+    height: 1050px;
+    background: url("https://docs.google.com/uc?id=1TGpGks0k0x1w46JKbfga9alXoOeNJ1zA");
+    background-repeat: no-repeat;
+    background-size: 600px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  
+    border-radius: 15px;
+    z-index: -1;
+ 
+    }
+    .cidade p{
+      text-align: center;
+      background-color: #ffffffaf;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-family: "Ubuntu", sans-serif;
+    }
+    </style>
+  </head>
+  <body>  
+    <div class="alerta-vidro">
+    <p>Alertas Meteorológicos</p><br>
+      <div class="cidade" id="cidade-info">
+      ${cidadeAlerta.map(({ cidade, alerta, data }) => `
+        <p>Cidade: ${cidade}<br><br> Alerta: ${alerta}<br><br> Data: ${data}</p>
+      `).join('')}
+      </div>
+    </div>  
+  </body>
+</html>

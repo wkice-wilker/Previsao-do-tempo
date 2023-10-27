@@ -1,15 +1,15 @@
 const { initializeApp } = require('firebase/app');
 const { getFirestore, collection, getDocs } = require('firebase/firestore');
-const { EventEmitter } = require('events');
 const nodemailer = require('nodemailer');
 
 const user = "tempocerto2023@gmail.com";
-const pass = "uxvz xgvw shjb fiqo";
+const pass = "ikbv kxfh fshb reso";
 
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyABceDMCup6Z1LmclNegasDGLMKAYmOk-0",
   authDomain: "clima-a12f5.firebaseapp.com",
+  databaseURL: "https://clima-a12f5-default-rtdb.firebaseio.com",
   projectId: "clima-a12f5",
   storageBucket: "clima-a12f5.appspot.com",
   messagingSenderId: "234130570534",
@@ -25,22 +25,13 @@ const db = getFirestore(appFirebase);
 // Função para buscar e-mails do Firestore
 async function buscarEmails() {
   try {
-    const emailsRef = collection(db, 'email'); // 'email' é o nome da coleção no Firestore
-    const alertasRef = collection(db, 'alerta');
+    const emailsRef = collection(db, 'email');
     const querySnapshot = await getDocs(emailsRef);
     const destinatarios = [];
 
     querySnapshot.forEach((doc) => {
       const emailData = doc.data();
       destinatarios.push(emailData.email);
-    });
-
-    const querySnapshotAlerta = await getDocs(alertasRef);
-    const alertas = [];
-
-    querySnapshotAlerta.forEach((doc) => {
-      const alertaData = doc.data();
-      alertas.push(alertaData.alerta);
     });
 
     return destinatarios;
@@ -52,109 +43,131 @@ async function buscarEmails() {
 // Função para buscar alertas do Firestore
 async function buscarAlertas() {
   try {
-    const alertasRef = collection(db, 'alerta'); // 'alertas' é o nome da coleção no Firestore
+    const alertasRef = collection(db, 'alerta');
     const querySnapshot = await getDocs(alertasRef);
-    const alertas = [];
-    let cidade = '';
+    const dataAtual = new Date();
+    const ano = dataAtual.getFullYear();
+    const mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
+    const dia = dataAtual.getDate().toString().padStart(2, '0');
+    const dataFormatada = `${dia}-${mes}-${ano}`;
+    const cidadeAlerta = [];
 
     querySnapshot.forEach((doc) => {
       const alertaData = doc.data();
-      alertas.push(alertaData.alerta);
-      cidade = alertaData.cidade;
+      const alerta = alertaData.alerta;
+      const cidade = alertaData.cidade;
+      const data = alertaData.data;
 
+      if (data === dataFormatada) {
+        cidadeAlerta.push({ cidade, alerta, data });
+      }
     });
 
-    // Exiba a cidade no elemento HTML
-    const cidadeElement = document.getElementById('cidade-info');
-    cidadeElement.textContent = `Cidade: ${cidade}`;
-
-    return alertas;
+    return cidadeAlerta;
   } catch (error) {
     console.error('Erro ao buscar alertas:', error);
     return [];
   }
 }
 
-async function enviarEmail(destinatarios, alertas) {
-  const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    host: "smtp-relay.gmail.com",
-    secure: true,
-    port: 465,
-    auth: { user, pass },
-  });
 
-  const cidadeElement = [
-    { cidade: 'Cidade 1', alerta: 'Alerta 1' },
-    { cidade: 'Cidade 2', alerta: 'Alerta 2' },
-    // ... outros pares cidade-alerta
-  ];
+async function enviarEmail(destinatarios) {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      host: 'smtp-relay.gmail.com',
+      secure: true,
+      port: 465,
+      auth: { user, pass },
+    });
   
-  const cidadeInfoDiv = document.getElementById('cidade-info');
-  
-  // Para cada par cidade-alerta, crie um elemento <p> e adicione-o à div cidade-info
-  cidadeAlertas.forEach((cidadeAlerta) => {
-    const cidadeParaExibir = cidadeAlerta.cidade;
-    const alertaParaExibir = cidadeAlerta.alerta;
-  
-    // Crie um elemento <p> e defina o texto com a cidade e o alerta
-    const paragrafo = document.createElement('p');
-    paragrafo.textContent = `Cidade: ${cidadeParaExibir}, Alerta: ${alertaParaExibir}`;
-  
-    // Adicione o elemento <p> à div cidade-info
-    cidadeInfoDiv.appendChild(paragrafo);
-  });
-
-  // Construir o conteúdo HTML do email
+  const cidadeAlerta = await buscarAlertas();
   const emailHTML = `
   <html>
-    <head>
-      <style>
-        /* CSS aqui */
-      </style>
-    </head>
-    <body>
-    <h1>Alertas Meteorológicos</h1>
-    <div id="cidade-info"></div>
-    <p>${alertas.join('<br>')}</p>
-    </body>
-  </html>
-  `;
+  <head>
+  <title>Tempo Certo</title>
+    <style>
+    .alerta-vidro p{
+      margin-top: 100px;
+      text-align: center;
+      align-items: center;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 25px;
+    }
+    .alerta-vidro{
+    margin-top: 5px;
+    padding-top: 4px;
+    width: 600px;
+    height: 1050px;
+    background: url('https://docs.google.com/uc?id=1TGpGks0k0x1w46JKbfga9alXoOeNJ1zA');
+    background-repeat: no-repeat;
+    background-size: 600px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  
+    border-radius: 15px;
+    z-index: -1;
+ 
+    }
+    .cidade p{
+      text-align: center;
+      background-color: #ffffffaf;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-family: "Ubuntu", sans-serif;
+    }
+    </style>
+  </head>
+  <body>  
+    <div class="alerta-vidro">
+    <p>Alertas Meteorológicos</p><br>
+      <div class="cidade" id="cidade-info">
+      ${cidadeAlerta.map(({ cidade, alerta, data }) => `
+        <p>Cidade: ${cidade}<br><br> Alerta: ${alerta}<br><br> Data: ${data}</p>
+      `).join('')}
+      </div>
+    </div>  
+  </body>
+</html>
+`;
 
   const mailOptions = {
     from: user,
-    to: destinatarios.join(', '),
+    to: "tempocerto2023@gmail.com", //destinatarios.join(', '),
     subject: "Alertas Meteorológicos",
     html: emailHTML,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Erro ao enviar o email:', error);
-    } else {
-      console.log('Email enviado com sucesso:', info.response);
-    }
-  });
+  const info = await transporter.sendMail(mailOptions);
+    console.log('Email enviado com sucesso:', info.response);
+  } catch (error) {
+    console.error('Erro ao enviar o email:', error);
+  }
 }
 
 async function enviarEmailSeNecessario() {
-  // Busca os alertas do Firestore
-  const alertas = await buscarAlertas();
   const dataAtual = new Date();
   const ano = dataAtual.getFullYear();
   const mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
   const dia = dataAtual.getDate().toString().padStart(2, '0');
   const dataFormatada = `${dia}-${mes}-${ano}`;
 
-  // Verifique se há um alerta na data atual
-  if (alertas.includes(dataFormatada)) {
-    // Busque os e-mails dos destinatários
-    const destinatarios = await buscarEmails();
+  // Busca os alertas do Firestore
+  const alertas = await buscarAlertas();
+  const alertasDoDia = alertas.filter(alerta => alerta.data === dataFormatada);
+  const destinatarios = await buscarEmails();
 
-    // Envie o e-mail com os alertas
-    enviarEmail(destinatarios, alertas);
+  if (alertasDoDia.length > 0) {
+    // Se houver alertas na data atual, envie o e-mail com os alertas
+    enviarEmail(destinatarios, alertasDoDia);
   }
 }
 
-// Configure um intervalo para verificar e enviar e-mails, por exemplo, a cada 1 hora
-setInterval(enviarEmailSeNecessario, 3600000); // 3600000 milissegundos = 1 hora
+enviarEmailSeNecessario();
+
+// verificar e enviar e-mails a cada 1 hora
+//setInterval(enviarEmailSeNecessario, 3600000); // 3600000 milissegundos = 1 hora
