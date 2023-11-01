@@ -54,12 +54,15 @@ async function buscarAlertas() {
 
     querySnapshot.forEach((doc) => {
       const alertaData = doc.data();
-      const alerta = alertaData.alerta;
-      const cidade = alertaData.cidade;
       const data = alertaData.data;
 
       if (data === dataFormatada) {
-        cidadeAlerta.push({ cidade, alerta, data });
+        // Processa todos os campos "alerta1", "alerta2", etc.
+        for (let i = 1; alertaData[`alerta${i}`]; i++) {
+          const alerta = alertaData[`alerta${i}`];
+          const cidade = alertaData.cidade;
+          cidadeAlerta.push({ cidade, alerta, data });
+        }
       }
     });
 
@@ -87,27 +90,30 @@ async function enviarEmail(destinatarios) {
   <head>
   <title>Tempo Certo</title>
     <style>
-    .alerta-vidro p{
+    .titulo{
       margin-top: 100px;
       text-align: center;
       align-items: center;
       font-family: "Ubuntu", sans-serif;
-      font-size: 25px;
+      font-size: 30px;
     }
     .alerta-vidro{
     margin-top: 5px;
     padding-top: 4px;
     width: 600px;
-    height: 1050px;
-    background: url('https://docs.google.com/uc?id=1TGpGks0k0x1w46JKbfga9alXoOeNJ1zA');
+    min-height: 800px;
+    background: url('https://docs.google.com/uc?id=1ryurHfD1ArPVtqskVOZDG2RxrK1442XV');
     background-repeat: no-repeat;
     background-size: 600px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-  
-    border-radius: 15px;
+    border-radius: 15px 15px 0 0;
     z-index: -1;
  
+    }
+    .cidade{
+      background-color: #70a7ff;
+      background: linear-gradient(to bottom, #70a7ff, #bedeff);
     }
     .cidade p{
       text-align: center;
@@ -117,20 +123,47 @@ async function enviarEmail(destinatarios) {
     padding: 10px;
     margin: 10px;
     border-radius: 15px;
-    font-size: 15px;
+    font-size: 17px;
     font-family: "Ubuntu", sans-serif;
+    }
+    .footer{
+      display: flex;
+      width: 600px;
+      height: 200px;
+      background: url('https://docs.google.com/uc?id=1wFavpaqSPcOPKMc5jfsloK1ALmrUDc-P');
+      background-repeat: no-repeat;
+      background-size: 600px;
+      border-radius: 0 0 15px 15px;
+      justify-content: center;
+      align-items: center;
+    }
+    .botao {
+      width: 200px;
+      border-radius: 10px;
+      background-color: #0597e5;
+      border: 0;
+      text-align: center;
+      padding: 10px;
+      text-decoration: none;
+      font-size: 20px;
+      font-family: 'ubuntu', sans-serif;
+      color: #f1b100;
     }
     </style>
   </head>
   <body>  
     <div class="alerta-vidro">
-    <p>Alertas Meteorológicos</p><br>
+    <p class="titulo">Alertas Meteorológicos</p><br>
       <div class="cidade" id="cidade-info">
       ${cidadeAlerta.map(({ cidade, alerta, data }) => `
-        <p>Cidade: ${cidade}<br><br> Alerta: ${alerta}<br><br> Data: ${data}</p>
+        <p>Cidade: ${cidade}<br><br>${alerta}<br> Data: ${data}</p>
       `).join('')}
       </div>
-    </div>  
+      
+    </div> 
+    <div class="footer">
+      <a class="botao" href="https://tempocerto.web.app/">Saiba mais</a>
+    </div> 
   </body>
 </html>
 `;
@@ -169,5 +202,5 @@ async function enviarEmailSeNecessario() {
 
 enviarEmailSeNecessario();
 
-// verificar e enviar e-mails a cada 1 hora
-//setInterval(enviarEmailSeNecessario, 3600000); // 3600000 milissegundos = 1 hora
+// verificar e enviar e-mails a cada 12 hora
+//setInterval(enviarEmailSeNecessario, 43.200.000); // 43.200.000 milissegundos = 12 hora

@@ -59,7 +59,8 @@ botaoEmail.addEventListener('click', async function () {
 
       // Limpar o campo de entrada após a adição do e-mail
       emailInput.value = '';
-      // Aguardar por alguns segundos antes de restaurar a imagem original do botão
+      
+      // Aguarda por alguns segundos antes de restaurar a imagem original do botão
       setTimeout(function () {
         botaoEmailIcon.src = './assets/botao-enviar.png';
         backBotao.style.backgroundColor = '#393939';
@@ -101,6 +102,7 @@ async function verificarEAdicionarAlerta() {
   const alertaTexto = alerta.textContent.trim();
   const cidadeTexto = cidade.textContent.trim();
 
+
   if (alertaTexto !== '') {
     try {
       // Recuperar alertas existentes do Firestore
@@ -116,23 +118,34 @@ async function verificarEAdicionarAlerta() {
         }
       });
 
+      // Se não houver um alerta com a mesma cidade, data e descrição
       if (!alertaJaExistente) {
-        // Se não houver um alerta com a mesma cidade e data, adicione-o ao Firestore
-        const docAlerta = await addDoc(alertasCollection, {
-          alerta: alertaTexto,
-          cidade: cidadeTexto,
-          data: data,
-        });
+        
+      // Divide os alertas com base na palavra "alerta"
+  const alertaParts = alertaTexto.split("Alerta");
+  
+  // Remove espaços em branco vazios e adiciona a palavra Alerta no começo da descrição
+  const alertaPartsLimpos = alertaParts.filter(part => part.trim() !== "").map(part => "Alerta " + part.trim());
+
+  
+  // Adicione alertas individuais aos campos correspondentes
+  const docData = { cidade: cidadeTexto, data: data };
+  for (let i = 0; i < alertaPartsLimpos.length; i++) {
+    docData[`alerta${i + 1}`] = alertaPartsLimpos[i].trim();
+  }
+
+// Adicione o documento ao Firestore
+  const docAlerta = await addDoc(alertasCollection, docData);
         console.log('Alerta adicionado com sucesso com ID: ', docAlerta.id);
       } else {
-        console.log('Alerta com a mesma cidade e data já existe, não adicionado.');
+        console.log('Alerta com a mesma cidade, data e descrição já existe, não adicionado.');
       }
     } catch (error) {
       console.error('Erro ao adicionar o Alerta: ', error);
     }
   }
 }
-// Configurar um observador de mutações para o elemento com o ID 'city-name'
+// Configura um observador de mutações para o elemento com o ID 'city-name'
 const cidadeVerificado = document.getElementById('city-name');
 const observer = new MutationObserver(verificarEAdicionarAlerta);
 const config = { childList: true, subtree: true };
