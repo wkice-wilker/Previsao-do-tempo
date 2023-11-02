@@ -96,9 +96,11 @@ async function enviarEmail(destinatarios) {
       align-items: center;
       font-family: "Ubuntu", sans-serif;
       font-size: 30px;
+      color: #000000;
+      font-weight: bold;
     }
     .alerta-vidro{
-    margin-top: 5px;
+      margin: 5px 0 0 210px;
     padding-top: 4px;
     width: 600px;
     min-height: 800px;
@@ -114,6 +116,7 @@ async function enviarEmail(destinatarios) {
     .cidade{
       background-color: #70a7ff;
       background: linear-gradient(to bottom, #70a7ff, #bedeff);
+      padding-bottom: 15px;
     }
     .cidade p{
       text-align: center;
@@ -127,6 +130,7 @@ async function enviarEmail(destinatarios) {
     font-family: "Ubuntu", sans-serif;
     }
     .footer{
+      margin-left: 210px;
       display: flex;
       width: 600px;
       height: 200px;
@@ -134,21 +138,25 @@ async function enviarEmail(destinatarios) {
       background-repeat: no-repeat;
       background-size: 600px;
       border-radius: 0 0 15px 15px;
-      justify-content: center;
-      align-items: center;
+      
     }
     .botao {
       width: 200px;
+      height: 40px;
       border-radius: 10px;
       background-color: #0597e5;
       border: 0;
       text-align: center;
-      padding: 10px;
+      padding: 15px 0 0 0;
       text-decoration: none;
       font-size: 20px;
       font-family: 'ubuntu', sans-serif;
       color: #f1b100;
+      margin: 80px 0px 100px 200px;
     }
+    a:visited {
+      color: currentColor;
+  }
     </style>
   </head>
   <body>  
@@ -162,7 +170,7 @@ async function enviarEmail(destinatarios) {
       
     </div> 
     <div class="footer">
-      <a class="botao" href="https://tempocerto.web.app/">Saiba mais</a>
+      <a class="botao" href="https://tempocerto.web.app/"><font color=#f1b100>Saiba mais</font></a>
     </div> 
   </body>
 </html>
@@ -170,7 +178,7 @@ async function enviarEmail(destinatarios) {
 
   const mailOptions = {
     from: user,
-    to: "tempocerto2023@gmail.com", //destinatarios.join(', '),
+    to: destinatarios.join(', '),
     subject: "Alertas Meteorológicos",
     html: emailHTML,
   };
@@ -203,4 +211,4 @@ async function enviarEmailSeNecessario() {
 enviarEmailSeNecessario();
 
 // verificar e enviar e-mails a cada 12 hora
-//setInterval(enviarEmailSeNecessario, 43.200.000); // 43.200.000 milissegundos = 12 hora
+setInterval(enviarEmailSeNecessario, 43200000); // 43.200.000 milissegundos = 12 hora

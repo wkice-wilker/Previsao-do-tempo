@@ -760,9 +760,10 @@ function getCityTemp(tempCityName) {
             dadoRajada = element.querySelector('div:nth-child(2)').textContent.trim();
           } else if (labelText === "Vento") {
             dadoVento = element.querySelector('div:nth-child(2)').textContent.trim();
-          } else if (labelText === "Índice máximo de raios UV") {
+          }
+           if (labelText === "Índice máximo de raios UV") {
             dadoUv = element.querySelector('div:nth-child(2)').textContent.trim();
-          }else {
+          }else if(!labelText === "Índice máximo de raios UV"){
             dadoUv = "...";
           }
           if (labelText === "RealFeel®") {
