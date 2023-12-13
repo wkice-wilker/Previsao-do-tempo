@@ -96,11 +96,11 @@ async function enviarEmail(destinatarios) {
       align-items: center;
       font-family: "Ubuntu", sans-serif;
       font-size: 30px;
-      color: #000000;
+      color: #03005d !important;
       font-weight: bold;
     }
     .alerta-vidro{
-      margin: 5px 0 0 210px;
+      margin: 5px 0 0 200px;
     padding-top: 4px;
     width: 600px;
     min-height: 800px;
@@ -130,7 +130,7 @@ async function enviarEmail(destinatarios) {
     font-family: "Ubuntu", sans-serif;
     }
     .footer{
-      margin-left: 210px;
+      margin-left: 200px;
       display: flex;
       width: 600px;
       height: 200px;
