@@ -813,7 +813,7 @@ function requestAr(cityName) {
       const parserDado = new DOMParser();
       const doc = parserDado.parseFromString(html, 'text/html');
 
-      const qualiArTextElements = doc.querySelectorAll('.category-text');
+      const qualiArTextElements = doc.querySelectorAll('.air-quality-module__row__category');
       console.log(qualiArTextElements);
       qualidadeDoAr(qualiArTextElements);
 
